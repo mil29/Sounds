@@ -110,9 +110,7 @@ def accept_friend_request(request, id):
     return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
 
 
-added this to test the sync function 
 
-this will be a extra test function
 
 
 
