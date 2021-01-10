@@ -28,11 +28,6 @@ def register(request):
 
 
 @login_required
-def profile(request):
-    return render(request, 'users/profile.html'<username>)
-
-
-@login_required
 def users_list(request):
     users = Profile.objects.exclude(user=request.user)
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
