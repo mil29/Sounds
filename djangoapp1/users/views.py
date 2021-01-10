@@ -112,6 +112,8 @@ def accept_friend_request(request, id):
 
 added this to test the sync function 
 
+this will be a extra test function
+
 
 
 
