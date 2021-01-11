@@ -10,6 +10,8 @@ from django.http import HttpResponseRedirect
 from .models import Profile, FriendRequest
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
+from django.core.mail import send_mail
+
 
 User = get_user_model()
 
