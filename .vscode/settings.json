@@ -1,4 +1,4 @@
 {
     "git.ignoreLimitWarning": true,
-    "python.pythonPath": "/Users/Milan/Documents/GitHub/Django Apps/Sounds/.env/bin/python"
+    "python.pythonPath": ".env/bin/python"
 }

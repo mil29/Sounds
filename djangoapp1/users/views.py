@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile
 from feed.models import Post
 from django.contrib import messages
-from .forms import UserRegisterForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.conf import settings
@@ -175,14 +174,14 @@ def edit_profile(request):
                     messages.success(request, f'Your account has been updated!')
                     return redirect('my_profile')
             
-            else:
-                    u_form = UserUpdateForm(instance=request.user)
-                    p_form = ProfileUpdateForm(instance=request.user.profile)
-            context ={
-                    'u_form': u_form,
-                    'p_form': p_form,
-            }
-            return render(request, 'users/edit_profile.html', context)
+    else:
+            u_form = UserUpdateForm(instance=request.user)
+            p_form = ProfileUpdateForm(instance=request.user.profile)
+    context ={
+            'u_form': u_form,
+            'p_form': p_form,
+    }
+    return render(request, 'users/edit_profile.html', context)
 
 
 @login_required
@@ -230,22 +229,3 @@ def search_users(request):
         }
         return render(request, 'users/search_users.html', context)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
