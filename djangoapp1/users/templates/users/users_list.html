@@ -1,5 +1,4 @@
-{% extends "feed/layout.html" %} {% load static %} {% block cssfiles %} 
-{% endblock cssfiles %} {% block searchform %}
+{% extends "feed/layout.html" %} {% load static %} {% block searchform %}
 <form
   class="form-inline my-2 my-lg-0 ml-5"
   action="{% url 'search_users' %}"
@@ -35,9 +34,9 @@
               class="btn btn-primary mr-2"
               href="{% url 'send_friend_request' user_p.id %}"
               >Add Friend</a
-            > 
+            >
           </small>
-          {% else %}
+          {% elif button_status == 'friend_request_sent' %}
           <small class="float-right">
             <a
               class="btn btn-warning mr-2"
@@ -45,7 +44,7 @@
               >Cancel Request</a
             >
           </small>
-          {% endif %}
+          {% endif %} 
           <br /><br />
           {% endfor %}
         </div>
