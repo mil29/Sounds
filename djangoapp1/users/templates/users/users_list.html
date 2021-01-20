@@ -28,7 +28,8 @@
           <a class="text-dark" href="{{ user_p.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
           >
-          {% if not user_p.user in sent %}
+          {% if not user_p in sent %}
+          
           <small class="float-right">
             <a
               class="btn btn-primary mr-2"
