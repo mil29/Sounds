@@ -37,6 +37,7 @@
 	          	{% if post.user_name == user %}
 				<a class="btn btn-outline-info mr-3" href="{% url 'post-update' post.id %}">Update</a>
 				<a class="btn btn-outline-danger" href="{% url 'post-delete' post.id %}">Delete</a>
+				<a class="btn btn-outline-success" href="{% url 'home' %}">Cancel</a>
 				{% endif %}
 	          </div>
 	        </div>
@@ -55,6 +56,8 @@
 				            </fieldset>
 				            <div class="form-group">
 				                <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Comment</button><br>
+								<br> 
+								<a class="btn btn-outline-success" href="{% url 'home' %}">Cancel</a>
 				            </div>
 	    			</div>
 	    		</div>

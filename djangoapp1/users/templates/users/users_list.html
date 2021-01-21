@@ -33,7 +33,7 @@
           <small class="float-right">
             <a
               class="btn btn-primary mr-2"
-              href="{% url 'send_friend_request' user_p.user.id %}"
+              href="{% url 'send_friend_request' user_p.user.username %}"
               >Add Friend</a
             >
           </small>
@@ -41,7 +41,7 @@
           <small class="float-right">
             <a
               class="btn btn-warning mr-2"
-              href="{% url 'cancel_friend_request' user_p.user.id %}"
+              href="{% url 'cancel_friend_request' user_p.user.username %}"
               >Cancel Request</a
             >
           </small>

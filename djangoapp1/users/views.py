@@ -46,11 +46,11 @@ def users_list(request):
             friends.remove(i)
     if request.user.profile in friends:
         friends.remove(request.user.profile)
-    random_list = random.sample(list(users), min(len(list(users)), 10))
-    for r in random_list:
+    my_users = list(users.order_by('user'))[0:10]
+    for r in my_users:
         if r in friends:
-            random_list.remove(r)
-    friends+=random_list
+            my_users.remove(r)
+    friends+=my_users
     for i in my_friends:
         if i in friends:
             friends.remove(i)
@@ -73,8 +73,8 @@ def friend_list(request):
 
 
 @login_required
-def send_friend_request(request, id):
-    user = get_object_or_404(User, id=id)
+def send_friend_request(request, username):
+    user = get_object_or_404(User, username=username)
     frequest, created = FriendRequest.objects.get_or_create(
         from_user=request.user,
         to_user=user)
@@ -82,8 +82,8 @@ def send_friend_request(request, id):
 
 
 @login_required
-def cancel_friend_request(request, id):
-    user = get_object_or_404(User, id=id)
+def cancel_friend_request(request, username):
+    user = get_object_or_404(User, username=username)
     frequest = FriendRequest.objects.filter(
         from_user=request.user,
         to_user=user).first()
@@ -92,8 +92,8 @@ def cancel_friend_request(request, id):
 
 
 @login_required
-def accept_friend_request(request, id):
-    from_user = get_object_or_404(User, id=id)
+def accept_friend_request(request, username):
+    from_user = get_object_or_404(User, username=username)
     frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
     user1 = frequest.to_user
     user2 = from_user
@@ -114,12 +114,13 @@ def delete_friend_request(request, id):
     return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
 
 
+
 def delete_friend(request, id):
     user_profile = request.user.profile
     friend_profile = get_object_or_404(Profile, id=id)
     user_profile.friends.remove(friend_profile)
     friend_profile.friends.remove(user_profile)
-    return HttpResponseRedirect('/users/{}'.format(friend_profile.slug))
+    return redirect('my_profile')
 
 
 @login_required
