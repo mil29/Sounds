@@ -28,20 +28,20 @@
           <a class="text-dark" href="{{ user_p.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
           >
-          {% if not user_p in sent %}
+          {% if not user_p.user in sent %}
           
           <small class="float-right">
             <a
               class="btn btn-primary mr-2"
-              href="{% url 'send_friend_request' user_p.id %}"
+              href="{% url 'send_friend_request' user_p.user.id %}"
               >Add Friend</a
             >
           </small>
-          {% elif button_status == 'friend_request_sent' %}
+          {% else %}
           <small class="float-right">
             <a
               class="btn btn-warning mr-2"
-              href="{% url 'cancel_friend_request' user_p.id %}"
+              href="{% url 'cancel_friend_request' user_p.user.id %}"
               >Cancel Request</a
             >
           </small>

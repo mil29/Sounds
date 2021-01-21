@@ -78,7 +78,7 @@ def send_friend_request(request, id):
     frequest, created = FriendRequest.objects.get_or_create(
         from_user=request.user,
         to_user=user)
-    return HttpResponseRedirect('/users/{}'.format(user.profile.slug))
+    return redirect('users_list')
 
 
 @login_required
@@ -88,7 +88,7 @@ def cancel_friend_request(request, id):
         from_user=request.user,
         to_user=user).first()
     frequest.delete()
-    return HttpResponseRedirect('/users/{}'.format(user.profile.slug))
+    return redirect('users_list')
 
 
 @login_required
