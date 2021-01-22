@@ -1,5 +1,5 @@
 {% extends "feed/layout.html" %} {% load static %}
-{% endblock cssfiles %} {% block searchform %}
+{% block searchform %}
 <form
   class="form-inline my-2 my-lg-0 ml-5"
   action="{% url 'search_users' %}"
@@ -28,16 +28,34 @@
               width="40"
               height="40"
               alt=""
-          /></a>
+          /></a>  
           <a class="text-dark" href="{{ user_p.profile.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
-          >
-          <br /><br />
+            >  
+            {% if not user_p.user in sent %}
+            <small class="float-right">
+              <a
+                class="btn btn-primary mr-2"
+                href="/users/friend-request/send/{{ user_p.username }}"
+                >Add Friend</a>
+              </small>
+              {% else %}
+              <small class="float-right">
+                <a
+                  class="btn btn-warning mr-2"
+                  href="/users/friend-request/cancel/{{ user_p.username }}"
+                  >Cancel Request</a
+                >`
+              </small>
+              {% endif %} 
+          <br/><br />
+
           {% endfor %}
         </div>
       </div>
       {% endif %}
     </div>
+
     <div class="col-md-4">
       <div class="card card-signin my-5">
         <a href="{{ request.user.profile.get_absolute_url }}"

@@ -10,6 +10,8 @@ from .models import Profile, FriendRequest
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
 from django.core.mail import send_mail
+from django.urls import reverse
+
 
 
 User = get_user_model()
@@ -223,10 +225,10 @@ def my_profile(request):
 
 @login_required
 def search_users(request):
-        query = request.GET.get('q')
-        object_list = User.objects.filter(username_icontains=query)
-        context ={
-                'users': object_list
-        }
-        return render(request, 'users/search_users.html', context)
+	query = request.GET.get('q')
+	object_list = User.objects.filter(username__icontains=query)
+	context ={
+		'users': object_list
+	}
+	return render(request, "users/search_users.html", context)
 
