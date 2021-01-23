@@ -32,7 +32,7 @@
           <a class="text-dark" href="{{ user_p.profile.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
             >  
-            {% if not user_p.user in sent %}
+            {% if user_p in users %}
             <small class="float-right">
               <a
                 class="btn btn-primary mr-2"
@@ -47,7 +47,7 @@
                   >Cancel Request</a
                 >`
               </small>
-              {% endif %} 
+               {% endif %}
           <br/><br />
 
           {% endfor %}

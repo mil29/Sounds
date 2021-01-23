@@ -11,6 +11,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
 from django.core.mail import send_mail
 from django.urls import reverse
+import request
 
 
 
@@ -227,8 +228,11 @@ def my_profile(request):
 def search_users(request):
 	query = request.GET.get('q')
 	object_list = User.objects.filter(username__icontains=query)
-	context ={
+	context ={ 
 		'users': object_list
 	}
 	return render(request, "users/search_users.html", context)
+
+        
+
 
