@@ -21,6 +21,7 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           {% for user_p in users %}
+          
           <a href="{{ user_p.profile.get_absolute_url }}"
             ><img
               src="{{ user_p.profile.image.url }}"
@@ -32,22 +33,14 @@
           <a class="text-dark" href="{{ user_p.profile.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
             >  
-            {% if user_p in users %}
+            
             <small class="float-right">
               <a
                 class="btn btn-primary mr-2"
                 href="/users/friend-request/send/{{ user_p.username }}"
                 >Add Friend</a>
               </small>
-              {% else %}
-              <small class="float-right">
-                <a
-                  class="btn btn-warning mr-2"
-                  href="/users/friend-request/cancel/{{ user_p.username }}"
-                  >Cancel Request</a
-                >`
-              </small>
-               {% endif %}
+          
           <br/><br />
 
           {% endfor %}
