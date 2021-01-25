@@ -11,7 +11,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
 from django.core.mail import send_mail
 from django.urls import reverse
-import request
+
 
 
 
@@ -227,7 +227,7 @@ def my_profile(request):
 @login_required
 def search_users(request):
 	query = request.GET.get('q')
-	object_list = User.objects.filter(username__icontains=query).exclude(friends=request.user.profile.friends.all())
+	object_list = User.objects.filter(username__icontains=query).exclude(user=request.user.profile)
 	context ={ 
 		'users': object_list
 	}

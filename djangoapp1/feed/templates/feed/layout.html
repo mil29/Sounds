@@ -6,12 +6,14 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="icon" type="image/png" href="https://storage.googleapis.com/bytewalk/icon.png"/>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/bytewalk/profilepage.css">
-    <link rel="stylesheet" type="text/css" href="https://storage.googleapis.com/bytewalk/styles.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Saira:wght@100&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
     {% block cssfiles %}{% endblock cssfiles %}
     <title>Future Sounds</title>
 </head>
@@ -19,25 +21,30 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 	  <a class="navbar-brand ml-4 mr-4" href="#"><b>Future Sounds</b></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
+    <button class="menu" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" aria-label="Toggle navigation">
+      <svg width="50" height="50" viewBox="0 0 100 100">
+        <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
+        <path class="line line2" d="M 20,50 H 80" />
+        <path class="line line3" d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
+      </svg>
+    </button>
+
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	      <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
-	      <a class="nav-item nav-link" href="{% url 'users_list' %}">Add New Friends</a>
+	      <a class="nav-item" href="{% url 'home' %}">HOME</a>
+	      <a class="nav-item" href="{% url 'users_list' %}">ADD NEW FRIENDS</a>
 	      {% if user.is_authenticated %}
-	      	<a class="nav-item nav-link" href="{% url 'friend_list' %}">Friends</a> 
-	      	<a class="nav-item nav-link" href="{% url 'my_profile' %}">Profile</a> 
-	      	<a class="nav-item nav-link" href="{% url 'post-create' %}">Create Post</a>
-	      	<a class="nav-item nav-link btn btn-danger ml-4  text-light" href="{% url 'logout' %}">Logout</a>
+	      	<a class="nav-item" href="{% url 'friend_list' %}">FRIENDS</a> 
+	      	<a class="nav-item" href="{% url 'my_profile' %}">PROFILE</a> 
+	      	<a class="nav-item" href="{% url 'post-create' %}">CREATE POST</a>
+	      	<a class="nav-item auth_buttons btn btn-danger" href="{% url 'logout' %}">LOGOUT</a>
 	      {% else %}
-         	<a class="nav-item nav-link btn btn-success ml-4  text-light" href="{% url 'login' %}">Login</a>
-          	<a class="nav-item nav-link btn btn-info ml-3  text-light" href="{% url 'register' %} ">Register</a>
+         	<a class="nav-item auth_buttons btn btn-success  text-light" href="{% url 'login' %}">LOGIN</a>
+          	<a class="nav-item auth_buttons btn btn-info text-light" href="{% url 'register' %} ">REGISTER</a>
           {% endif %}
 	    	{% block searchform %}{% endblock searchform %}
 		</div>
-	  </div>
+	 </div>
 	</nav>
 	<div class="container">
 	{% block content %}{% endblock content %}
@@ -53,6 +60,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    {% block jsfiles %}{% endblock jsfiles %}
+	{% block jsfiles %}{% endblock jsfiles %}
 </body>
 </html>

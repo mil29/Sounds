@@ -63,7 +63,7 @@
               <p>{{ u.profile.bio }}</p>
               <hr class="my-2" />
               {% if request.user == u %}
-              <a class="btn btn-info" href="{% url 'edit_profile' %}"
+              <a class="btn btn-info edit_btn" href="{% url 'edit_profile' %}"
                 >Edit Profile</a
               >
               {% else %} {% if button_status == 'not_friend' %}
