@@ -15,6 +15,10 @@ html {
 
 }
 
+.navbar-nav {
+    width: 100%;
+}
+
 .nav-item {
     font-family: 'Saira', sans-serif;
     font-size: 20px;
@@ -47,11 +51,11 @@ html {
 }
 
 
-@media screen and (min-width: 701px){
+@media screen and (min-width: 768px){
     .menu {display: none;}
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 767px) {
     .menu {
         background-color: transparent;
         border: none;
@@ -97,3 +101,28 @@ html {
         stroke-width: 6;
         }
     }
+
+/** Search Function for POSTS **/
+
+.search_box input {
+    height: 50px;
+}
+
+.search_box {
+    float: left;
+    left: 0;
+    top: 128px;
+    position: absolute;
+}
+
+input[type=text] {
+    width: 200px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    border: 1px solid black;
+  }
+  
+  /* When the input field gets focus, change its width to 100% */
+  input[type=text]:focus {
+    width: 500%;
+  }

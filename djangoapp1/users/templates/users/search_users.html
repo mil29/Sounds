@@ -21,7 +21,6 @@
       <div class="card card-signin my-5">
         <div class="card-body">
           {% for user_p in users %}
-          
           <a href="{{ user_p.profile.get_absolute_url }}"
             ><img
               src="{{ user_p.profile.image.url }}"
@@ -42,7 +41,6 @@
               </small>
           
           <br/><br />
-
           {% endfor %}
         </div>
       </div>

@@ -227,7 +227,7 @@ def my_profile(request):
 @login_required
 def search_users(request):
 	query = request.GET.get('q')
-	object_list = User.objects.filter(username__icontains=query).exclude(user=request.user.profile)
+	object_list = User.objects.filter(username__icontains=query).profile.exclude(friends=request.user.profile.friends.all())
 	context ={ 
 		'users': object_list
 	}
