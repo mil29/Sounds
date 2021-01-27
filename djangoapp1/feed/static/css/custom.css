@@ -19,6 +19,7 @@ html {
     width: 100%;
 }
 
+
 .nav-item {
     font-family: 'Saira', sans-serif;
     font-size: 20px;
@@ -102,27 +103,5 @@ html {
         }
     }
 
-/** Search Function for POSTS **/
+/** Search button for Posts and User search  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
 
-.search_box input {
-    height: 50px;
-}
-
-.search_box {
-    float: left;
-    left: 0;
-    top: 128px;
-    position: absolute;
-}
-
-input[type=text] {
-    width: 200px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-    border: 1px solid black;
-  }
-  
-  /* When the input field gets focus, change its width to 100% */
-  input[type=text]:focus {
-    width: 500%;
-  }
