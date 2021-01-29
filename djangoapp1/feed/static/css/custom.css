@@ -1,6 +1,8 @@
 html {
     overflow-y: scroll;
+    overflow-x: scroll;
 }
+
 
 
 .edit_btn {
@@ -19,15 +21,18 @@ html {
 .navbar-nav {
     width: 100%;
     height: auto;
+    padding: 10px;
+
 }
+
 .nav-item-logout {
     position: absolute;
-    top: 10px;
-    right: 0px;
+    top: 20px;
+    right: 0;
     font-family: 'Saira', sans-serif;
     font-size: 20px;
     color: rgb(223, 250, 250);
-    padding: 10px;
+    padding: 5px;
     width: 25%;
     
 }
@@ -73,10 +78,18 @@ html {
 }
 
 @media screen and (max-width: 767px) {
-    .container2 {
-        display: none; 
-    }   
-
+    .nav-item-logout {
+        position: relative;
+        top: 20px;
+        right: 0;
+        font-family: 'Saira', sans-serif;
+        font-size: 20px;
+        color: rgb(223, 250, 250);
+        padding: 5px;
+        width: 25%;
+        
+    }
+  
     .menu {
         background-color: transparent;
         border: none;
@@ -127,8 +140,12 @@ html {
 /** Search button for Posts and User search  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
 
 .container2 {
-    width: 400px;
+    width: 100%;
     display: inline-flex;
+    top: 10px;
+    left: 10%;
+    position: absolute;
+    margin: 0px;
 }
 
 
@@ -138,18 +155,18 @@ html {
 }
 
 .searchbar{
-    position: relative;
-    top: 0;
-    right: -15%;
-    transform: translate(-50%,-50%);
+    position: fixed;
+    top: 27px;
+    right: 150px;
     transition: all 1s;
     width: 50px;
     height: 50px;
     background: white;
     box-sizing: border-box;
-    border-radius: 25px;
+    border-radius: 15px;
     border: 4px solid white;
     padding: 0px;
+    
 }
 
 .postquery{
@@ -164,7 +181,7 @@ html {
     border: 0;
     display: none;
     font-size: 1em;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 0 20px;
 }
 
