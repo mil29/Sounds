@@ -37,7 +37,7 @@
 	      	<a class="nav-item" href="{% url 'friend_list' %}">FRIENDS</a> 
 	      	<a class="nav-item" href="{% url 'my_profile' %}">PROFILE</a> 
 	      	<a class="nav-item" href="{% url 'post-create' %}">CREATE POST</a>
-	      	<a class="nav-item auth_buttons btn btn-danger" href="{% url 'logout' %}">LOGOUT</a>
+	      	<a class="nav-item-logout auth_buttons btn btn-danger" href="{% url 'logout' %}">LOGOUT</a>
 	      {% else %}
          	<a class="nav-item auth_buttons btn btn-success  text-light" href="{% url 'login' %}">LOGIN</a>
           	<a class="nav-item auth_buttons btn btn-info text-light" href="{% url 'register' %} ">REGISTER</a>
@@ -61,7 +61,6 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-	
 	{% block jsfiles %}{% endblock jsfiles %}
 </body>
 </html>

@@ -101,7 +101,7 @@ def post_delete(request, pk):
 @login_required
 def search_posts(request):
 	query = request.GET.get('p')
-	object_list = Post.objects.filter(tags__icontains=query)
+	object_list = Post.objects.filter(tags__icontains=query).order_by('-date_posted')
 	liked = [i for i in object_list if Like.objects.filter(user = request.user, post=i)]
 	context ={
 		'posts': object_list,
