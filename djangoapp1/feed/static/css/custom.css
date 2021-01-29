@@ -4,7 +4,6 @@ html {
 }
 
 
-
 .edit_btn {
     font-size: 17px;
     background-color: rgba(24, 83, 128, 0.851);
@@ -22,7 +21,6 @@ html {
     width: 100%;
     height: auto;
     padding: 10px;
-
 }
 
 .nav-item-logout {
@@ -42,8 +40,8 @@ html {
     font-family: 'Saira', sans-serif;
     font-size: 20px;
     color: rgb(223, 250, 250);
-    padding: 10px;
-    width: 25%;
+    padding: 0px;
+    width: 100%;
     text-align: center;
     position: relative;
     top: 25px;
@@ -86,18 +84,19 @@ html {
         font-size: 20px;
         color: rgb(223, 250, 250);
         padding: 5px;
-        width: 25%;
-        
+        width: 25%; 
+        left: 36%;
     }
-  
+
     .menu {
         background-color: transparent;
         border: none;
         cursor: pointer;
         display: block;
         padding: 0;
-        position: relative;
         float: right;
+        top: 10px;
+        position: relative;
 
     }
 
@@ -141,7 +140,6 @@ html {
 
 .container2 {
     width: 100%;
-    display: inline-flex;
     top: 10px;
     left: 10%;
     position: absolute;
