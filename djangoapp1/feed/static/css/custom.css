@@ -8,13 +8,22 @@ html {
     font-size: 17px;
     background-color: rgba(24, 83, 128, 0.851);
 }
+
 .container1 {
     width: 100%;
+    height: auto;
+    padding: 0px;
+    position: relative;
 }
-
 .menu_nav {
     justify-content: center;
 
+}
+
+.navbar-brand {
+    margin: 0;
+    padding: 0;
+    
 }
 
 .navbar-nav {
@@ -40,11 +49,11 @@ html {
     font-family: 'Saira', sans-serif;
     font-size: 20px;
     color: rgb(223, 250, 250);
-    padding: 0px;
+    padding: 15px;
     width: 100%;
     text-align: center;
     position: relative;
-    top: 25px;
+    top: 35px;
     margin-bottom: 20px;
 }
 .nav-item:hover{
@@ -87,7 +96,18 @@ html {
         width: 25%; 
         left: 36%;
     }
-
+    .nav-item {
+        font-family: 'Saira', sans-serif;
+        font-size: 20px;
+        color: rgb(223, 250, 250);
+        padding: 0px;
+        width: 100%;
+        text-align: center;
+        position: relative;
+        top: 35px;
+        margin-bottom: 20px;
+    }
+   
     .menu {
         background-color: transparent;
         border: none;
@@ -153,9 +173,9 @@ html {
 }
 
 .searchbar{
-    position: fixed;
-    top: 27px;
-    right: 150px;
+    position: absolute;
+    top: 18px;
+    right: 25%;
     transition: all 1s;
     width: 50px;
     height: 50px;
@@ -163,8 +183,7 @@ html {
     box-sizing: border-box;
     border-radius: 15px;
     border: 4px solid white;
-    padding: 0px;
-    
+    padding: 20px;  
 }
 
 .postquery{
