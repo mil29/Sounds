@@ -39,8 +39,8 @@
 	      	<a class="nav-item" href="{% url 'post-create' %}">CREATE POST</a>
 	      	<a class="nav-item-logout auth_buttons btn btn-danger" href="{% url 'logout' %}">LOGOUT</a>
 	      {% else %}
-         	<a class="nav-item auth_buttons btn btn-success  text-light" href="{% url 'login' %}">LOGIN</a>
-          	<a class="nav-item auth_buttons btn btn-info text-light" href="{% url 'register' %} ">REGISTER</a>
+         	<a class="nav-item-login auth_buttons btn btn-success" href="{% url 'login' %}">LOGIN</a>
+          	<a class="nav-item-register auth_buttons btn btn-info" href="{% url 'register' %} ">REGISTER</a>
 		  {% endif %}
 	    	{% block searchform %}{% endblock searchform %}
 		</div>

@@ -15,6 +15,10 @@ html {
     padding: 0px;
     position: relative;
 }
+.large_navbar {
+    padding: 10px;
+    
+}
 .menu_nav {
     justify-content: center;
 
@@ -43,7 +47,88 @@ html {
     width: 25%;
     
 }
+.nav-item-login {
+    position: relative;
+    top: 35px;
+    right: 0px;
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
+    color: rgb(223, 250, 250);
+    padding: 5px;
+    width: 115px;
+}
+.nav-item-register {
+    position: relative;
+    top: 35px;
+    right: -15px;
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
+    color: rgb(223, 250, 250);
+    padding: 5px;
+    width: 300px;
+}
+.auth_buttons {
+    width: auto;
+    margin: 10px;
+    height: fit-content; 
+    background: none;
+}
+.auth_buttons_signup_login {
+    position: relative;
+    top: 20px;
+    right: 0;
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 100%; 
+    background-color: rgb(53, 189, 92); 
+}
+.auth_buttons_signup_forgot {
+    position: relative;
+    top: 20px;
+    right: 0;
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 100%; 
+    background-color: rgb(23, 109, 162);
+}
+.text-center_register_now {
+    padding: 20px;
+    text-align: center;
+}
 
+@media screen and (max-width: 767px) {
+    .nav-item-login {
+        position: relative;
+        top: 20px;
+        right: 0;
+        font-family: 'Saira', sans-serif;
+        font-size: 20px;
+        color: rgb(223, 250, 250);
+        padding: 5px;
+        width: 100%;
+    }
+    .nav-item-register {
+        position: relative;
+        top: 20px;
+        right: 0;
+        font-family: 'Saira', sans-serif;
+        font-size: 20px;
+        color: rgb(223, 250, 250);
+        padding: 5px;
+        width: 100%;
+    }
+    .auth_buttons {
+        width: auto;
+        margin: 10px;
+        height: fit-content; 
+        background: none;
+    }
+
+}
 
 .nav-item {
     font-family: 'Saira', sans-serif;
@@ -63,13 +148,6 @@ html {
     transition-property: color;
     text-decoration: none;
 }
-
-.auth_buttons {
-    width: auto;
-    margin: 10px;
-    height: auto; 
-}
-
 
 .form-inline {
     justify-content: center;
@@ -175,7 +253,7 @@ html {
 .searchbar{
     position: absolute;
     top: 18px;
-    right: 25%;
+    right: 28%;
     transition: all 1s;
     width: 50px;
     height: 50px;
@@ -230,4 +308,16 @@ html {
     background: #41c5d4;
     color: rgb(0, 0, 0);
     
+}
+
+.post_button {
+    background-color: #48b083fe;
+    color: rgb(255, 255, 255);
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
+
+}
+.card-body .text-center {
+    font-family: 'Saira', sans-serif;
+    font-size: 20px;
 }

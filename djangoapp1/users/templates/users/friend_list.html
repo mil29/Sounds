@@ -1,15 +1,16 @@
 {% extends "feed/layout.html" %} {% load static %} {% block cssfiles %} 
 {%endblock cssfiles %} {% block searchform %}
-<form
-  class="form-inline my-2 my-lg-0 ml-5"
-  action="{% url 'search_users' %}"
-  method="get"
->
-  <input name="q" type="text" placeholder="Search users.." />
-  <button class="btn btn-success my-2 my-sm-0 ml-4" type="submit">
-    Search
+<div class="container2">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
+integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<form class="searchbar" action="{% url 'search_users' %}" method="get"">
+  <input class="postquery" name="q" type="text" placeholder="Search users..">
+  <button id="search_btn" type="submit">
+  <i class="fa fa-search"></i>
   </button>
 </form>
+</div>
 {% endblock searchform %} {% block content %}
 <div class="container">
   <div class="row">
