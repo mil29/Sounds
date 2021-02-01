@@ -3,12 +3,6 @@ html {
     overflow-x: scroll;
 }
 
-.edit_btn {
-    font-size: 17px;
-    background-color: rgba(24, 83, 128, 0.851);
-}
-
-
 .container1 {
     width: 100%;
     height: auto;
@@ -25,9 +19,12 @@ html {
 }
 
 .navbar-brand {
-    margin: 0;
-    padding: 0;
-    
+    margin: 0px;
+    padding: -10px;
+    left: -25px;
+    font-family: 'Saira', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
 }
 
 .navbar-nav {
@@ -38,20 +35,22 @@ html {
 
 .nav-item-logout {
     position: absolute;
-    top: 20px;
+    top: 34px;
     right: 0;
     font-family: 'Saira', sans-serif;
+    font-weight: 200;
     font-size: 20px;
     color: rgb(223, 250, 250);
     padding: 5px;
     width: 25%;
-    
+    height: 45px !important;
 }
 .nav-item-login {
     position: relative;
     top: 35px;
     right: 0px;
     font-family: 'Saira', sans-serif;
+    font-weight: 200;
     font-size: 20px;
     color: rgb(223, 250, 250);
     padding: 5px;
@@ -62,6 +61,7 @@ html {
     top: 35px;
     right: -15px;
     font-family: 'Saira', sans-serif;
+    font-weight: 200;
     font-size: 20px;
     color: rgb(223, 250, 250);
     padding: 5px;
@@ -78,6 +78,7 @@ html {
     top: 20px;
     right: 0;
     font-family: 'Saira', sans-serif;
+    font-weight: 100;
     font-size: 20px;
     color: rgb(255, 255, 255);
     padding: 5px;
@@ -89,6 +90,16 @@ html {
     top: 20px;
     right: 0;
     font-family: 'Saira', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    width: 100%; 
+    background-color: rgb(23, 109, 162);
+}
+.login_again {
+    font-family: 'Saira', sans-serif;
+    font-weight: 100;
     font-size: 20px;
     color: rgb(255, 255, 255);
     padding: 5px;
@@ -101,11 +112,19 @@ html {
 }
 
 @media screen and (max-width: 767px) {
+    .navbar-nav {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        margin-bottom: 60px;
+    }
+
     .nav-item-login {
         position: relative;
         top: 20px;
         right: 0;
         font-family: 'Saira', sans-serif;
+        font-weight: 200;
         font-size: 20px;
         color: rgb(223, 250, 250);
         padding: 5px;
@@ -116,6 +135,7 @@ html {
         top: 20px;
         right: 0;
         font-family: 'Saira', sans-serif;
+        font-weight: 200;
         font-size: 20px;
         color: rgb(223, 250, 250);
         padding: 5px;
@@ -132,6 +152,7 @@ html {
 
 .nav-item {
     font-family: 'Saira', sans-serif;
+    font-weight: 100;
     font-size: 20px;
     color: rgb(223, 250, 250);
     padding: 15px;
@@ -163,19 +184,34 @@ html {
 }
 
 @media screen and (max-width: 767px) {
+    .searchbar{
+        position: fixed;
+        top: 351px !important;
+        right: 130px;
+        transition: all 1s;
+        width: 50px;
+        height: 50px;
+        background: white;
+        box-sizing: border-box;
+        border-radius: 15px;
+        border: 4px solid white;
+        padding: 20px;  
+    }
+
     .nav-item-logout {
-        position: relative;
-        top: 20px;
-        right: 0;
+        position: absolute;
+        top: 333px;
+        right: -10px;
         font-family: 'Saira', sans-serif;
+        font-weight: 200;
         font-size: 20px;
         color: rgb(223, 250, 250);
         padding: 5px;
-        width: 25%; 
-        left: 36%;
+        width: 95px;
     }
     .nav-item {
         font-family: 'Saira', sans-serif;
+        font-weight: 100;
         font-size: 20px;
         color: rgb(223, 250, 250);
         padding: 0px;
@@ -251,9 +287,9 @@ html {
 }
 
 .searchbar{
-    position: absolute;
-    top: 18px;
-    right: 28%;
+    position: fixed;
+    top: 51px;
+    right: 130px;
     transition: all 1s;
     width: 50px;
     height: 50px;
@@ -314,10 +350,28 @@ html {
     background-color: #48b083fe;
     color: rgb(255, 255, 255);
     font-family: 'Saira', sans-serif;
+    font-weight: 100;
     font-size: 20px;
 
 }
 .card-body .text-center {
     font-family: 'Saira', sans-serif;
+    font-weight: 100;
     font-size: 20px;
+}
+
+.update_profile {
+    font-family: 'Saira', sans-serif;
+    font-weight: 100;
+    font-size: 20px;
+}
+.edit_btn {
+    font-size: 17px;
+    background-color: #48b083fe;
+}
+
+.profile_requests {
+    font-family: 'Saira', sans-serif;
+    font-weight: 100;
+    font-size: 30px;
 }

@@ -70,7 +70,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
               {% else %} {% if button_status == 'not_friend' %}
               <small
                 ><a
-                  class="btn btn-primary"
+                  class="btn btn-secondary"
                   href="/users/friend-request/send/{{ u.username }}"
                   >Add Friend</a
                 ></small
@@ -86,7 +86,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
               {% elif button_status == 'friend_request_received' %}
               <small
                 ><a
-                  class="btn btn-success mr-2"
+                  class="btn btn-secondary mr-2"
                   href="/users/friend-request/accept/{{ u.username }}"
                   >Accept Request</a
                 ></small
@@ -118,7 +118,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       <div class="col-md-6">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h2>Friend Requests Sent ({{ sent_friend_requests.count }})</h2>
+            <h2 class="profile_requests">Friend Requests Sent ({{ sent_friend_requests.count }})</h2>
             <hr class="my-2" />
             {% if not sent_friend_requests %}
             <h5><i>No sent requests!</i></h5>
@@ -149,7 +149,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       <div class="col-md-6">
         <div class="card card-signin my-5">
           <div class="card-body">
-            <h2>Friend Requests Recieved ({{ rec_friend_requests.count }})</h2>
+            <h2 class="profile_requests">Friend Requests Recieved ({{ rec_friend_requests.count }})</h2>
             <hr class="my-2" />
             {% if not rec_friend_requests %}
             <h5><i>No recieved requests!</i></h5>

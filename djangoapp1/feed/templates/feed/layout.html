@@ -12,7 +12,9 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
 	<link rel="preconnect" href="https://fonts.gstatic.com"> 
-	<link href="https://fonts.googleapis.com/css2?family=Saira:wght@100&display=swap" rel="stylesheet">
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link rel="preconnect" href="https://fonts.gstatic.com"> 
+	<link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100;0,300;0,400;0,600;1,100;1,200;1,400&display=swap" rel="stylesheet">	
 	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
     {% block cssfiles %}{% endblock cssfiles %}
     <title>Future Sounds</title>
@@ -21,7 +23,7 @@
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark large_navbar">
 		<div class="container1">
-	  <a class="navbar-brand ml-4 mr-4" href="#"><b>Future Sounds</b></a>
+	  <a href="{% url 'home' %}" class="navbar-brand ml-4 mr-4" href="#"><b>Future Sounds</b></a>
     <button class="menu" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" aria-label="Toggle navigation">
       <svg width="50" height="50" viewBox="0 1 100 100">
         <path class="line line1" d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
@@ -53,7 +55,6 @@
 
 	<footer class="page-footer font-small black">
 	  <div class="footer-copyright text-center py-3">Future Sounds © 2020
-	  <br><small class="text-muted">All rights reserved!</small>
 	</div>
 	</footer>
 
