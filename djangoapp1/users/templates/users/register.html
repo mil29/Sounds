@@ -1,18 +1,18 @@
 {% extends "feed/layout.html" %} {% load static %} {% load crispy_forms_tags %}
 {% block content %}
-
 <br />
-<div class="container">
+<div class="container register_card">
   <div class="row">
-    <div class="col-sm-9 col-md-9 col-lg-7 mx-auto">
-     <div class="card card-signin my-5">
+    <div class="col-sm-12 col-md-9 col-lg-7 mx-auto">
+     <div class="card card-signin my-0">
       <div class="card-body">
        <h5 class="card-title text-center"><b>Register</b></h5>
        <form class="form-signin" method="POST">
          {% csrf_token %}
          <fieldset class="form-group">
-           <br />
+           
            {{ form|crispy }}
+
         </fieldset>
         <div class="form-group">
           <button
@@ -20,7 +20,7 @@
             type="submit">
 
             Sign Up</button
-            ><br /><br />
+            ><br />
         </div>
         <small
         ><p class="text-center">

@@ -95,6 +95,7 @@ def post_delete(request, pk):
 	post = Post.objects.get(pk=pk)
 	if request.user== post.user_name:
 		Post.objects.get(pk=pk).delete()
+		messages.error(request, f'Post Deleted')
 	return redirect('home')
 
 

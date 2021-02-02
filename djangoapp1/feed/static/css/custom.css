@@ -118,7 +118,6 @@ html {
         padding: 10px;
         margin-bottom: 60px;
     }
-
     .nav-item-login {
         position: relative;
         top: 20px;
@@ -164,8 +163,8 @@ html {
 }
 .nav-item:hover{
     color: rgb(0, 245, 167);
-    transition-delay: 50ms;
-    transition-duration: 800ms;
+    transition-delay: 20ms;
+    transition-duration: 80ms;
     transition-property: color;
     text-decoration: none;
 }
@@ -185,9 +184,9 @@ html {
 
 @media screen and (max-width: 767px) {
     .searchbar{
-        position: fixed;
-        top: 351px !important;
-        right: 130px;
+        position: absolute!important;
+        top: 300px !important;
+        right: 180px !important;
         transition: all 1s;
         width: 50px;
         height: 50px;
@@ -200,7 +199,7 @@ html {
 
     .nav-item-logout {
         position: absolute;
-        top: 333px;
+        top: 303px;
         right: -10px;
         font-family: 'Saira', sans-serif;
         font-weight: 200;
@@ -218,8 +217,12 @@ html {
         width: 100%;
         text-align: center;
         position: relative;
-        top: 35px;
+        top: 0px;
         margin-bottom: 20px;
+    }
+    .nav-item:hover {
+        background-color: #3b586c;
+        transition: all 0.5s ease;
     }
    
     .menu {
@@ -287,9 +290,9 @@ html {
 }
 
 .searchbar{
-    position: fixed;
-    top: 51px;
-    right: 130px;
+    position: absolute;
+    top: 32px;
+    right: 25%;
     transition: all 1s;
     width: 50px;
     height: 50px;
@@ -374,4 +377,13 @@ html {
     font-family: 'Saira', sans-serif;
     font-weight: 100;
     font-size: 30px;
+}
+
+body {
+    background-color: #15222b;
+    overflow: hidden;
+}
+.register_card {
+   position: relative;
+   top: 20px;
 }

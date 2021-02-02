@@ -14,7 +14,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 {% endblock searchform %} {% block content %}
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       {% if friends %}
       <div class="card card-signin my-5">
         <div class="card-body">
@@ -50,7 +50,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       </h5>
       {% endif %}
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="card card-signin my-5">
         <a href="{{ request.user.profile.get_absolute_url }}"
           ><img
