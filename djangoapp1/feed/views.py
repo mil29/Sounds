@@ -83,12 +83,15 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 	def form_valid(self, form):
 		form.instance.user_name = self.request.user
 		return super().form_valid(form)
+		
 
 	def test_func(self):
 		post = self.get_object()
 		if self.request.user == post.user_name:
 			return True
 		return False
+		
+		
 
 @login_required
 def post_delete(request, pk):

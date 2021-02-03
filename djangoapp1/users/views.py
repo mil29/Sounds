@@ -80,6 +80,7 @@ def send_friend_request(request, username):
     frequest, created = FriendRequest.objects.get_or_create(
         from_user=request.user,
         to_user=user)
+    messages.success(request, f'Friend request sent!')
     return redirect('users_list')
 
 
@@ -90,6 +91,7 @@ def cancel_friend_request(request, username):
         from_user=request.user,
         to_user=user).first()
     frequest.delete()
+    messages.error(request, f'Friend request cancelled')
     return redirect('users_list')
 
 
@@ -105,6 +107,7 @@ def accept_friend_request(request, username):
         request_rev = FriendRequest.objects.filter(from_user=request.user, to_user=from_user).first()
         request_rev.delete() 
     frequest.delete()
+    messages.success(request, f'You are now friends with {user2}')
     return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
 
 
@@ -122,6 +125,7 @@ def delete_friend(request, id):
     friend_profile = get_object_or_404(Profile, id=id)
     user_profile.friends.remove(friend_profile)
     friend_profile.friends.remove(user_profile)
+    messages.error(request, f'You are no longer friends with {friend_profile}')
     return redirect('my_profile')
 
 

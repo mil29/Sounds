@@ -26,6 +26,27 @@ html {
     font-weight: 100;
     font-size: 30px;
 }
+.navbar-brand:hover {
+    margin: 0px;
+    padding: -10px;
+    left: -25px;
+    display: inline-block;
+    font-size: 30px;
+    font-weight: 100;
+    color: rgb(65, 188, 225);
+    overflow: hidden;
+    background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 875ms ease;
+    text-decoration: none; // text decorations are clipped in WebKit browsers
+    &:hover {
+        background-position: 0 100%;
+  }
+}
 
 .navbar-nav {
     width: 100%;
@@ -162,11 +183,23 @@ html {
     margin-bottom: 20px;
 }
 .nav-item:hover{
-    color: rgb(0, 245, 167);
-    transition-delay: 20ms;
-    transition-duration: 80ms;
-    transition-property: color;
-    text-decoration: none;
+    font-size: 20px;
+    font-weight: 400;
+    color: rgb(65, 188, 225);
+    overflow: hidden;
+    background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-size: 200% 100%;
+    background-position: 100%;
+    transition: background-position 875ms ease;
+    text-decoration: none; // text decorations are clipped in WebKit browsers
+    &:hover {
+        background-position: 0 100%;
+  }
+}
+
 }
 
 .form-inline {
@@ -220,11 +253,23 @@ html {
         top: 0px;
         margin-bottom: 20px;
     }
-    .nav-item:hover {
-        background-color: #3b586c;
-        transition: all 0.5s ease;
+    .nav-item:hover{
+        font-size: 20px;
+        font-weight: 400;
+        color: rgb(65, 188, 225);
+        overflow: hidden;
+        background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-size: 200% 100%;
+        background-position: 100%;
+        transition: background-position 875ms ease;
+        text-decoration: none; // text decorations are clipped in WebKit browsers
+        &:hover {
+            background-position: 0 100%;
+      }
     }
-   
     .menu {
         background-color: transparent;
         border: none;
@@ -387,3 +432,17 @@ body {
    position: relative;
    top: 20px;
 }
+.no_friends_text {
+    position: relative;
+    top: 200px;
+    color: rgb(222, 222, 222);
+    font-family: 'Saira', sans-serif;
+}
+.no_friends_text a {
+    color: aqua;
+}
+
+
+
+
+
