@@ -22,7 +22,6 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
       <div class="card card-signin my-5">
         <div class="card-body">
           {% for user_p in users %}
-          {% if not user_p in friends %}
           <a href="{{ user_p.profile.get_absolute_url }}"
             ><img
               src="{{ user_p.profile.image.url }}"
@@ -34,15 +33,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <a class="text-dark" href="{{ user_p.profile.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
             >  
-            
-            <small class="float-right">
-              <a
-                class="btn btn-primary mr-2"
-                href="/users/friend-request/send/{{ user_p.username }}"
-                >Add Friend</a>
-              </small>
-              <a
-              {% endif %}
+  
               </small>
           <br/><br />
           {% endfor %}

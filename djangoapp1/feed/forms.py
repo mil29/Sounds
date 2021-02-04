@@ -6,6 +6,9 @@ class NewPostForm(forms.ModelForm):
 		model = Post
 		fields = ['description', 'pic', 'tags']
 
+
+
+
 class NewCommentForm(forms.ModelForm):
 
 	class Meta:
