@@ -441,7 +441,15 @@ body {
 .no_friends_text a {
     color: aqua;
 }
+.post_search_noresult_text {
+    color: rgb(222, 222, 222);
+    font-family: 'Saira', sans-serif;
+}
 
+.page-footer {
+    color: rgb(222, 222, 222);
+    font-family: 'Saira', sans-serif;
+}
 
 
 

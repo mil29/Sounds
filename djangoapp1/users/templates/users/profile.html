@@ -4,7 +4,7 @@
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 <form class="searchbar" action="{% url 'search_users' %}" method="get"">
-  <input class="postquery" name="q" type="text" placeholder="Search users..">
+  <input class="postquery" name="q" type="text" autocomplete="off"/ placeholder="Search users..">
   <button id="search_btn" type="submit">
   <i class="fa fa-search"></i>
   </button>
@@ -20,7 +20,6 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
               <div class="card-profile-image">
-                <a href="{{ u.profile.image.url }}">
                   <img
                     src="{{ u.profile.image.url }}"
                     class="rounded-circle"
