@@ -59,7 +59,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
               </div>
             </div>
             <div class="text-center">
-              <h3>{{ u }}</h3>
+              <h3 class="user_link"><a href="{% url 'user-posts' u.username %}">{{ u }}</a></h3>
               <p>{{ u.profile.bio }}</p>
               <hr class="my-2" />
               {% if request.user == u %}

@@ -395,8 +395,6 @@ html {
 }
 
 .post_button {
-    background-color: #48b083fe;
-    color: rgb(255, 255, 255);
     font-family: 'Saira', sans-serif;
     font-weight: 100;
     font-size: 20px;
@@ -415,7 +413,6 @@ html {
 }
 .edit_btn {
     font-size: 17px;
-    background-color: #48b083fe;
 }
 
 .profile_requests {
@@ -451,5 +448,34 @@ body {
     font-family: 'Saira', sans-serif;
 }
 
-
+.card-body {
+    background-color: #d9e1e4;
+}
+.btn-danger:hover {
+    background-color: #880a0a;
+}
+.btn-secondary:hover {
+    background-color: #2d2c2c;
+}
+.btn-info:hover {
+    background-color: #079379;
+}
+.user_link a {
+    color: #222426;
+    text-decoration: none;
+}
+.user_link a:hover {
+    font-family: Saira, sans-serif;
+    color: #065688;
+    text-decoration: none;
+    font-weight: 600;
+}
+.friend_link{
+    color: #1c1c1c;
+    text-decoration: none;
+}
+.friend_link:hover{
+    color: #006d85;
+    text-decoration: none;
+}
 

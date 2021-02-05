@@ -32,7 +32,7 @@ def register(request):
 
 @login_required
 def users_list(request):
-    users = Profile.objects.exclude(user=request.user)
+    users = Profile.objects.exclude(user=request.user).exclude(slug='admin')
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
     sent_to = []
     friends = []
@@ -230,7 +230,7 @@ def my_profile(request):
 @login_required
 def search_users(request):
 	query = request.GET.get('q')
-	object_list = User.objects.filter(username__icontains=query).exclude(username=request.user.profile)
+	object_list = User.objects.filter(username__icontains=query).exclude(username=request.user.profile).exclude(username='admin')
 	context ={ 
 		'users': object_list
 	}
