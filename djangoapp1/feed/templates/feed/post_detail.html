@@ -29,6 +29,11 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	            <p class="card-text text-dark">{{ post.description }}</p>
 	          </div>
 	          <a href="{{ post.pic.url }}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+			  {% if post.audio %}
+    		  	<div id="play"><audio controls="controls"><source src="{{ post.audio.url }}" type= "audio/mpeg" type="audio/wav" type="audio/aiff" />
+      				Your browser does not support the audio element.
+    			</audio></div>
+			  {% endif %}
 	          {% if post.tags %}
 	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
 	          {% endif %}

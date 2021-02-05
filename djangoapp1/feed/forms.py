@@ -4,7 +4,7 @@ from .models import Comments, Post
 class NewPostForm(forms.ModelForm):
 	class Meta:
 		model = Post
-		fields = ['description', 'pic', 'tags']
+		fields = ['description', 'pic', 'audio', 'tags']
 		widgets = {
           'description': forms.Textarea(attrs={'rows':3, 'cols':15}),
         }
