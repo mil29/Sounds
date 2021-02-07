@@ -4,9 +4,8 @@ from django.urls import reverse
 from django.utils import timezone
 
 class Post(models.Model):
-	description = models.TextField(max_length=255, blank=True)
-	pic = models.ImageField(upload_to='path/to/img')
-	audio = models.FileField(upload_to='path/to/audio', blank=True)
+	description = models.TextField(max_length=255)
+	pic = models.ImageField(upload_to='path/to/img', blank=True)
 	date_posted = models.DateTimeField(default=timezone.now)
 	user_name = models.ForeignKey(User, on_delete=models.CASCADE)
 	tags = models.CharField(max_length=100, blank=True)

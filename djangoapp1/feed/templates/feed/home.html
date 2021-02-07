@@ -31,7 +31,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	          	<br><br>
 	            <p class="card-text text-dark">{{ post.description }}</p>
 	          </div>
+            {% if post.pic %}
 	          <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+            {% endif %}
 	          {% if post.tags %}
 	          <br>
 	          <p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
@@ -45,6 +47,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 			        {% endif %}
 			    </button>
 	          	<a class="btn btn-outline-info" href="{% url 'post-detail' post.id %}">Comments | {{ post.details.count }}</a>
+              {% if post.user_name == user %}
+              <a class="btn btn-outline-info mr-0 float-right" href="{% url 'post-update' post.id %}">Edit Post</a>
+              {% endif %}
 	          </div>
 	        </div>
 	        {% endfor %}

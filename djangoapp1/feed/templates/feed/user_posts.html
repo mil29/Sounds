@@ -18,7 +18,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 {% block content %}
  	<div class="container">
 	    <div class="row">
-	      <div class="col-md-8">
+	      <div class="col-xl-9 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
 	        {% for post in posts %}
 	        <div class="card card-signin my-5">
 	          <div class="card-body">
@@ -28,7 +28,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	          	<br><br>
 	            <p class="card-text text-dark">{{ post.description }}</p>
 	          </div>
+            {% if post.pic %}
 	          <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+            {% endif %}
 	          {% if post.tags %}
 	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
 	          {% endif %}
