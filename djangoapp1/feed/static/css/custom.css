@@ -849,3 +849,29 @@ body {
     background-color: #344450;
     border: 2px solid #0ae964;
 }
+.comment_text {
+    color: #0ae964;
+    position: relative;
+    text-align: center;
+}
+.post_delete {
+    color: #880a0a;
+    float: right;
+    margin: 10px;
+    padding-right: 10px;
+}
+.comment_delete {
+    color: #880a0a;
+}
+.comment_delete:hover {
+    color: #ff0808;
+    font-size: 16px;
+}
+.delete_comment_button {
+    position: relative;
+    color: #880a0a;
+    font-size: 15px;
+    top: -15px;
+    right: -10px;
+    float: right;
+}

@@ -101,6 +101,14 @@ def post_delete(request, pk):
 		messages.error(request, f'Post Deleted')
 	return redirect('home')
 
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comments, pk=pk)
+    if request.user.id == comment.username_id:
+        Comments.objects.get(pk=pk).delete()
+        messages.error(request, f'Comment Deleted')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 @login_required
 def search_posts(request):
