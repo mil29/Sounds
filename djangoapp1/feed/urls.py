@@ -13,4 +13,5 @@ urlpatterns=[
 	path('search_posts/', views.search_posts, name='search_posts'),
 	path('user_posts/<str:username>', UserPostListView.as_view(), name='user-posts'),
 	path('comments/<int:pk>/delete/', views.comment_delete, name='comment-delete'),
+	path('music/new/', views.music_upload, name='music-upload'),
 ]

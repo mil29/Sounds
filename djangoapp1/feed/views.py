@@ -4,10 +4,10 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from .forms import NewCommentForm, NewPostForm
+from .forms import NewCommentForm, NewPostForm, MusicForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Comments, Like
+from .models import Post, Comments, Like, Music
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
@@ -140,3 +140,17 @@ def like(request):
 	return HttpResponse(response, content_type = "application/json")
 
 
+@login_required
+def music_upload(request):
+	user = request.user
+	if request.method == "POST":
+		form = MusicForm(request.POST, request.FILES)
+		if form.is_valid():
+			data = form.save(commit=False)
+			data.artist = user
+			data.save()
+			messages.success(request, f'Track Uploaded')
+			return redirect('my_profile')
+	else:
+		form = MusicForm()
+	return render(request, 'feed/music_upload.html', {'form':form})

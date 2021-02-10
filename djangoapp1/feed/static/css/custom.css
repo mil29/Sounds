@@ -1,11 +1,24 @@
 html {
     overflow-y: scroll;
     overflow-x: scroll;
+    -webkit-tap-highlight-color:transparent;
 }
 body {
     background-color: #15222b;
     overflow: hidden;
 }
+html{ /*** disables most of the site from being selected , but still allows text to be selected **/
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none; 
+}
+p,a,h1,h2,h3,h4,h5,h6,li,td,article{
+    -o-user-select: text;
+    -moz-user-select: text;
+    -webkit-user-select: text;
+    user-select: text;
+} /** only allows text to be selected on site **/
 
 .container1 {
     width: 100%;
@@ -368,7 +381,7 @@ body {
     padding: 0 20px;
 }
 
-.fa{
+.fa-search{
     box-sizing: border-box;
     padding: 10px;
     width: 42.5px;
@@ -392,7 +405,7 @@ body {
     display: block;
 }
 
-.searchbar:hover .fa{
+.searchbar:hover .fa-search{
     background: #41c5d4;
     color: rgb(0, 0, 0);
     
@@ -482,7 +495,7 @@ body {
 
 
 
-#app-cover  /******************************************* Music Player ******************************************/
+#app-cover  /******************************************* Music Player ******************************************/ 
 {
     position: relative;
     top: 100px;
@@ -491,14 +504,15 @@ body {
     width: 430px;
     height: 100px;
     margin: -4px auto;
+    
 }
-
 
 #player
 {
     position: relative;
-    height: 100%;
+    height: 105%;
     z-index: 3;
+    
 }
 
 #player-track
@@ -510,8 +524,9 @@ body {
     padding: 13px 22px 10px 184px;
     background-color: #829aa3;
     border-radius: 15px 15px 0 0;
-    transition: 0.3s ease top;
+    transition: 0.9s ease top;
     z-index: 1;
+    height: 90%;
 }
 
 #player-track.active
@@ -521,14 +536,14 @@ body {
 
 #album-name
 {
-    color: #54576f;
+    color: #343435;
     font-size: 17px;
     font-weight: bold;
 }
 
 #track-name
 {
-    color: #acaebd;
+    color: #404041;
     font-size: 13px;
     margin: 2px 0 13px 0;
 }
@@ -561,7 +576,7 @@ body {
 
 #track-time.active #current-time, #track-time.active #track-length
 {
-    color: #f86d92;
+    color: #c64265;
     background-color: transparent;
 }
 
@@ -621,7 +636,7 @@ body {
 #player-content
 {
     position: relative;
-    height: 100%;
+    height: 90%;
     background-color: rgb(6, 21, 29);
     box-shadow: 0px 0px 40px #989797;
     border-radius: 15px;
@@ -749,29 +764,48 @@ body {
 {
     width: 33.333%;
     float: left;
-    padding: 12px;
+    padding: 0px;
     height: 100%;
-    justify-items: center;
 }
 
 .button
 {
-    width: 26px;
-    height: 46px;
+    width: fit-content;
+    height: fit-content;
     padding: 25px;
-    background-color: rgb(7, 10, 10);
+    left: 15px;
+    top: 25px;
+    background-color: rgb(40, 40, 40);
     border-radius: 10px;
     cursor: pointer;
     position: relative;
+    border: 1px solid  #0ac0e93f;
+}
+.button:hover {
+    background-color: #1c4d52;
+}
+.button .fa-pause {
+    color: #af28f2;
+    background-color: #000000;
+}
+.button .fa-forward:active {
+    color: #9500ff;
+}
+.button .fa-backward:active {
+    color: #9500ff;
 }
 
 .button i
 {
     display: block;
-    color: #d6dee7;
-    font-size: 26px;
+    color: #8998a9;
+    font-size: 20px;
     text-align: center;
-    line-height: 1;
+    position: absolute;
+    right: 14px;
+    line-height: 0;
+    width: fit-content;
+    height: fit-content;
 }
 
 .button, .button i
@@ -779,14 +813,9 @@ body {
     transition: 0.2s ease all;
 }
 
-.button:hover
-{
-    background-color: #d6d6de;
-}
-
 .button:hover i
 {
-    color: #fff;
+    color: rgb(99, 249, 172);
 }
 
 #ytd-url {
@@ -803,25 +832,9 @@ body {
   border-radius: 4px;
   box-shadow: 0 10px 20px -5px rgba(174, 95, 135, 0.86);
   z-index: 125;
-}
+}   
 
 
-#play-pause-button {
-    height: 100%;
-}
-#play-next {
-    height: 100%;
-
-}
-#play-previous {
-    height: 100%;
-}
-.fa-play {
-    justify-content: center;
-}
-.fa-pause {
-    justify-content: center;
-}
 
 .card-music h3 {
     font-family: Saira, sans-serif;
@@ -835,7 +848,27 @@ body {
     height: 270px;
     background-color: #344450;
     border: 2px solid #0ae964;
+    transition: border-width 0.6s linear;
+} 
+  
+  .card-music:hover { border-width: 10px; }
+
+.track-upload-button {
+    width: 100px;
+    height: fit-content;
+    right: 0;
+    top: 5px;
+    padding: 0px;
+    margin: 5px;
+    position: absolute;
+    font-family: 'Saira', sans-serif;
+    background-color: #058a8a;
+    border: none;
 }
+.track-upload-button:hover {
+    background-color: #ac0707;
+}
+
 .card-videos h3 {
     font-family: Saira, sans-serif;
     font-weight: 400;
@@ -875,3 +908,4 @@ body {
     right: -10px;
     float: right;
 }
+

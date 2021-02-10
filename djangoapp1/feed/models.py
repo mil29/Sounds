@@ -26,3 +26,13 @@ class Comments(models.Model):
 class Like(models.Model):
 	user = models.ForeignKey(User, related_name='likes', on_delete=models.CASCADE)
 	post = models.ForeignKey(Post, related_name='likes', on_delete=models.CASCADE)
+
+
+class Music(models.Model):
+	track = models.FileField(upload_to='path/to/audio')
+	title = models.TextField(max_length=50)
+	artwork = models.ImageField(upload_to='path/to/img', blank=True)
+	artist = models.ForeignKey(User, on_delete=models.CASCADE)
+
+	def __str__(self):
+		return self.title
