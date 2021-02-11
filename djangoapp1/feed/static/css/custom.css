@@ -848,10 +848,13 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     height: 270px;
     background-color: #344450;
     border: 2px solid #0ae964;
-    transition: border-width 0.6s linear;
+    transition: border-width 0.1s linear;
 } 
   
-  .card-music:hover { border-width: 10px; }
+  .card-music:hover { 
+      border-width: 10px;
+      border: 8px solid #17ccd8;
+     }
 
 .track-upload-button {
     width: 100px;

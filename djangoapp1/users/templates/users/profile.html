@@ -137,12 +137,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
-
-                      <img src="djangoapp1/media/path/to/img/1000x600_EPICMUSIC2018-web-optimised-1000.jpg" class="active" id="_1">
+                      {% for artwork in music %}
+                      <img src="{{ music.artwork.artist_id.url }}" class="active" id="_1">
                       <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
                       <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_3.jpg" id="_3">
                       <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_4.jpg" id="_4">
                       <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_5.jpg" id="_5">
+                      {% endfor %}
                       <div id="buffer-box">Buffering ...</div>
                     </div>
                     <div id="player-controls">
@@ -265,7 +266,21 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 <script>
 $(function()
 {
-    var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl, albumName = $('#album-name'), trackName = $('#track-name'), albumArt = $('#album-art'), sArea = $('#s-area'), seekBar = $('#seek-bar'), trackTime = $('#track-time'), insTime = $('#ins-time'), sHover = $('#s-hover'), playPauseButton = $("#play-pause-button"),  i = playPauseButton.find('i'), tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'], albumArtworks = ['_1','_2','_3','_4','_5'], trackUrl = ['https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3','https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'], playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
+    var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
+     albumName = $('#album-name'), trackName = $('#track-name'), albumArt = $('#album-art'),
+      sArea = $('#s-area'), seekBar = $('#seek-bar'), trackTime = $('#track-time'), insTime = $('#ins-time'),
+       sHover = $('#s-hover'), playPauseButton = $("#play-pause-button"),  i = playPauseButton.find('i'), 
+       tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, 
+       ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
+       tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
+       trackNames = ['Skylike - Dawn','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'], 
+       albumArtworks = ['_1','_2','_3','_4','_5'], trackUrl = 
+      ['https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/2.mp3',
+       'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/1.mp3',
+       'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/3.mp3',
+       'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/4.mp3',
+       'https://raw.githubusercontent.com/himalayasingh/music-player-1/master/music/5.mp3'],
+       playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
     function playPause()
     {
@@ -496,16 +511,6 @@ $(function()
 });
 </script>
 
-<script>
-  var VolumeSlider = player.querySelector('.volume-bar');
-VolumeSlider.addEventListener('input', function(){
-audio.volume=this.value;
-step=.01;
-min=0;
-max=1;
-value=1;
-}, false);
-</script>
 
 {% endblock jsfiles %}
  

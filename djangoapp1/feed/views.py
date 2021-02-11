@@ -12,6 +12,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
 
+
 class PostListView(ListView):
 	model = Post
 	template_name = 'feed/home.html'
@@ -154,3 +155,11 @@ def music_upload(request):
 	else:
 		form = MusicForm()
 	return render(request, 'feed/music_upload.html', {'form':form})
+
+
+
+
+
+
+
+
