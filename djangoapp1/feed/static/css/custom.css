@@ -818,24 +818,6 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     color: rgb(99, 249, 172);
 }
 
-#ytd-url {
-  display: block;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  padding: 10px 14px;
-  margin: 20px;
-  color: #fff;
-  font-size: 14px;
-  text-decoration: none;
-  background-color: #ae5f87;
-  border-radius: 4px;
-  box-shadow: 0 10px 20px -5px rgba(174, 95, 135, 0.86);
-  z-index: 125;
-}   
-
-
-
 .card-music h3 {
     font-family: Saira, sans-serif;
     font-weight: 400;
