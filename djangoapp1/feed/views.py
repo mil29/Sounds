@@ -157,17 +157,6 @@ def music_upload(request):
 	return render(request, 'feed/music_upload.html', {'form':form})
 
 
-def music_playback(request):
-	m = request.user.user_id
-	track = m.track.all()
-	artwork = m.artwork.all()
-	title = m.title.all()
-	context = {
-		'track': track,
-		'artwork': artwork,
-		'title': title
-	}
-	return render(request, 'profile.html', context)
 
 
 

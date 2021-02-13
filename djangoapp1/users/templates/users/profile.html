@@ -116,17 +116,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-music">
                 <h3>MUSIC</h3>
-                {% for songs in music.artist %}
-                  {% if songs.track %}
-                <audio controls>
-                <source src="{{ songs.track }}" type="audio/mpeg">
-                Your browser does not support the audio tag.
-                </audio>
-                {% endif %}
-                {% endfor %}
-
                 <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' %}">Upload</a>
-
               <div id="app-cover">
                 <div id="bg-artwork"></div>
                 <div id="bg-layer"></div>
