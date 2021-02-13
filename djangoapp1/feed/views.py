@@ -141,14 +141,14 @@ def like(request):
 	return HttpResponse(response, content_type = "application/json")
 
 
-@login_required
+@login_required 
 def music_upload(request):
 	if request.method == "POST":
 		form = MusicForm(request.POST, request.FILES)
 		if form.is_valid():
-			track = request.FILES['track']
+			user = request.user
 			song = form.save(commit=False)
-			song.artist = request.user
+			song.artist = user
 			song.save()
 			messages.success(request, f'Track Uploaded')
 			return redirect('my_profile')
@@ -157,8 +157,8 @@ def music_upload(request):
 	return render(request, 'feed/music_upload.html', {'form':form})
 
 
-def music_detail(request):
-	m = request.user.music
+def music_playback(request):
+	m = request.user.user_id
 	track = m.track.all()
 	artwork = m.artwork.all()
 	title = m.title.all()
