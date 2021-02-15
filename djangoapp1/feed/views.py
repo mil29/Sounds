@@ -11,6 +11,7 @@ from .models import Post, Comments, Like, Music
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
+from json import dumps
 
 
 class PostListView(ListView):
@@ -158,6 +159,10 @@ def music_upload(request):
 
 
 
+def music_detail(request):
+	user = request.user.user_id
+	songs = user.music.objects.all()
+	tracks = songs.track.all()
 
 
 

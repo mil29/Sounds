@@ -19,8 +19,7 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return "/users/{}".format(self.slug)
-
-
+    
 
 def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
     if created:
