@@ -11,7 +11,7 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
 from django.core.mail import send_mail
 from django.urls import reverse
-
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 
 User = get_user_model()
@@ -191,6 +191,7 @@ def edit_profile(request):
     return render(request, 'users/edit_profile.html', context)
 
 
+
 @login_required
 def my_profile(request):
         p = request.user.profile
@@ -224,7 +225,6 @@ def my_profile(request):
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count
         }
-
         return render(request, 'users/profile.html', context)
 
 @login_required
@@ -235,6 +235,9 @@ def search_users(request):
 		'users': object_list
 	}
 	return render(request, "users/search_users.html", context)
+
+
+
 
         
 

@@ -162,7 +162,7 @@ def music_upload(request):
 def music_detail(request):
 	user = request.user.user_id
 	songs = user.music.objects.all()
-	tracks = songs.track.all()
+	tracks = songs.track.all().first()
 
 
 
