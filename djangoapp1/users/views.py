@@ -200,8 +200,9 @@ def my_profile(request):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
+        music = Music.objects.all().order_by('-date_posted')
 
-        # is this user our friend
+        # is this user our friend 
         button_status = 'none'
         if p not in request.user.profile.friends.all():
             button_status = 'not_friend'
@@ -223,7 +224,8 @@ def my_profile(request):
                 'friends_list': friends,
                 'sent_friend_requests': sent_friend_requests,
                 'rec_friend_requests': rec_friend_requests,
-                'post_count': user_posts.count
+                'post_count': user_posts.count,
+                'music': music
         }
         return render(request, 'users/profile.html', context)
 
