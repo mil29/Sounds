@@ -144,12 +144,12 @@ def like(request):
 
 @login_required 
 def music_upload(request):
+	artist = request.user
 	if request.method == "POST":
 		form = MusicForm(request.POST, request.FILES)
 		if form.is_valid():
-			user = request.user
 			song = form.save(commit=False)
-			song.artist = user
+			song.artist = artist
 			song.save()
 			messages.success(request, f'Track Uploaded')
 			return redirect('my_profile')

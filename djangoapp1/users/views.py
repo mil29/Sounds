@@ -200,7 +200,7 @@ def my_profile(request):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-        artwork = Music.objects.all()
+        artwork = Music.objects.all().order_by('-date_posted')
 
         # is this user our friend 
         button_status = 'none'

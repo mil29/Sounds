@@ -36,9 +36,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="card-body pt-0 pt-md-4">
             <div class="row">
               <div class="col">
-                <div
-                  class="card-profile-stats d-flex justify-content-center mt-md-5"
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5"
                 >
+
                   <div>
                     <span class="heading">{{ u.profile.friends.count }}</span>
                     {% if request.user == u %}
@@ -138,12 +138,16 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   <div id="player-content">
                     <div id="album-art">
                     {% for art in artwork %}
-
-                      <img src="{{ art.url }}" class="active" id="_1">
-                      <img src="{{ art.url }}" id="_2">
-                      <img src="{{ art.url }}" id="_3">
-                      <img src="{{ art.url }}" id="_4">
-                      <img src="{{ art.url }}" id="_5">
+                      {% if art.artwork %}
+                      <li>
+                      <img src="{{ art.artwork.url }}" class="active" id="_1">
+                      <img src="" id="_2">
+                      <img src="" id="_3">
+                      <img src="" id="_4">
+                      <img src="" id="_5">
+                    </li>
+ 
+                      {% endif %}
                     {% endfor %}
 
                       <div id="buffer-box">Buffering ...</div>
