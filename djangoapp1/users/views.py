@@ -12,7 +12,7 @@ import random
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-
+from django.core import serializers
 
 User = get_user_model()
 
@@ -200,7 +200,7 @@ def my_profile(request):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-        music = Music.objects.all().order_by('-date_posted')
+        artwork = Music.objects.all()
 
         # is this user our friend 
         button_status = 'none'
@@ -216,6 +216,8 @@ def my_profile(request):
             if len(FriendRequest.objects.filter(
                 from_user=p.user).filter(to_user=request.user)) == 1:
                         button_status = 'friend_request_received'
+            
+
         
 
         context = {
@@ -225,7 +227,8 @@ def my_profile(request):
                 'sent_friend_requests': sent_friend_requests,
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count,
-                'music': music
+                'artwork': artwork
+
         }
         return render(request, 'users/profile.html', context)
 

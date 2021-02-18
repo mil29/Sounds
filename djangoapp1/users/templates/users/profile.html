@@ -137,14 +137,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
-                    {% for art in music %}
-                    {% if art.artwork %}
-                      <img src="{{ art.artwork.url }}" class="active" id="_1">
-                      <img src="" id="_2">
-                      <img src="" id="_3">
-                      <img src="" id="_4">
-                      <img src="" id="_5">
-                    {% endif %}
+                    {% for art in artwork %}
+
+                      <img src="{{ art.url }}" class="active" id="_1">
+                      <img src="{{ art.url }}" id="_2">
+                      <img src="{{ art.url }}" id="_3">
+                      <img src="{{ art.url }}" id="_4">
+                      <img src="{{ art.url }}" id="_5">
                     {% endfor %}
 
                       <div id="buffer-box">Buffering ...</div>
