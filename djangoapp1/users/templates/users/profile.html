@@ -265,6 +265,11 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
     {% endif %}
   </div>
 </div>
+{% for item in tracks %}
+{% if item.track %}
+<a href="{{ item.track.url }}" id="_10"></a>
+{% endif %}
+{% endfor %}
 
 {% endblock content %}
 {% block jsfiles %}
@@ -279,9 +284,9 @@ $(function()
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
        tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
        trackNames = ['Skylike - test','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'], 
-       albumArtworks = ['_1','_2','_3','_4','_5'], trackUrl = [],
+       albumArtworks = ['_1','_2','_3','_4','_5']; trackUrl = [];
 
-       playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
+       var playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
     function playPause()
     {

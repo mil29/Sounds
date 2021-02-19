@@ -63,7 +63,7 @@ def post_detail(request, pk):
 	return render(request, 'feed/post_detail.html', {'post':post, 'is_liked':is_liked, 'form':form})
 
 @login_required
-def create_post(request):
+def create_post(request, slug):
 	user = request.user
 	if request.method == "POST":
 		form = NewPostForm(request.POST, request.FILES)

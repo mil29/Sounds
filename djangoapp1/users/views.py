@@ -13,6 +13,7 @@ from django.core.mail import send_mail
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.core import serializers
+import json
 
 User = get_user_model()
 
@@ -31,7 +32,7 @@ def register(request):
 
 
 @login_required
-def users_list(request):
+def users_list(request, slug):
     users = Profile.objects.exclude(user=request.user).exclude(slug='admin')
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
     sent_to = []
@@ -63,6 +64,7 @@ def users_list(request):
         'sent': sent_to
     }
     return render(request, "users/users_list.html", context)
+
 
 
 def friend_list(request):
@@ -193,7 +195,7 @@ def edit_profile(request):
 
 
 @login_required
-def my_profile(request):
+def my_profile(request, slug):
         p = request.user.profile
         you = p.user
         sent_friend_requests = FriendRequest.objects.filter(from_user=you)
@@ -201,6 +203,7 @@ def my_profile(request):
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
         artwork = Music.objects.all().order_by('-date_posted')
+        tracks = Music.objects.all()
 
         # is this user our friend 
         button_status = 'none'
@@ -217,7 +220,10 @@ def my_profile(request):
                 from_user=p.user).filter(to_user=request.user)) == 1:
                         button_status = 'friend_request_received'
             
-
+        
+        data = {
+            'music' : json.loads(serializers.serialize('json', Music.objects.all()))
+        }
         
 
         context = {
@@ -227,9 +233,11 @@ def my_profile(request):
                 'sent_friend_requests': sent_friend_requests,
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count,
-                'artwork': artwork
+                'artwork': artwork,
+                'tracks': tracks,
+                'data': json.dumps(data)
+            }
 
-        }
         return render(request, 'users/profile.html', context)
 
 @login_required
