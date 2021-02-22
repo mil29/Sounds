@@ -32,7 +32,7 @@ def register(request):
 
 
 @login_required
-def users_list(request, slug):
+def users_list(request):
     users = Profile.objects.exclude(user=request.user).exclude(slug='admin')
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
     sent_to = []
@@ -66,7 +66,7 @@ def users_list(request, slug):
     return render(request, "users/users_list.html", context)
 
 
-
+@login_required
 def friend_list(request):
     p = request.user.profile
     friends = p.friends.all()

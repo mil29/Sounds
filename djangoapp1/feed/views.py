@@ -8,6 +8,7 @@ from .forms import NewCommentForm, NewPostForm, MusicForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comments, Like, Music
+from users.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
@@ -20,12 +21,14 @@ class PostListView(ListView):
 	context_object_name = 'posts'
 	ordering = ['-date_posted']
 	paginate_by = 10
+
 	def get_context_data(self, **kwargs):
 		context = super(PostListView, self).get_context_data(**kwargs)
 		if self.request.user.is_authenticated:
 			liked = [i for i in Post.objects.all() if Like.objects.filter(user = self.request.user, post=i)]
 			context['liked_post'] = liked
 		return context
+	
 
 class UserPostListView(LoginRequiredMixin, ListView):
 	model = Post
@@ -46,7 +49,7 @@ class UserPostListView(LoginRequiredMixin, ListView):
 
 
 @login_required
-def post_detail(request, pk):
+def post_detail(request, pk, slug):
 	post = get_object_or_404(Post, pk=pk)
 	user = request.user
 	is_liked =  Like.objects.filter(user=user, post=post)
@@ -57,7 +60,7 @@ def post_detail(request, pk):
 			data.post = post
 			data.username = user
 			data.save()
-			return redirect('post-detail', pk=pk)
+			return redirect('post-detail', pk=pk, slug=slug)
 	else:
 		form = NewCommentForm()
 	return render(request, 'feed/post_detail.html', {'post':post, 'is_liked':is_liked, 'form':form})
@@ -72,7 +75,7 @@ def create_post(request, slug):
 			data.user_name = user
 			data.save()
 			messages.success(request, f'Posted Successfully')
-			return redirect('home')
+			return redirect('home', slug=slug)
 	else:
 		form = NewPostForm()
 	return render(request, 'feed/create_post.html', {'form':form})
@@ -96,12 +99,12 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 		
 
 @login_required
-def post_delete(request, pk):
+def post_delete(request, pk, slug):
 	post = Post.objects.get(pk=pk)
 	if request.user== post.user_name:
 		Post.objects.get(pk=pk).delete()
 		messages.error(request, f'Post Deleted')
-	return redirect('home')
+	return redirect('home', slug=slug)
 
 @login_required
 def comment_delete(request, pk):
@@ -124,7 +127,7 @@ def search_posts(request):
 	return render(request, "feed/search_posts.html", context)
 
 @login_required
-def like(request):
+def like(request, slug):
 	post_id = request.GET.get("likeId", "")
 	user = request.user
 	post = Post.objects.get(pk=post_id)

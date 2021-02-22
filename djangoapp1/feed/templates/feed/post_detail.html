@@ -37,9 +37,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	          <div class="card-footer">
 	          	<button class="btn btn-white mr-3 like" id="{{ post.id }}">
 			        {% if is_liked %}
-			            <a href="{% url 'post-like' %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike | {{post.likes.count}}</a>
+			            <a href="{% url 'post-like' user.profile.slug %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike | {{post.likes.count}}</a>
 			        {% else %}
-			            <a href="{% url 'post-like' %}" style="color:green;" id="likebtn{{ post.id }}"> Like | {{post.likes.count}}</a>
+			            <a href="{% url 'post-like' user.profile.slug %}" style="color:green;" id="likebtn{{ post.id }}"> Like | {{post.likes.count}}</a>
 			        {% endif %}
 			    </button>
 				
@@ -89,7 +89,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 				            <div class="form-group">
 				                <button class="btn btn-secondary btn-block text-uppercase" type="submit">Comment</button><br>
 								<br> 
-								<a class="btn btn-outline-danger" href="{% url 'home' %}">Back</a>
+								<a class="btn btn-outline-danger" href="{% url 'home' user.profile.slug %}">Back</a>
 				            </div>
 	    			</div>
 	    		</div>

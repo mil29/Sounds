@@ -10,7 +10,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('feed.urls')),
-    path('users/<slug:slug>/', user_views.users_list, name='users_list'),
+    path('users/', user_views.users_list, name='users_list'),
     path('users/<slug:slug>/', user_views.profile_view, name='profile_view'),
     path('friends/', user_views.friend_list, name='friend_list'),
     path('users/friend-request/send/<str:username>/', user_views.send_friend_request, name='send_friend_request'),
