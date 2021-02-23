@@ -8,7 +8,6 @@ from .forms import NewCommentForm, NewPostForm, MusicForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comments, Like, Music
-from users.models import Profile
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
@@ -29,6 +28,7 @@ class PostListView(ListView):
 			context['liked_post'] = liked
 		return context
 	
+
 
 class UserPostListView(LoginRequiredMixin, ListView):
 	model = Post
