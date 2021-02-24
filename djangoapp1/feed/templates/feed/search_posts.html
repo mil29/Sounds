@@ -34,7 +34,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	            <p class="card-text text-dark">{{ post.description }}</p>
 	          </div>
 			  {% if post.pic %}
-	          <a href="{% url 'post-detail' post.id user.profile.slug %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
+	          <a href="{% url 'post-detail' post.id %}"><img class="card-img-top" src="{{ post.pic.url }}" alt=""></a>
 			  {% endif %}
 	          {% if post.tags %}
 	          <br><p class="text-danger ml-3"><b>Tags: <i>{{ post.tags }}</i></b></p>
@@ -42,12 +42,12 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 	          <div class="card-footer">
 	          	<button class="btn btn-white mr-3 like" id="{{ post.id }}">
 			        {% if post in liked_post %}
-			            <a href="{% url 'post-like' user.profile.slug %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike</a> | {{post.likes.count}}
+			            <a href="{% url 'post-like' %}" style="color:red;" id="likebtn{{ post.id }}"> Unlike</a> | {{post.likes.count}}
 			        {% else %}
-			            <a href="{% url 'post-like' user.profile.slug %}" style="color:green;" id="likebtn{{ post.id }}"> Like</a> | {{post.likes.count}}
+			            <a href="{% url 'post-like' %}" style="color:green;" id="likebtn{{ post.id }}"> Like</a> | {{post.likes.count}}
 			        {% endif %}
 			    </button>
-	          	<a class="btn btn-outline-info" href="{% url 'post-detail' post.id user.profile.slug %}">Comments | {{ post.details.count }}</a>
+	          	<a class="btn btn-outline-info" href="{% url 'post-detail' post.id %}">Comments | {{ post.details.count }}</a>
 	          </div>
 	        </div>
 	        {% endfor %}

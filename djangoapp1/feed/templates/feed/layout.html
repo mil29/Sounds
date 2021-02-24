@@ -23,9 +23,8 @@
 <body>
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark large_navbar">
 		<div class="container1">
-	{% if user.is_authenticated %}
 	  <a href="{% url 'home' %}" class="navbar-brand ml-4 mr-4" href="#"><b>Future Sounds</b></a>
-	{% endif %}
+
 
     <button class="menu" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))" aria-label="Toggle navigation">
       <svg width="50" height="50" viewBox="0 1 100 100">
@@ -36,9 +35,7 @@
     </button>
 	  <div class="collapse navbar-collapse menu_nav" id="navbarNavAltMarkup">
 		<div class="navbar-nav">
-		{% if user.is_authenticated %}
 	      <a class="nav-item" href="{% url 'home' %}">HOME</a>
-		  {% endif %}
 	      <a class="nav-item" href="{% url 'users_list' %}">ADD NEW FRIENDS</a>
 	      {% if user.is_authenticated %}
 	      	<a class="nav-item" href="{% url 'friend_list' %}">FRIENDS</a> 

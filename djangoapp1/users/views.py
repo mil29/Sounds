@@ -124,7 +124,7 @@ def delete_friend_request(request, id):
 
 def delete_friend(request, id):
     user_profile = request.user.profile
-    friend_profile = get_object_or_404(Profile, id=id)
+    friend_profile = get_object_or_404(Profile, id=id) 
     user_profile.friends.remove(friend_profile)
     friend_profile.friends.remove(user_profile)
     messages.error(request, f'You are no longer friends with {friend_profile}')
@@ -196,6 +196,7 @@ def edit_profile(request):
 
 @login_required
 def my_profile(request, slug):
+        slug = Profile.objects.filter(slug=slug).first() 
         p = request.user.profile
         you = p.user
         sent_friend_requests = FriendRequest.objects.filter(from_user=you)

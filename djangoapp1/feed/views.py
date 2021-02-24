@@ -42,14 +42,14 @@ class UserPostListView(LoginRequiredMixin, ListView):
 		liked = [i for i in Post.objects.filter(user_name=user) if Like.objects.filter(user = self.request.user, post=i)]
 		context['liked_post'] = liked
 		return context
-
+		
 	def get_queryset(self):
 		user = get_object_or_404(User, username=self.kwargs.get('username'))
 		return Post.objects.filter(user_name=user).order_by('-date_posted')
 
 
 @login_required
-def post_detail(request, pk, slug):
+def post_detail(request, pk):
 	post = get_object_or_404(Post, pk=pk)
 	user = request.user
 	is_liked =  Like.objects.filter(user=user, post=post)
@@ -76,7 +76,7 @@ def create_post(request, slug):
 			data.save()
 			messages.success(request, f'Posted Successfully')
 			return redirect('home', slug=slug)
-	else:
+	else:	
 		form = NewPostForm()
 	return render(request, 'feed/create_post.html', {'form':form})
 
@@ -127,7 +127,7 @@ def search_posts(request):
 	return render(request, "feed/search_posts.html", context)
 
 @login_required
-def like(request, slug):
+def like(request):
 	post_id = request.GET.get("likeId", "")
 	user = request.user
 	post = Post.objects.get(pk=post_id)
