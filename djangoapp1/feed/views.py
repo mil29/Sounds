@@ -60,7 +60,7 @@ def post_detail(request, pk):
 			data.post = post
 			data.username = user
 			data.save()
-			return redirect('post-detail', pk=pk, slug=slug)
+			return redirect('post-detail', pk=pk)
 	else:
 		form = NewCommentForm()
 	return render(request, 'feed/post_detail.html', {'post':post, 'is_liked':is_liked, 'form':form})
@@ -75,7 +75,7 @@ def create_post(request, slug):
 			data.user_name = user
 			data.save()
 			messages.success(request, f'Posted Successfully')
-			return redirect('home', slug=slug)
+			return redirect('home')
 	else:	
 		form = NewPostForm()
 	return render(request, 'feed/create_post.html', {'form':form})
@@ -99,12 +99,12 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 		
 
 @login_required
-def post_delete(request, pk, slug):
+def post_delete(request, pk):
 	post = Post.objects.get(pk=pk)
 	if request.user== post.user_name:
 		Post.objects.get(pk=pk).delete()
 		messages.error(request, f'Post Deleted')
-	return redirect('home', slug=slug)
+	return redirect('home')
 
 @login_required
 def comment_delete(request, pk):
@@ -147,7 +147,7 @@ def like(request):
 
 @login_required 
 def music_upload(request):
-	artist = request.user
+	artist = request.user.username
 	if request.method == "POST":
 		form = MusicForm(request.POST, request.FILES)
 		if form.is_valid():

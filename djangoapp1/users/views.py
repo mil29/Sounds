@@ -193,10 +193,9 @@ def edit_profile(request):
     return render(request, 'users/edit_profile.html', context)
 
 
-
 @login_required
 def my_profile(request, slug):
-        slug = Profile.objects.filter(slug=slug).first() 
+        slug = Profile.objects.filter(slug=slug).first()
         p = request.user.profile
         you = p.user
         sent_friend_requests = FriendRequest.objects.filter(from_user=you)
