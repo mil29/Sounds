@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
 from json import dumps
+from rest_framework import viewsets
+from .serializers import MusicSerializer
 
 
 class PostListView(ListView):
@@ -162,10 +164,9 @@ def music_upload(request):
 
 
 
-def music_detail(request):
-	user = request.user.user_id
-	songs = user.music.objects.all()
-	tracks = songs.track.all().first()
+class MusicViewSet(viewsets.ModelViewSet):
+    queryset = Music.objects.all().order_by('date_posted')
+    serializer_class = MusicSerializer
 
 
 

@@ -1,9 +1,17 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import PostUpdateView, PostListView, UserPostListView
+from .views import PostUpdateView, PostListView, UserPostListView, MusicViewSet
+from rest_framework import routers
+
+
+
+router = routers.DefaultRouter()
+router.register(r'songs', views.MusicViewSet)
 
 urlpatterns=[
+	path('music/', include(router.urls)),
+	path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 	path('', PostListView.as_view(), name='home'),
 	path('post/new/<slug:slug>/', views.create_post, name='post-create'),
 	path('post/<int:pk>/', views.post_detail, name='post-detail'),

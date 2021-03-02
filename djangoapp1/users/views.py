@@ -12,10 +12,14 @@ import random
 from django.core.mail import send_mail
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt,csrf_protect
-from django.core import serializers
+from django.http import JsonResponse
 import json
+from json import dumps 
+
+
 
 User = get_user_model()
+
 
 
 def register(request):
@@ -204,7 +208,14 @@ def my_profile(request, slug):
         friends = p.friends.all()
         artwork = Music.objects.all().order_by('-date_posted')
         tracks = Music.objects.all()
+        songs = []
+        for song in tracks:
+            if song.track:
+                songs.append(song.track)
 
+        records = (json.dumps(str(songs)))
+
+    
         # is this user our friend 
         button_status = 'none'
         if p not in request.user.profile.friends.all():
@@ -220,11 +231,6 @@ def my_profile(request, slug):
                 from_user=p.user).filter(to_user=request.user)) == 1:
                         button_status = 'friend_request_received'
             
-        
-        data = {
-            'music' : json.loads(serializers.serialize('json', Music.objects.all()))
-        }
-        
 
         context = {
                 'u': you,
@@ -235,7 +241,8 @@ def my_profile(request, slug):
                 'post_count': user_posts.count,
                 'artwork': artwork,
                 'tracks': tracks,
-                'data': json.dumps(data)
+                'songs' : songs,
+                'records' : records
             }
 
         return render(request, 'users/profile.html', context)
@@ -251,7 +258,5 @@ def search_users(request):
 
 
 
-
-        
 
 
