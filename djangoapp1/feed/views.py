@@ -148,8 +148,8 @@ def like(request):
 
 
 @login_required 
-def music_upload(request):
-	artist = request.user.username
+def music_upload(request, slug):
+	artist = request.user
 	if request.method == "POST":
 		form = MusicForm(request.POST, request.FILES)
 		if form.is_valid():
@@ -157,7 +157,7 @@ def music_upload(request):
 			song.artist = artist
 			song.save()
 			messages.success(request, f'Track Uploaded')
-			return redirect('my_profile')
+			return redirect('my_profile', slug=slug)
 	else:
 		form = MusicForm()
 	return render(request, 'feed/music_upload.html', {'form':form})
@@ -165,9 +165,9 @@ def music_upload(request):
 
 
 class MusicViewSet(viewsets.ModelViewSet):
-    queryset = Music.objects.all().order_by('date_posted')
+    queryset = Music.objects.all().order_by('-date_posted')
     serializer_class = MusicSerializer
-
+	
 
 
 

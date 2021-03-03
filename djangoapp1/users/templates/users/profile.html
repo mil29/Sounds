@@ -116,7 +116,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-music">
                 <h3>MUSIC</h3>
-                <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' %}">Upload</a>
+                <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' user.profile.slug %}">Upload</a>
               <div id="app-cover">
                 <div id="bg-artwork"></div>
                 <div id="bg-layer"></div>
@@ -137,18 +137,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
-                    {% for art in artwork %}
-                      {% if art.artwork %}
                       <li>
-                      <img src="{{ art.artwork.url }}" class="active" id="_1">
-                      <img src="" id="_2">
-                      <img src="" id="_3">
-                      <img src="" id="_4">
-                      <img src="" id="_5">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/04007_autumnsunlightthroughthetrees_1920x1080_Uf05V9N.jpg" class="active" id="_1">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/tree_beach_side-wide.jpg" id="_2">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/fender_amplifier-wallpaper-2560x1600.jpg" id="_3">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/paint-splashes-24810-2880x1800.jpg" id="_4">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/02524_desertroad_1280x1024.jpg" id="_5">
                     </li>
- 
-                      {% endif %}
-                    {% endfor %}
 
                       <div id="buffer-box">Buffering ...</div>
                     </div>
@@ -293,8 +288,12 @@ $(function()
        tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, 
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
        tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
-       trackNames = ['_11','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'], 
-       albumArtworks = ['_1','_2','_3','_4','_5']; trackUrl = '{{records}}';
+       trackNames = ['Empty Garden','Closer','Dont Give Hate a Chance','We will rock you','Isnt she lovely'], 
+       albumArtworks = ['_1','_2','_3','_4','_5']; trackUrl = ['http://127.0.0.1:8000/media/path/to/audio/01_Empty_Garden.mp3',
+        'http://127.0.0.1:8000/media/path/to/audio/01_Closer.mp3',
+         'http://127.0.0.1:8000/media/path/to/audio/08_Dont_Give_Hate_A_Chance.MP3',
+         'http://127.0.0.1:8000/media/path/to/audio/01_-_We_Will_Rock_You_1.mp3',
+         'http://127.0.0.1:8000/media/path/to/audio/1-05_Isnt_She_Lovely.mp3'];
  
        var playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 

@@ -18,6 +18,7 @@ from json import dumps
 
 
 
+
 User = get_user_model()
 
 
@@ -255,6 +256,7 @@ def search_users(request):
 		'users': object_list
 	}
 	return render(request, "users/search_users.html", context)
+
 
 
 
