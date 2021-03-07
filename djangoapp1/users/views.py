@@ -15,6 +15,9 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import JsonResponse
 import json
 from json import dumps 
+from feed.serializers import MusicSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+import requests
 
 
 
@@ -208,15 +211,8 @@ def my_profile(request, slug):
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
         artwork = Music.objects.all().order_by('-date_posted')
-        tracks = Music.objects.all()
-        songs = []
-        for song in tracks:
-            if song.track:
-                songs.append(song.track)
-
-        records = (json.dumps(str(songs)))
-
-    
+        tracks = Music.objects.values_list('track')
+ 
         # is this user our friend 
         button_status = 'none'
         if p not in request.user.profile.friends.all():
@@ -241,9 +237,7 @@ def my_profile(request, slug):
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count,
                 'artwork': artwork,
-                'tracks': tracks,
-                'songs' : songs,
-                'records' : records
+                'tracks' : tracks,
             }
 
         return render(request, 'users/profile.html', context)

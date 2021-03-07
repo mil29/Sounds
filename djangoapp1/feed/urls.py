@@ -1,13 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import PostUpdateView, PostListView, UserPostListView, MusicViewSet
+from .views import PostUpdateView, PostListView, UserPostListView, MusicViewSet, TrackViewSet
 from rest_framework import routers
 
 
 
 router = routers.DefaultRouter()
-router.register(r'songs', views.MusicViewSet)
+router.register(r'music_all', views.MusicViewSet, 'music_all')
+router.register(r'tracks', views.TrackViewSet, 'tracks')
 
 urlpatterns=[
 	path('music/', include(router.urls)),
