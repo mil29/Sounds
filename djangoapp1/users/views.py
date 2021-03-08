@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import JsonResponse
 import json
 from json import dumps 
-from feed.serializers import MusicSerializer
+from feed.serializers import MusicSerializer, TrackSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 import requests
 
@@ -212,6 +212,7 @@ def my_profile(request, slug):
         friends = p.friends.all()
         artwork = Music.objects.all().order_by('-date_posted')
         tracks = Music.objects.values_list('track')
+        rest_tracks = {"tracks":"http://127.0.0.1:8000/music/tracks/?format=json"}
  
         # is this user our friend 
         button_status = 'none'
@@ -238,6 +239,7 @@ def my_profile(request, slug):
                 'post_count': user_posts.count,
                 'artwork': artwork,
                 'tracks' : tracks,
+                'rest_tracks' : rest_tracks
             }
 
         return render(request, 'users/profile.html', context)
@@ -252,7 +254,10 @@ def search_users(request):
 	return render(request, "users/search_users.html", context)
 
 
-
-
+def user_tracks(request):
+    if request.method == "GET":
+        tracks = Music.objects.all()
+        serializer = TrackSerializer(tracks, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
