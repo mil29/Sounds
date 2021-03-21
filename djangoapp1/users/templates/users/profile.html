@@ -1,4 +1,4 @@
-{% extends "feed/layout.html" %} {% load static %} {% block searchform %}
+{% extends "feed/layout.html" %} {% load static %} {% block searchform %} 
 <div class="container2">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -36,9 +36,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="card-body pt-0 pt-md-4">
             <div class="row">
               <div class="col">
-                <div
-                  class="card-profile-stats d-flex justify-content-center mt-md-5"
+                <div class="card-profile-stats d-flex justify-content-center mt-md-5"
                 >
+
                   <div>
                     <span class="heading">{{ u.profile.friends.count }}</span>
                     {% if request.user == u %}
@@ -116,12 +116,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-music">
                 <h3>MUSIC</h3>
-                <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' %}">Upload</a>
+                <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' user.profile.slug %}">Upload</a>
               <div id="app-cover">
                 <div id="bg-artwork"></div>
                 <div id="bg-layer"></div>
                 <div id="player">
                   <div id="player-track">
+
                     <div id="album-name"></div>
                     <div id="track-name"></div>
                     <div id="track-time">
@@ -136,11 +137,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
-                      <img src="" class="active" id="_1">
-                      <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
-                      <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_3.jpg" id="_3">
-                      <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_4.jpg" id="_4">
-                      <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_5.jpg" id="_5">
+                      <li>
+                      <img src="http://127.0.0.1:8000/media/path/to/img/04007_autumnsunlightthroughthetrees_1920x1080_Uf05V9N.jpg" class="active" id="_1">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/tree_beach_side-wide.jpg" id="_2">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/fender_amplifier-wallpaper-2560x1600.jpg" id="_3">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/paint-splashes-24810-2880x1800.jpg" id="_4">
+                      <img src="http://127.0.0.1:8000/media/path/to/img/02524_desertroad_1280x1024.jpg" id="_5">
+                    </li>
 
                       <div id="buffer-box">Buffering ...</div>
                     </div>
@@ -152,7 +155,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                       </div>
                       <div class="control">
                         <div class="button" id="play-pause-button">
-                          <i class="fas fa-play"></i>
+                        <i class="fas fa-play"></i>
                         </div>
                       </div>
                       <div class="control">
@@ -174,7 +177,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-videos shadow">
               <h3>VIDEOS</h3>
-
+ 
 
             </div>
           </div>
@@ -257,6 +260,12 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
     {% endif %}
   </div>
 </div>
+
+<audio controls>
+  <source src="{{ track }}" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+
 {% endblock content %}
 {% block jsfiles %}
 <script>
@@ -269,10 +278,25 @@ $(function()
        tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, 
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
        tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
-       trackNames = ['Skylike - test','Alex Skrindo - Me & You','Kaaze - Electro Boy','Jordan Schor - Home','Martin Garrix - Proxy'], 
-       albumArtworks = ['_1','_2','_3','_4','_5'], trackUrl = 
-      ["_10"],
-       playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
+       trackNames = ['Empty Garden','Closer','Dont Give Hate a Chance','We will rock you','Isnt she lovely'], 
+       albumArtworks = ['_1','_2','_3','_4','_5']; 
+       var trackUrl = [];
+       $.ajax({
+        url: 'http://127.0.0.1:8000/music/tracks/',
+        data: {
+          format: 'json'
+        },
+        dataType: 'json',
+        success: function(data) {
+          var $title = $('<h1>').text(data.talks[0].talk_title);
+          var $description =  $('<p>').text(data.talks[0].talk_description);
+          $('#info')
+          .append($title)
+          .append($description);
+        },
+        type: 'GET'
+      });
+         playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
     function playPause()
     {
@@ -498,6 +522,8 @@ $(function()
         playPreviousTrackButton.on('click',function(){ selectTrack(-1);} );
         playNextTrackButton.on('click',function(){ selectTrack(1);});
 	}
+
+  
     
 	initPlayer();
 });

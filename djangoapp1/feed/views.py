@@ -11,96 +11,106 @@ from .models import Post, Comments, Like, Music
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
+from json import dumps
+from rest_framework import viewsets
+from .serializers import MusicSerializer, TrackSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 
 
 class PostListView(ListView):
-	model = Post
-	template_name = 'feed/home.html'
-	context_object_name = 'posts'
-	ordering = ['-date_posted']
-	paginate_by = 10
-	def get_context_data(self, **kwargs):
-		context = super(PostListView, self).get_context_data(**kwargs)
-		if self.request.user.is_authenticated:
-			liked = [i for i in Post.objects.all() if Like.objects.filter(user = self.request.user, post=i)]
-			context['liked_post'] = liked
-		return context
+    model = Post
+    template_name = 'feed/home.html'
+    context_object_name = 'posts'
+    ordering = ['-date_posted']
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super(PostListView, self).get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            liked = [i for i in Post.objects.all() if Like.objects.filter(user = self.request.user, post=i)]
+            context['liked_post'] = liked
+        return context
+    
+
 
 class UserPostListView(LoginRequiredMixin, ListView):
-	model = Post
-	template_name = 'feed/user_posts.html'
-	context_object_name = 'posts'
-	paginate_by = 10
+    model = Post
+    template_name = 'feed/user_posts.html'
+    context_object_name = 'posts'
+    paginate_by = 10
 
-	def get_context_data(self, **kwargs):
-		context = super(UserPostListView, self).get_context_data(**kwargs)
-		user = get_object_or_404(User, username=self.kwargs.get('username'))
-		liked = [i for i in Post.objects.filter(user_name=user) if Like.objects.filter(user = self.request.user, post=i)]
-		context['liked_post'] = liked
-		return context
-
-	def get_queryset(self):
-		user = get_object_or_404(User, username=self.kwargs.get('username'))
-		return Post.objects.filter(user_name=user).order_by('-date_posted')
+    def get_context_data(self, **kwargs):
+        context = super(UserPostListView, self).get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        liked = [i for i in Post.objects.filter(user_name=user) if Like.objects.filter(user = self.request.user, post=i)]
+        context['liked_post'] = liked
+        return context
+        
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(user_name=user).order_by('-date_posted')
 
 
 @login_required
 def post_detail(request, pk):
-	post = get_object_or_404(Post, pk=pk)
-	user = request.user
-	is_liked =  Like.objects.filter(user=user, post=post)
-	if request.method == 'POST':
-		form = NewCommentForm(request.POST)
-		if form.is_valid():
-			data = form.save(commit=False)
-			data.post = post
-			data.username = user
-			data.save()
-			return redirect('post-detail', pk=pk)
-	else:
-		form = NewCommentForm()
-	return render(request, 'feed/post_detail.html', {'post':post, 'is_liked':is_liked, 'form':form})
+    post = get_object_or_404(Post, pk=pk)
+    user = request.user
+    is_liked =  Like.objects.filter(user=user, post=post)
+    if request.method == 'POST':
+        form = NewCommentForm(request.POST)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.post = post
+            data.username = user
+            data.save()
+            return redirect('post-detail', pk=pk)
+    else:
+        form = NewCommentForm()
+    return render(request, 'feed/post_detail.html', {'post':post, 'is_liked':is_liked, 'form':form})
 
 @login_required
-def create_post(request):
-	user = request.user
-	if request.method == "POST":
-		form = NewPostForm(request.POST, request.FILES)
-		if form.is_valid():
-			data = form.save(commit=False)
-			data.user_name = user
-			data.save()
-			messages.success(request, f'Posted Successfully')
-			return redirect('home')
-	else:
-		form = NewPostForm()
-	return render(request, 'feed/create_post.html', {'form':form})
+def create_post(request, slug):
+    user = request.user
+    if request.method == "POST":
+        form = NewPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.save(commit=False)
+            data.user_name = user
+            data.save()
+            messages.success(request, f'Posted Successfully')
+            return redirect('home')
+    else:	
+        form = NewPostForm()
+    return render(request, 'feed/create_post.html', {'form':form})
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-	model = Post
-	fields = ['description', 'pic', 'tags']
-	template_name = 'feed/create_post.html'
+    model = Post
+    fields = ['description', 'pic', 'tags']
+    template_name = 'feed/create_post.html'
 
-	def form_valid(self, form):
-		form.instance.user_name = self.request.user
-		return super().form_valid(form)
-		
+    def form_valid(self, form):
+        form.instance.user_name = self.request.user
+        return super().form_valid(form)
+        
 
-	def test_func(self):
-		post = self.get_object()
-		if self.request.user == post.user_name:
-			return True
-		return False
-		
-		
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user_name:
+            return True
+        return False
+        
+        
 
 @login_required
 def post_delete(request, pk):
-	post = Post.objects.get(pk=pk)
-	if request.user== post.user_name:
-		Post.objects.get(pk=pk).delete()
-		messages.error(request, f'Post Deleted')
-	return redirect('home')
+    post = Post.objects.get(pk=pk)
+    if request.user== post.user_name:
+        Post.objects.get(pk=pk).delete()
+        messages.error(request, f'Post Deleted')
+    return redirect('home')
 
 @login_required
 def comment_delete(request, pk):
@@ -113,54 +123,73 @@ def comment_delete(request, pk):
 
 @login_required
 def search_posts(request):
-	query = request.GET.get('p')
-	object_list = Post.objects.filter(tags__icontains=query).order_by('-date_posted')
-	liked = [i for i in object_list if Like.objects.filter(user = request.user, post=i)]
-	context ={
-		'posts': object_list,
-		'liked_post': liked
-	}
-	return render(request, "feed/search_posts.html", context)
+    query = request.GET.get('p')
+    object_list = Post.objects.filter(tags__icontains=query).order_by('-date_posted')
+    liked = [i for i in object_list if Like.objects.filter(user = request.user, post=i)]
+    context ={
+        'posts': object_list,
+        'liked_post': liked
+    }
+    return render(request, "feed/search_posts.html", context)
 
 @login_required
 def like(request):
-	post_id = request.GET.get("likeId", "")
-	user = request.user
-	post = Post.objects.get(pk=post_id)
-	liked= False
-	like = Like.objects.filter(user=user, post=post)
-	if like:
-		like.delete()
-	else:
-		liked = True
-		Like.objects.create(user=user, post=post)
-	resp = {
+    post_id = request.GET.get("likeId", "")
+    user = request.user
+    post = Post.objects.get(pk=post_id)
+    liked= False
+    like = Like.objects.filter(user=user, post=post)
+    if like:
+        like.delete()
+    else:
+        liked = True
+        Like.objects.create(user=user, post=post)
+    resp = {
         'liked':liked
     }
-	response = json.dumps(resp)
-	return HttpResponse(response, content_type = "application/json")
+    response = json.dumps(resp)
+    return HttpResponse(response, content_type = "application/json")
 
 
 @login_required 
-def music_upload(request):
-	if request.method == "POST":
-		form = MusicForm(request.POST, request.FILES)
-		if form.is_valid():
-			user = request.user
-			song = form.save(commit=False)
-			song.artist = user
-			song.save()
-			messages.success(request, f'Track Uploaded')
-			return redirect('my_profile')
-	else:
-		form = MusicForm()
-	return render(request, 'feed/music_upload.html', {'form':form})
+def music_upload(request, slug):
+    artist = request.user
+    if request.method == "POST":
+        form = MusicForm(request.POST, request.FILES)
+        if form.is_valid():
+            song = form.save(commit=False)
+            song.artist = artist
+            song.save()
+            messages.success(request, f'Track Uploaded')
+            return redirect('my_profile', slug=slug)
+    else:
+        form = MusicForm()
+    return render(request, 'feed/music_upload.html', {'form':form})
 
 
 
+class MusicViewSet(viewsets.ModelViewSet):
+
+    queryset = Music.objects.all()
+    serializer_class = MusicSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['artist']
+
+    def get_queryset(self):
+        user = self.request.user
+        songs = Music.objects.all().filter(artist=user)
+        return songs
+
+class TrackViewSet(viewsets.ModelViewSet):
+
+    queryset = Music.objects.all()
+    serializer_class = TrackSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        songs = Music.objects.all().filter(artist=user)
+        return songs
 
 
 
-
-
-
+    

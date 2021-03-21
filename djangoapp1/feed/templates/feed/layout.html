@@ -39,8 +39,8 @@
 	      <a class="nav-item" href="{% url 'users_list' %}">ADD NEW FRIENDS</a>
 	      {% if user.is_authenticated %}
 	      	<a class="nav-item" href="{% url 'friend_list' %}">FRIENDS</a> 
-	      	<a class="nav-item" href="{% url 'my_profile' %}">PROFILE</a> 
-	      	<a class="nav-item" href="{% url 'post-create' %}">CREATE POST</a>
+	      	<a class="nav-item" href="{% url 'my_profile' user.profile.slug %}">PROFILE</a> 
+	      	<a class="nav-item" href="{% url 'post-create' user.profile.slug %}">CREATE POST</a>
 	      	<a class="nav-item-logout auth_buttons btn btn-danger" href="{% url 'logout' %}">LOGOUT</a>
 	      {% else %}
          	<a class="nav-item-login auth_buttons btn btn-success" href="{% url 'login' %}">LOGIN</a>

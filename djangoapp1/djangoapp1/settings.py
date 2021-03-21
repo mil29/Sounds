@@ -36,6 +36,8 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'feed.apps.FeedConfig',
     'crispy_forms',
+    'rest_framework',
+    'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -130,7 +132,7 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'my_profile'
+LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 
 

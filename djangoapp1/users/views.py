@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile
-from feed.models import Post
+from feed.models import Post, Music
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -11,10 +11,19 @@ from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
 import random
 from django.core.mail import send_mail
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
+from django.http import JsonResponse
+import json
+from json import dumps 
+from feed.serializers import MusicSerializer, TrackSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+import requests
+
 
 
 
 User = get_user_model()
+
 
 
 def register(request):
@@ -65,6 +74,7 @@ def users_list(request):
     return render(request, "users/users_list.html", context)
 
 
+@login_required
 def friend_list(request):
     p = request.user.profile
     friends = p.friends.all()
@@ -122,7 +132,7 @@ def delete_friend_request(request, id):
 
 def delete_friend(request, id):
     user_profile = request.user.profile
-    friend_profile = get_object_or_404(Profile, id=id)
+    friend_profile = get_object_or_404(Profile, id=id) 
     user_profile.friends.remove(friend_profile)
     friend_profile.friends.remove(user_profile)
     messages.error(request, f'You are no longer friends with {friend_profile}')
@@ -192,15 +202,19 @@ def edit_profile(request):
 
 
 @login_required
-def my_profile(request):
+def my_profile(request, slug):
+        slug = Profile.objects.filter(slug=slug).first()
         p = request.user.profile
         you = p.user
         sent_friend_requests = FriendRequest.objects.filter(from_user=you)
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-
-        # is this user our friend
+        artwork = Music.objects.all().order_by('-date_posted')
+        tracks = Music.objects.values_list('track')
+        rest_tracks = {"tracks":"http://127.0.0.1:8000/music/tracks/?format=json"}
+ 
+        # is this user our friend 
         button_status = 'none'
         if p not in request.user.profile.friends.all():
             button_status = 'not_friend'
@@ -214,7 +228,7 @@ def my_profile(request):
             if len(FriendRequest.objects.filter(
                 from_user=p.user).filter(to_user=request.user)) == 1:
                         button_status = 'friend_request_received'
-        
+            
 
         context = {
                 'u': you,
@@ -222,8 +236,11 @@ def my_profile(request):
                 'friends_list': friends,
                 'sent_friend_requests': sent_friend_requests,
                 'rec_friend_requests': rec_friend_requests,
-                'post_count': user_posts.count
-        }
+                'post_count': user_posts.count,
+                'artwork': artwork,
+                'tracks' : tracks,
+                'rest_tracks' : rest_tracks
+            }
 
         return render(request, 'users/profile.html', context)
 
@@ -236,6 +253,11 @@ def search_users(request):
 	}
 	return render(request, "users/search_users.html", context)
 
-        
+
+def user_tracks(request):
+    if request.method == "GET":
+        tracks = Music.objects.all()
+        serializer = TrackSerializer(tracks, many=True)
+        return JsonResponse(serializer.data, safe=False)
 
 
