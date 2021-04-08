@@ -261,14 +261,14 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
   </div>
 </div>
 
-<audio controls>
-  <source src="{{ track }}" type="audio/mpeg">
-  Your browser does not support the audio tag.
-</audio>
-
 {% endblock content %}
 {% block jsfiles %}
 <script>
+fetch('http://127.0.0.1:8000/music/music_all/?format=json')
+.then(response => response.json())
+.then(data => 
+
+
 $(function()
 {
     var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
@@ -279,23 +279,8 @@ $(function()
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
        tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
        trackNames = ['Empty Garden','Closer','Dont Give Hate a Chance','We will rock you','Isnt she lovely'], 
-       albumArtworks = ['_1','_2','_3','_4','_5']; 
-       var trackUrl = [];
-       $.ajax({
-        url: 'http://127.0.0.1:8000/music/tracks/',
-        data: {
-          format: 'json'
-        },
-        dataType: 'json',
-        success: function(data) {
-          var $title = $('<h1>').text(data.talks[0].talk_title);
-          var $description =  $('<p>').text(data.talks[0].talk_description);
-          $('#info')
-          .append($title)
-          .append($description);
-        },
-        type: 'GET'
-      });
+       albumArtworks = ['_1','_2','_3','_4','_5'],
+       trackUrl = [],
          playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
     function playPause()

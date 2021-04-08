@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import JsonResponse
 import json
 from json import dumps 
-from feed.serializers import MusicSerializer, TrackSerializer
+from feed.serializers import MusicSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 import requests
 

@@ -13,7 +13,7 @@ from django.views.decorators.http import require_POST
 import json
 from json import dumps
 from rest_framework import viewsets
-from .serializers import MusicSerializer, TrackSerializer
+from .serializers import MusicSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -180,15 +180,15 @@ class MusicViewSet(viewsets.ModelViewSet):
         songs = Music.objects.all().filter(artist=user)
         return songs
 
-class TrackViewSet(viewsets.ModelViewSet):
+# class TrackViewSet(viewsets.ModelViewSet):
 
-    queryset = Music.objects.all()
-    serializer_class = TrackSerializer
+#     queryset = Music.objects.all()
+#     serializer_class = TrackSerializer
 
-    def get_queryset(self):
-        user = self.request.user
-        songs = Music.objects.all().filter(artist=user)
-        return songs
+#     def get_queryset(self):
+#         user = self.request.user
+#         songs = Music.objects.all().filter(artist=user)
+#         return songs
 
 
 
