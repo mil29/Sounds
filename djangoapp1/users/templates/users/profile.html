@@ -1,6 +1,6 @@
 {% extends "feed/layout.html" %} {% load static %} {% block searchform %} 
 <div class="container2">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 <form class="searchbar" action="{% url 'search_users' %}" method="get"">
@@ -28,10 +28,8 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   />
                 </a>
               </div>
-              
-            
-  
 
+      
               
             </div>
           </div>
@@ -142,15 +140,16 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
+                    
+                    {% if request.user == u %}
+                    {% for art in artwork %}
                 
+                    <img src="{{ art.artwork.url }}" class="active" id="_{{ forloop.counter }}">
 
-                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_1.jpg" class="active" id="_1">
-                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_2.jpg" id="_2">
-                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_3.jpg" id="_3">
-                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_4.jpg" id="_4">
-                    <img src="https://raw.githubusercontent.com/himalayasingh/music-player-1/master/img/_5.jpg" id="_5">
-                    </li>
-
+                    {% endfor %}
+                    {% endif %}
+                    
+      
                       <div id="buffer-box">Buffering ...</div>
                     </div>
                     <div id="player-controls">
@@ -274,19 +273,52 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 $(function()
 {
 
-async function getTracks(){
- let res = await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
- .then(res => res.json())
- .then(data => {
-   for(item of data)
-   trackUrl.push(item['track'])
-   console.log(trackUrl);
-  })
- };
-getTracks();
+      async function userTracks(){
+         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+          .then(res => res.json())
+          .then(data => {
+          for(item of data)
+          trackUrl.push(item['track'])
+          console.log(trackUrl)
+        });
+      } 
+      userTracks();
+
+       async function userTrackTitle(){
+         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+          .then(res => res.json())
+          .then(data => {
+          for(item of data)
+          trackNames.push(item['title'])
+          console.log(trackUrl)
+        });
+      } 
+      userTrackTitle();
+
+      async function getArtistName(){
+         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+          .then(res => res.json())
+          .then(data => {
+          for(item of data)
+          albums.push(item['artist_name'])
+          console.log(albums)
+        });
+      } 
+      getArtistName();
 
 
 
+function userArtworkLength (){
+  setTimeout(function(){
+      let number = 0;
+      for(let i=0; i < trackUrl.length; i++){
+        number++;
+        albumArtworks.push(`_${number}`);
+        console.log(albumArtworks);
+      }
+  },100)
+}
+userArtworkLength();
 
 
     var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
@@ -295,12 +327,16 @@ getTracks();
        sHover = $('#s-hover'), playPauseButton = $("#play-pause-button"),  i = playPauseButton.find('i'), 
        tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, 
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
-       tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
-       trackNames = ['Empty Garden','Closer','Dont Give Hate a Chance','We will rock you','Isnt she lovely'], 
-       albumArtworks = ['_1','_2','_3','_4','_5'],
-       trackUrl = [];
+       tFlag = false, 
+
+       // all arrays are fetched from above fetch functions
+       albums = [], 
+       trackNames = [], 
+       albumArtworks = [],
+       trackUrl = [],
          playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
+      
 
     function playPause()
     {
@@ -328,6 +364,7 @@ getTracks();
     	
 	function showHover(event)
 	{
+     
 		seekBarPos = sArea.offset(); 
 		seekT = event.clientX - seekBarPos.left;
 		seekLoc = audio.duration * (seekT / sArea.outerWidth());
@@ -507,6 +544,15 @@ getTracks();
 
     function initPlayer()
 	{	
+    setTimeout(function(){
+
+  if( trackUrl.length == 0 ){
+      $('#player-controls').click(function(){
+        alert('You haven\'t uploaded any tracks, please upload now!');
+      });
+      }
+  else 
+  {
         audio = new Audio();
 
 		selectTrack(0);
@@ -525,10 +571,12 @@ getTracks();
 
         playPreviousTrackButton.on('click',function(){ selectTrack(-1);} );
         playNextTrackButton.on('click',function(){ selectTrack(1);});
-	}
+        };
+    },1000)
+	
+  }
 
-  
-    
+
 	initPlayer();
 });
 

@@ -211,8 +211,7 @@ def my_profile(request, slug):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-        artwork = Music.objects.all()
-    
+        artwork = Music.objects.all().filter(artist=you)
  
         # is this user our friend 
         button_status = 'none'
@@ -250,6 +249,9 @@ def search_users(request):
 		'users': object_list
 	}
 	return render(request, "users/search_users.html", context)
+
+
+
 
 
 # def user_tracks(request):

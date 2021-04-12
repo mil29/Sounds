@@ -17,6 +17,7 @@ from .serializers import MusicSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import permissions
 
 
 
@@ -172,23 +173,16 @@ class MusicViewSet(viewsets.ModelViewSet):
 
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filter_fields = ['artist']
+
 
     def get_queryset(self):
         user = self.request.user
         songs = Music.objects.all().filter(artist=user)
         return songs
 
-# class TrackViewSet(viewsets.ModelViewSet):
-
-#     queryset = Music.objects.all()
-#     serializer_class = TrackSerializer
-
-#     def get_queryset(self):
-#         user = self.request.user
-#         songs = Music.objects.all().filter(artist=user)
-#         return songs
 
 
 
