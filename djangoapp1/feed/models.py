@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
 from users.models import Profile
+from embed_video.fields import EmbedVideoField
 
 
 class Post(models.Model):
@@ -40,6 +41,12 @@ class Music(models.Model):
 
 	def __str__(self):
 		return self.title
+
+
+
+class Video(models.Model):
+	video = EmbedVideoField()
+
 
 	
 

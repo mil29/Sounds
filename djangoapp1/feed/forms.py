@@ -1,5 +1,5 @@
 from django import forms
-from .models import Comments, Post, Music
+from .models import Comments, Post, Music, Video
 from crispy_forms.bootstrap import InlineField
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from crispy_forms.helper import FormHelper
@@ -33,20 +33,9 @@ class MusicForm(forms.ModelForm):
         }
 
 
-# class NewMusicForm(forms.ModelForm):
-#     def __init__(self, *args, **kwargs):
 
-#         super(NewMusicForm, self).__init__(*args, **kwargs)
-#         self.helper = FormHelper()
-#         self.helper.layout = Layout (
-#             Fieldset(
-#                 'title',
-#                 'track',
-#                 'artist_name',
-#                 'artwork'
-#             ),
-#             ButtonHolder(
-#                 Submit('submit', 'Submit', css_class='button white')
-#             )
-#         )
-
+class VideoForm(forms.ModelForm):
+	class Meta:
+		model = Video
+		fields = ['video']
+		

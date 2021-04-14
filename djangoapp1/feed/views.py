@@ -4,10 +4,10 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from .forms import NewCommentForm, NewPostForm, MusicForm
+from .forms import NewCommentForm, NewPostForm, MusicForm, VideoForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from .models import Post, Comments, Like, Music
+from .models import Post, Comments, Like, Music, Video
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 import json
@@ -18,6 +18,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import permissions
+
+MUSIC_FILE_TYPES = ['mp3']
 
 
 
@@ -154,18 +156,39 @@ def like(request):
 
 @login_required 
 def music_upload(request, slug):
-    artist = request.user
     if request.method == "POST":
         form = MusicForm(request.POST, request.FILES)
         if form.is_valid():
             song = form.save(commit=False)
-            song.artist = artist
-            song.save()
-            messages.success(request, f'Track Uploaded')
-            return redirect('my_profile', slug=slug)
+            song.artist = request.user
+            song.track = request.FILES['track']
+            file_type = song.track.url.split('.')[-1]
+            file_type = file_type.lower()
+            if file_type not in MUSIC_FILE_TYPES:
+                messages.error(request, f'ERROR - Track needs to be in MP3 format, Please try again!')
+                return render(request, 'feed/music_upload.html', {'form':form})
+            else:
+                song.save()
+                messages.success(request, f'Track Uploaded')
+                return redirect('my_profile', slug=slug)
     else:
         form = MusicForm()
     return render(request, 'feed/music_upload.html', {'form':form})
+
+
+@login_required
+def video_upload(request, slug):
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            video = form.save(commit=False)
+            video.videoUser= request.user
+            video.save()  
+            messages.success(request, f'Video Uploaded')
+            return redirect('my_profile', slug=slug)
+    else:
+        form = VideoForm()
+    return render(request, 'feed/video_upload.html', {'form':form})
 
 
 
@@ -173,14 +196,13 @@ class MusicViewSet(viewsets.ModelViewSet):
 
     queryset = Music.objects.all()
     serializer_class = MusicSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     filter_backends = [DjangoFilterBackend]
     filter_fields = ['artist']
 
 
     def get_queryset(self):
         user = self.request.user
-        songs = Music.objects.all().filter(artist=user)
+        songs = Music.objects.all().filter(artist=user).order_by('-date_posted')
         return songs
 
 

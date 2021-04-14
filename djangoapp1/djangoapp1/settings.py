@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'feed.apps.FeedConfig',
     'crispy_forms',
     'rest_framework',
+    'embed_video',
     'django_filters',
     'django.contrib.admin',
     'django.contrib.auth',

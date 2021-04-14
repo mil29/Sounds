@@ -23,4 +23,5 @@ urlpatterns=[
 	path('user_posts/<str:username>/', UserPostListView.as_view(), name='user-posts'),
 	path('comments/<int:pk>/delete/', views.comment_delete, name='comment-delete'),
 	path('music/new/<slug:slug>/', views.music_upload, name='music-upload'),
+	path('video/new/<slug:slug>/', views.video_upload, name='video-upload'),
 ]

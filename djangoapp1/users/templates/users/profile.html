@@ -1,4 +1,4 @@
-{% extends "feed/layout.html" %} {% load static %} {% block searchform %} 
+{% extends "feed/layout.html" %} {% load static %} {% load embed_video_tags %} {% block searchform %} 
 <div class="container2">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
@@ -141,12 +141,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   <div id="player-content">
                     <div id="album-art">
                     
+                  
                     {% if request.user == u %}
-                    {% for art in artwork %}
-                
-                    <img src="{{ art.artwork.url }}" class="active" id="_{{ forloop.counter }}">
+                      {% for art in artwork %}
+                    
+                        <img src="{{ art.artwork.url }}" class="active" id="_{{ forloop.counter }}">
 
-                    {% endfor %}
+                      {% endfor %}
                     {% endif %}
                     
       
@@ -181,8 +182,22 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
         <div class="row">
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-videos shadow">
+
               <h3>VIDEOS</h3>
- 
+              <a class="btn btn-secondary track-upload-button" href="{% url 'video-upload' user.profile.slug %}">Upload</a>
+
+
+              {% for item in videos %}
+                <div class="user_videos">
+
+                    {% video item.video '150x150' %}
+                </div>
+
+              {% endfor %}
+          
+            
+            
+  
 
             </div>
           </div>
@@ -273,52 +288,31 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 $(function()
 {
 
-      async function userTracks(){
-         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
-          .then(res => res.json())
-          .then(data => {
-          for(item of data)
-          trackUrl.push(item['track'])
-          console.log(trackUrl)
+async function getUserTracks(){
+  await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+    .then(res => res.json())
+    .then(data => {
+      for(item of data)
+        trackNames.push(item['title']),
+        trackUrl.push(item['track']),
+        albums.push(item['artist_name'])
+        console.log(trackNames, trackUrl, albums)
         });
       } 
-      userTracks();
+getUserTracks();
 
-       async function userTrackTitle(){
-         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
-          .then(res => res.json())
-          .then(data => {
-          for(item of data)
-          trackNames.push(item['title'])
-          console.log(trackUrl)
-        });
-      } 
-      userTrackTitle();
-
-      async function getArtistName(){
-         await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
-          .then(res => res.json())
-          .then(data => {
-          for(item of data)
-          albums.push(item['artist_name'])
-          console.log(albums)
-        });
-      } 
-      getArtistName();
-
-
-
-function userArtworkLength (){
+function createAlbumId (){
   setTimeout(function(){
       let number = 0;
       for(let i=0; i < trackUrl.length; i++){
         number++;
         albumArtworks.push(`_${number}`);
+
         console.log(albumArtworks);
       }
   },100)
 }
-userArtworkLength();
+createAlbumId();
 
 
     var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
@@ -330,10 +324,10 @@ userArtworkLength();
        tFlag = false, 
 
        // all arrays are fetched from above fetch functions
-       albums = [], 
        trackNames = [], 
-       albumArtworks = [],
        trackUrl = [],
+       albums = [], 
+       albumArtworks = [],
          playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
       
@@ -484,6 +478,7 @@ userArtworkLength();
 
     function selectTrack(flag)
     {
+
         if( flag == 0 || flag == 1 )
             ++currIndex;
         else

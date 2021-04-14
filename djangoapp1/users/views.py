@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile
-from feed.models import Post, Music
+from feed.models import Post, Music, Video
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -211,7 +211,8 @@ def my_profile(request, slug):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-        artwork = Music.objects.all().filter(artist=you)
+        artwork = Music.objects.all().filter(artist=you).order_by('-date_posted')
+        videos = Video.objects.all()
  
         # is this user our friend 
         button_status = 'none'
@@ -237,6 +238,7 @@ def my_profile(request, slug):
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count,
                 'artwork': artwork,
+                'videos': videos,
             }
 
         return render(request, 'users/profile.html', context)
