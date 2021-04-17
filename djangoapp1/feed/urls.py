@@ -1,14 +1,14 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
-from .views import PostUpdateView, PostListView, UserPostListView, MusicViewSet, TrackViewSet
+from .views import PostUpdateView, PostListView, UserPostListView, MusicViewSet
 from rest_framework import routers
 
 
 
 router = routers.DefaultRouter()
 router.register(r'music_all', views.MusicViewSet, 'music_all')
-router.register(r'tracks', views.TrackViewSet, 'tracks')
+# router.register(r'tracks', views.TrackViewSet, 'tracks')
 
 urlpatterns=[
 	path('music/', include(router.urls)),
@@ -23,4 +23,5 @@ urlpatterns=[
 	path('user_posts/<str:username>/', UserPostListView.as_view(), name='user-posts'),
 	path('comments/<int:pk>/delete/', views.comment_delete, name='comment-delete'),
 	path('music/new/<slug:slug>/', views.music_upload, name='music-upload'),
+	path('video/new/<slug:slug>/', views.video_upload, name='video-upload'),
 ]

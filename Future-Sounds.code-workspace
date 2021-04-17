@@ -1,0 +1,10 @@
+{
+  "folders": [
+    {
+      "path": "djangoapp1"
+    }
+  ],
+  "settings": {
+    "git.ignoreLimitWarning": true
+  }
+}

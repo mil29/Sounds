@@ -1,5 +1,9 @@
 from django import forms
-from .models import Comments, Post, Music
+from .models import Comments, Post, Music, Video
+from crispy_forms.bootstrap import InlineField
+from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
+from crispy_forms.helper import FormHelper
+
 
 class NewPostForm(forms.ModelForm):
 	class Meta:
@@ -22,8 +26,16 @@ class NewCommentForm(forms.ModelForm):
 class MusicForm(forms.ModelForm):
 	class Meta:
 		model = Music
-		fields = ['track', 'title', 'artwork']
+		fields = ['title', 'artist_name', 'track', 'artwork']
 		widgets = {
           'title': forms.Textarea(attrs={'rows':1, 'cols':1}),
+		  'artist_name': forms.Textarea(attrs={'rows':1, 'cols':1}),
         }
 
+
+
+class VideoForm(forms.ModelForm):
+	class Meta:
+		model = Video
+		fields = ['video']
+		

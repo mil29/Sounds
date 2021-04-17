@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile
-from feed.models import Post, Music
+from feed.models import Post, Music, Video
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
@@ -15,7 +15,7 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 from django.http import JsonResponse
 import json
 from json import dumps 
-from feed.serializers import MusicSerializer, TrackSerializer
+from feed.serializers import MusicSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 import requests
 
@@ -147,6 +147,7 @@ def profile_view(request, slug):
     rec_friend_requests = FriendRequest.objects.filter(to_user=p.user)
     user_posts = Post.objects.filter(user_name=u)
 
+
     friends = p.friends.all()
 
     # is this user our friend
@@ -210,9 +211,8 @@ def my_profile(request, slug):
         rec_friend_requests = FriendRequest.objects.filter(to_user=you)
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
-        artwork = Music.objects.all().order_by('-date_posted')
-        tracks = Music.objects.values_list('track')
-        rest_tracks = {"tracks":"http://127.0.0.1:8000/music/tracks/?format=json"}
+        artwork = Music.objects.all().filter(artist=you).order_by('-date_posted')
+        videos = Video.objects.all()
  
         # is this user our friend 
         button_status = 'none'
@@ -238,8 +238,7 @@ def my_profile(request, slug):
                 'rec_friend_requests': rec_friend_requests,
                 'post_count': user_posts.count,
                 'artwork': artwork,
-                'tracks' : tracks,
-                'rest_tracks' : rest_tracks
+                'videos': videos,
             }
 
         return render(request, 'users/profile.html', context)
@@ -254,10 +253,13 @@ def search_users(request):
 	return render(request, "users/search_users.html", context)
 
 
-def user_tracks(request):
-    if request.method == "GET":
-        tracks = Music.objects.all()
-        serializer = TrackSerializer(tracks, many=True)
-        return JsonResponse(serializer.data, safe=False)
+
+
+
+# def user_tracks(request):
+#     if request.method == "GET":
+#         tracks = Music.objects.all()
+#         serializer = TrackSerializer(tracks, many=True)
+#         return JsonResponse(serializer.data, safe=False)
 
 

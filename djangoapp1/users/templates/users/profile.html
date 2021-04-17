@@ -1,6 +1,6 @@
-{% extends "feed/layout.html" %} {% load static %} {% block searchform %} 
+{% extends "feed/layout.html" %} {% load static %} {% load embed_video_tags %} {% block searchform %} 
 <div class="container2">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" 
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
 integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
 <form class="searchbar" action="{% url 'search_users' %}" method="get"">
@@ -28,6 +28,9 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   />
                 </a>
               </div>
+
+      
+              
             </div>
           </div>
           <div
@@ -137,14 +140,17 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                   </div>
                   <div id="player-content">
                     <div id="album-art">
-                      <li>
-                      <img src="http://127.0.0.1:8000/media/path/to/img/04007_autumnsunlightthroughthetrees_1920x1080_Uf05V9N.jpg" class="active" id="_1">
-                      <img src="http://127.0.0.1:8000/media/path/to/img/tree_beach_side-wide.jpg" id="_2">
-                      <img src="http://127.0.0.1:8000/media/path/to/img/fender_amplifier-wallpaper-2560x1600.jpg" id="_3">
-                      <img src="http://127.0.0.1:8000/media/path/to/img/paint-splashes-24810-2880x1800.jpg" id="_4">
-                      <img src="http://127.0.0.1:8000/media/path/to/img/02524_desertroad_1280x1024.jpg" id="_5">
-                    </li>
+                    
+                  
+                    {% if request.user == u %}
+                      {% for art in artwork %}
+                    
+                        <img src="{{ art.artwork.url }}" class="active" id="_{{ forloop.counter }}">
 
+                      {% endfor %}
+                    {% endif %}
+                    
+      
                       <div id="buffer-box">Buffering ...</div>
                     </div>
                     <div id="player-controls">
@@ -176,8 +182,35 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
         <div class="row">
           <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
             <div class="card card-videos shadow">
+
               <h3>VIDEOS</h3>
- 
+              <a class="btn btn-secondary track-upload-button" href="{% url 'video-upload' user.profile.slug %}">Upload</a>
+
+            <div class="main_video_container" id="box">
+              <input type="radio" name="slider" id="item-1" onclick="changeColor()" checked>
+              <input type="radio" name="slider" id="item-2" onclick="changeColor()">
+              <input type="radio" name="slider" id="item-3" onclick="changeColor()">
+              <input type="radio" name="slider" id="item-4" onclick="changeColor()">
+              <input type="radio" name="slider" id="item-5" onclick="changeColor()">
+
+
+              
+                <div class="video_card">
+                  {% for item in videos %}
+                  <label class="user_videos" for="item-{{ forloop.counter }}" id="song-{{ forloop.counter }}">
+                    {% video item.video '120% x 70%' %}
+                  </label>
+                  {% endfor %}
+                </div>
+
+    
+              
+
+            </div>
+          
+            
+            
+  
 
             </div>
           </div>
@@ -260,43 +293,68 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
     {% endif %}
   </div>
 </div>
-
-<audio controls>
-  <source src="{{ track }}" type="audio/mpeg">
-  Your browser does not support the audio tag.
-</audio>
-
 {% endblock content %}
+
 {% block jsfiles %}
 <script>
+
+  
+function changeColor() {
+  const x = document.getElementById('box');
+  if (x.style.backgroundColor === "rgb(52, 68, 80)") {
+      x.style.backgroundColor = 'black';
+} else {
+    x.style.backgroundColor = "rgb(52, 68, 80)";
+}
+};
+
+
 $(function()
 {
+
+async function getUserTracks(){
+  await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+    .then(res => res.json())
+    .then(data => {
+      for(item of data)
+        trackNames.push(item['title']),
+        trackUrl.push(item['track']),
+        albums.push(item['artist_name'])
+        console.log(trackNames, trackUrl, albums)
+        });
+      } 
+getUserTracks();
+
+function createAlbumId (){
+  setTimeout(function(){
+      let number = 0;
+      for(let i=0; i < trackUrl.length; i++){
+        number++;
+        albumArtworks.push(`_${number}`);
+
+        console.log(albumArtworks);
+      }
+  },100)
+}
+createAlbumId();
+
+
     var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
      albumName = $('#album-name'), trackName = $('#track-name'), albumArt = $('#album-art'),
       sArea = $('#s-area'), seekBar = $('#seek-bar'), trackTime = $('#track-time'), insTime = $('#ins-time'),
        sHover = $('#s-hover'), playPauseButton = $("#play-pause-button"),  i = playPauseButton.find('i'), 
        tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes, 
        ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null, 
-       tFlag = false, albums = ['Dawn','Me & You','Electro Boy','Home','Proxy (Original Mix)'], 
-       trackNames = ['Empty Garden','Closer','Dont Give Hate a Chance','We will rock you','Isnt she lovely'], 
-       albumArtworks = ['_1','_2','_3','_4','_5']; 
-       var trackUrl = [];
-       $.ajax({
-        url: 'http://127.0.0.1:8000/music/tracks/',
-        data: {
-          format: 'json'
-        },
-        dataType: 'json',
-        success: function(data) {
-          var $title = $('<h1>').text(data.talks[0].talk_title);
-          var $description =  $('<p>').text(data.talks[0].talk_description);
-          $('#info')
-          .append($title)
-          .append($description);
-        },
-        type: 'GET'
-      });
+       tFlag = false, 
+
+       // all arrays are fetched from above fetch functions
+       trackNames = [], 
+       trackUrl = [],
+       albums = [], 
+       albumArtworks = [],
          playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
+
+      
 
     function playPause()
     {
@@ -319,11 +377,12 @@ $(function()
                 i.attr('class','fas fa-play');
                 audio.pause();
             }
-        },300);
+        },100);
     }
     	
 	function showHover(event)
 	{
+     
 		seekBarPos = sArea.offset(); 
 		seekT = event.clientX - seekBarPos.left;
 		seekLoc = audio.duration * (seekT / sArea.outerWidth());
@@ -443,6 +502,7 @@ $(function()
 
     function selectTrack(flag)
     {
+
         if( flag == 0 || flag == 1 )
             ++currIndex;
         else
@@ -503,6 +563,15 @@ $(function()
 
     function initPlayer()
 	{	
+    setTimeout(function(){
+
+  if( trackUrl.length == 0 ){
+      $('#player-controls').click(function(){
+        alert('You haven\'t uploaded any tracks, please upload now!');
+      });
+      }
+  else 
+  {
         audio = new Audio();
 
 		selectTrack(0);
@@ -521,14 +590,16 @@ $(function()
 
         playPreviousTrackButton.on('click',function(){ selectTrack(-1);} );
         playNextTrackButton.on('click',function(){ selectTrack(1);});
-	}
+        };
+    },1000)
+	
+  }
 
-  
-    
+
 	initPlayer();
 });
+
 </script>
 
 
 {% endblock jsfiles %}
- 

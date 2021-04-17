@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils import timezone
+from users.models import Profile
+from embed_video.fields import EmbedVideoField
 
 
 class Post(models.Model):
@@ -32,12 +34,19 @@ class Like(models.Model):
 class Music(models.Model):
 	track = models.FileField(upload_to='path/to/audio')
 	title = models.TextField(max_length=50)
-	artwork = models.ImageField(upload_to='path/to/img', blank=True)
+	artwork = models.ImageField(upload_to='path/to/img')
+	artist_name = models.TextField(max_length=50)
 	artist = models.ForeignKey(User, on_delete=models.CASCADE)
 	date_posted = models.DateTimeField(default=timezone.now)
 
 	def __str__(self):
 		return self.title
+
+
+
+class Video(models.Model):
+	video = EmbedVideoField()
+
 
 	
 

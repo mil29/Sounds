@@ -8,13 +8,12 @@ class MusicSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Music
-        fields = ['track', 'title', 'artwork', 'artist', 'date_posted']
+        fields = ['track', 'title', 'artwork', 'artist', 'date_posted', 'artist_name',]
 
-class TrackSerializer(serializers.ModelSerializer):
+# class TrackSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Music
-        fields = ['track']
-
+#     class Meta:
+#         model = Music
+#         fields = ['track']
 
 
