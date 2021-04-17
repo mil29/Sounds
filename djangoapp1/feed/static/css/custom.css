@@ -858,6 +858,8 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     background-color: #ac0707;
 }
 
+/* /////////////////////////////////////////////// Video section styling //////////////////////////////////////*/
+
 .card-videos h3 {
     font-family: Saira, sans-serif;
     font-weight: 400;
@@ -867,16 +869,59 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     text-align: center;
 }
 .card-videos {
-    height: 270px;
+    height: 400px;
     background-color: #344450;
     border: 2px solid #0ae964;
 }
-.user_videos {
-    padding: 10px;
-    margin-top: 0px;
-    border: 10px;
-    display: inline;
+
+input[type=radio] {
+    display: none;
+  }
+
+.main_video_container { /* container */
+    width: 100%;
+    height: 395px;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 0;
+    text-align: center;
+    margin: 0 auto;
+    background-color: rgb(52, 68, 80);
+  }
+
+.user_videos {  /* card */
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    transition: transform .7s ease;
+    cursor: pointer;
+    top: 100px;
+  }
+.video_card {
+    position: relative;
 }
+
+
+#item-1:checked ~ .video_card #song-5, #item-2:checked ~ .video_card #song-1, #item-3:checked ~ .video_card #song-2, #item-4:checked ~ .video_card #song-3, #item-5:checked ~ .video_card #song-4 {
+  transform: translatex(-150px) scale(.8);
+  opacity: .4;
+  z-index: 0;
+}
+
+#item-1:checked ~ .video_card #song-4, #item-2:checked ~ .video_card #song-5, #item-3:checked ~ .video_card #song-1, #item-4:checked ~ .video_card #song-2, #item-5:checked ~ .video_card #song-3 {
+  transform: translatex(150px) scale(.8);
+  opacity: .4;
+  z-index: 0;
+}
+
+#item-1:checked ~ .video_card #song-3, #item-2:checked ~ .video_card #song-4, #item-3:checked ~ .video_card #song-5, #item-4:checked ~ .video_card #song-1, #item-5:checked ~ .video_card #song-2 {
+    transform: translatex(0) scale(1);
+    opacity: 1;
+    z-index: 1;
+}
+
+/*  /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
+
 
 .comment_text {
     color: #0ae964;
