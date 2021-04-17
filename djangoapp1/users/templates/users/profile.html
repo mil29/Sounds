@@ -186,27 +186,30 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
               <h3>VIDEOS</h3>
               <a class="btn btn-secondary track-upload-button" href="{% url 'video-upload' user.profile.slug %}">Upload</a>
 
-            <div class="main_video_container" id="box">
-              <input type="radio" name="slider" id="item-1" onclick="changeColor()" checked>
-              <input type="radio" name="slider" id="item-2" onclick="changeColor()">
-              <input type="radio" name="slider" id="item-3" onclick="changeColor()">
-              <input type="radio" name="slider" id="item-4" onclick="changeColor()">
-              <input type="radio" name="slider" id="item-5" onclick="changeColor()">
-
-
-              
-                <div class="video_card">
-                  {% for item in videos %}
-                  <label class="user_videos" for="item-{{ forloop.counter }}" id="song-{{ forloop.counter }}">
-                    {% video item.video '120% x 70%' %}
-                  </label>
-                  {% endfor %}
+      
+                <div class="main_video_container" id="box">
+                  <input type="radio" name="slider" id="item-1" onclick="changeColor()" checked>
+                  <input type="radio" name="slider" id="item-2" onclick="changeColor()">
+                  <input type="radio" name="slider" id="item-3" onclick="changeColor()">
+                  <input type="radio" name="slider" id="item-4" onclick="changeColor()">
+                  <input type="radio" name="slider" id="item-5" onclick="changeColor()">
+    
+    
+                  
+                    <div class="video_card">
+                      {% for item in videos %}
+                      <label class="user_videos" for="item-{{ forloop.counter }}" id="song-{{ forloop.counter }}">
+                       
+                        {% video item.video '120% x 70%' %}
+                        
+                      </label>
+                      {% endfor %}
+                    </div>
                 </div>
 
-    
-              
+           
 
-            </div>
+
           
             
             
@@ -297,16 +300,6 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 
 {% block jsfiles %}
 <script>
-
-  
-function changeColor() {
-  const x = document.getElementById('box');
-  if (x.style.backgroundColor === "rgb(52, 68, 80)") {
-      x.style.backgroundColor = 'black';
-} else {
-    x.style.backgroundColor = "rgb(52, 68, 80)";
-}
-};
 
 
 $(function()
