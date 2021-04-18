@@ -213,6 +213,7 @@ def my_profile(request, slug):
         friends = p.friends.all()
         artwork = Music.objects.all().filter(artist=you).order_by('-date_posted')
         videos = Video.objects.all()
+        
  
         # is this user our friend 
         button_status = 'none'

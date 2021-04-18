@@ -46,6 +46,9 @@ class Music(models.Model):
 
 class Video(models.Model):
 	video = EmbedVideoField()
+	user_videos = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
 
 
 	
