@@ -212,7 +212,7 @@ def my_profile(request, slug):
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
         artwork = Music.objects.all().filter(artist=you).order_by('-date_posted')
-        videos = Video.objects.all()
+        videos = Video.objects.all().filter(videoUser_id=you)
         
  
         # is this user our friend 
