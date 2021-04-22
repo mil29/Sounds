@@ -17,7 +17,7 @@
 <div class="main-content">
   <div class="container mt-2">
     <div class="row">
-      <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
+      <div class="col-xl-12 col-lg-10 col-md-10  m-auto order-xl-2 mb-5 mb-xl-0">
         <div class="card card-profile shadow">
           <div class="row justify-content-center">
             <div class="col-lg-3 order-lg-2">
@@ -76,7 +76,7 @@
     </div>
     <br />
     <div class="row">
-      <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
+      <div class="col-xl-12 col-lg-10 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
         <div class="card card-music">
           <h3>MUSIC</h3>
           <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' user.profile.slug %}">Upload</a>
@@ -141,7 +141,7 @@
 
 
     <div class="row">
-      <div class="col-xl-8 col-md-10 m-auto order-xl-2 mb-5 mb-xl-0">
+      <div class="col-xl-12 col-lg-10 col-md-10 m-auto order-xl-2 mb-5 mb-xl-5">
         <div class="card card-videos shadow">
 
           <h3>VIDEOS</h3>
@@ -152,16 +152,13 @@
   
     <ol id="slides" start="1">
       {% for item in videos %}
-      <li class="slide color-{{ forloop.counter0 }} alive">
-          {% video item.video '100% x 400' %}
+      <li class="slide color-{{ forloop.counter0 }}">
+          {% video item.video '100% x 100%' %}
       </li>
 
       {% endfor %}
       
-    
     </ol>
- 
-
 </div>
    <span class="nav fa fa-chevron-left fa-3x" id="left"></span>
     <span class="nav fa fa-chevron-right fa-3x" id="right"></span>
@@ -174,8 +171,8 @@
 
 
     {% if request.user == u %}
-    <div class="row">
-      <div class="col-md-6">
+    <div class="row sent-request-row">
+      <div class="col-md-6 sent-requests">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h2 class="profile_requests">Friend Requests Sent ({{ sent_friend_requests.count }})</h2>
@@ -196,7 +193,7 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 sent-requests">
         <div class="card card-signin my-5">
           <div class="card-body">
             <h2 class="profile_requests">Friend Requests Recieved ({{ rec_friend_requests.count }})</h2>
@@ -242,7 +239,7 @@
             trackNames.push(item['title']),
               trackUrl.push(item['track']),
               albums.push(item['artist_name'])
-          console.log(trackNames, trackUrl, albums)
+          // console.log(trackNames, trackUrl, albums)
         });
     }
     getUserTracks();
@@ -254,7 +251,7 @@
           number++;
           albumArtworks.push(`_${number}`);
 
-          console.log(albumArtworks);
+          // console.log(albumArtworks);
         }
       }, 100)
     }
@@ -286,6 +283,7 @@
           checkBuffering();
           i.attr('class', 'fas fa-pause');
           audio.play();
+          document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
         else {
           playerTrack.removeClass('active');
@@ -294,6 +292,7 @@
           albumArt.removeClass('buffering');
           i.attr('class', 'fas fa-play');
           audio.pause();
+          document.querySelector('.card-music').style.backgroundColor = "rgb(52, 68, 80)";
         }
       }, 100);
     }
