@@ -502,27 +502,63 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 #app-cover  /******************************************* Music Player ******************************************/ 
 {
     position: relative;
-    top: 100px;
+    top: -20px;
     right: 0;
     left: 0;
-    width: 430px;
-    height: 100px;
+    width: 530px;
+    height: 5px;
     margin: -4px auto;
-    
+}
+@media screen and (max-width: 991px) {
+    #app-cover {
+        position: relative;
+        top: 30px;
+        right: 0;
+        left: 0;
+        width: 530px;
+        height: 5px;
+        margin: -4px auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #app-cover {
+        position: relative;
+        top: 10px;
+        right: 0;
+        left: 0;
+        width: 410px;
+        height: 5px;
+        margin: -4px auto;
+    }
+}
+@media screen and (max-width: 485px) {
+    #app-cover {
+        position: relative;
+        top: 10px;
+        right: 0;
+        left: 0;
+        width: 350px;
+        height: 5px;
+        margin: -4px auto;
+    }
 }
 
 #player
 {
     position: relative;
-    height: 105%;
-    z-index: 3;
+    height: 115px;
+    z-index: 1;
+    width: 100%;
+    top: 125px;
+    
     
 }
 
 #player-track
 {
     position: absolute;
-    top: 0;
+    top: 0px;
     right: 15px;
     left: 15px;
     padding: 13px 22px 10px 184px;
@@ -530,7 +566,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     border-radius: 15px 15px 0 0;
     transition: 0.9s ease top;
     z-index: 1;
-    height: 90%;
+    height: 100px;
 }
 
 #player-track.active
@@ -760,10 +796,46 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 {
     width: 250px;
     height: 100%;
-    margin: 0 5px 0 141px;
-    float: right;
-    overflow: hidden;
+    margin: auto;
+    right: 10%;
+    left: 10%;
+    position: relative;
 }
+
+@media screen and (max-width: 767px) {
+        #player-controls {
+        width: 200px;
+        height: 100%;
+        margin: auto;
+        left: 15%;
+        position: relative;
+    }
+}
+@media screen and (max-width: 485px) {
+        #player-controls {
+        width: 170px;
+        height: 100%;
+        margin: auto;
+        left: 20%;
+        position: relative;
+    }
+}
+
+.music-buttons {
+    padding: 35px;
+    color: #20516f;
+    font-size: 20px;
+    justify-items: center;
+}
+.music-buttons:hover {
+    color: #0ae964;
+    transition-duration: 0.3s;
+}
+.fa-pause {
+    color: #0ae964;
+    transition-duration: 0.3s;
+}
+
 
 .control
 {
@@ -771,56 +843,6 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     float: left;
     padding: 0px;
     height: 100%;
-}
-
-.button
-{
-    width: fit-content;
-    height: fit-content;
-    padding: 25px;
-    left: 15px;
-    top: 25px;
-    background-color: rgb(40, 40, 40);
-    border-radius: 10px;
-    cursor: pointer;
-    position: relative;
-    border: 1px solid  #0ac0e93f;
-}
-.button:hover {
-    background-color: #1c4d52;
-}
-.button .fa-pause {
-    color: #af28f2;
-    background-color: #000000;
-}
-.button .fa-forward:active {
-    color: #9500ff;
-}
-.button .fa-backward:active {
-    color: #9500ff;
-}
-
-.button i
-{
-    display: block;
-    color: #8998a9;
-    font-size: 20px;
-    text-align: center;
-    position: absolute;
-    right: 14px;
-    line-height: 0;
-    width: fit-content;
-    height: fit-content;
-}
-
-.button, .button i
-{
-    transition: 0.2s ease all;
-}
-
-.button:hover i
-{
-    color: rgb(99, 249, 172);
 }
 
 .card-music h3 {
@@ -832,7 +854,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     text-align: center;
 }
 .card-music {
-    height: 270px;
+    height: 290px;
     background-color: #344450;
     border: 2px solid #0ae964;
     transition: border-width 0.1s linear;
@@ -843,6 +865,23 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
       border-width: 10px;
       border: 8px solid #17ccd8;
      }
+
+@media screen and (max-width: 991px) {
+    .card-music {
+        height: 340px;
+    } 
+}
+
+@media screen and (max-width: 767px) {
+    .card-music {
+        height: 310px;
+    } 
+}
+@media screen and (max-width: 485px) {
+    .card-music {
+        height: 330px;
+    } 
+}
 
 .track-upload-button {
     width: 100px;
@@ -861,6 +900,38 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     position: absolute;
 }
 
+.edit-tracks-button {
+    width: 100px;
+    height: fit-content;
+    right: 0;
+    top: 40px;
+    padding: 0px;
+    margin: 5px;
+    position: absolute;
+    font-family: 'Saira', sans-serif;
+    background-color: #058a8a;
+    border: none;
+}
+.edit-tracks-button:hover {
+    background-color: #ac0707;
+    position: absolute;
+}
+.track-delete-button {
+    position: relative;
+    top: -35px;
+    height: fit-content; 
+}
+.edit-song-button {
+    position: relative;
+    top: -35px;
+    margin-right: 20px;
+}
+.item-names {
+    font-size: 20px;
+    font-family: 'Saira', sans-serif;
+}
+
+
 /* /////////////////////////////////////////////// Video section styling //////////////////////////////////////*/
 
 .card-videos h3 {
@@ -872,13 +943,12 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     text-align: center;
 }
 .card-videos {
-    height: 700px;
+    height: 715px;
     background-color: #344450;
     border: 2px solid #0ae964;
-
 }
 .card-videos:hover {
-    height: 700px;
+    height: 715px;
     border: 2px solid #0ae964;
     background-color: rgb(18, 17, 17);
     transition: background-color 0.8s ease-in;
@@ -889,8 +959,13 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
   width: 100%;
   height: 100%;
   overflow: hidden;
-  top: 70px;
+  top: 65px;
   left: 0px;
+  margin-top: 10px;
+  text-align: center;
+  font-family: 'Saira', sans-serif;
+  color: rgb(200, 201, 201);
+  font-size: 20px;
 }
 
 #slides {
@@ -912,9 +987,9 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
   float: left;
   margin: 0;
   padding: 0;
-  width: 500px;
+  width: fit-content;
   height: 600px;
-  background: #ccc;
+  background: rgb(18, 17, 17);
   justify-content: center;
   text-align: center;
   background-size: cover;
@@ -932,9 +1007,9 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
   float: left;
   margin: 0;
   padding: 0;
-  width: 500px;
+  width: fit-content;
   height: 400px;
-  background: #ccc;
+  background:rgb(18, 17, 17);
   justify-content: center;
   text-align: center;
   background-size: cover;
@@ -945,13 +1020,15 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
   -webkit-transform-style: preserve-3d;
 }
 .card-videos {
-    height: 500px;
+    height: 515px;
+    width: auto;
     background-color: #344450;
     border: 2px solid #0ae964;
 
 }
 .card-videos:hover {
-    height: 500px;
+    height: 515px;
+    width: auto;
     border: 2px solid #0ae964;
     background-color: rgb(18, 17, 17);
     transition: background-color 0.8s ease-in;
@@ -1002,8 +1079,48 @@ right: 30%;
 }
 }
 
+.video-upload-button {
+    width: 100px;
+    height: fit-content;
+    right: 0;
+    top: 5px;
+    padding: 0px;
+    margin: 5px;
+    position: absolute;
+    font-family: 'Saira', sans-serif;
+    background-color: #058a8a;
+    border: none;
+}
+.video-upload-button:hover {
+    background-color: #ac0707;
+    position: absolute;
+}
 
-
+.edit-videos-button {
+    width: 100px;
+    height: fit-content;
+    right: 0;
+    top: 40px;
+    padding: 0px;
+    margin: 5px;
+    position: absolute;
+    font-family: 'Saira', sans-serif;
+    background-color: #058a8a;
+    border: none;
+}
+.edit-videos-button:hover {
+    background-color: #ac0707;
+    position: absolute;
+}
+.video-delete-button {
+    position: relative;
+    top: -35px;
+    height: fit-content; 
+}
+.caption {
+    background-color: rgb(18, 17, 17);
+    height: fit-content;
+}
 
 /*  /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 

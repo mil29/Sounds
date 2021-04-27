@@ -6,8 +6,6 @@ $.global.total = 0;
 $(document).ready(function() 
 	{
 
-
-
 	var WindowWidth = $('.card-videos').width();
 	var SlideCount = $('#slides iframe').length;
 	var SlidesWidth = SlideCount * WindowWidth;

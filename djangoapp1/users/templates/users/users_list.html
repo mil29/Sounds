@@ -29,7 +29,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
           <a class="friend_link" href="{{ user_p.get_absolute_url }}"
             ><b>{{ user_p }}</b></a
           >
-          {% if not user_p.user in sent %}
+          {% if not user_p.user in users %}
           
           <small class="float-right">
             <a

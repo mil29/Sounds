@@ -46,7 +46,9 @@ class Music(models.Model):
 
 class Video(models.Model):
 	video = EmbedVideoField()
+	caption = models.TextField(max_length=30)
 	videoUser = models.ForeignKey(User, on_delete=models.CASCADE, default='') 
+	date_posted = models.DateTimeField(default=timezone.now)
 
 
 

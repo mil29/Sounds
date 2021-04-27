@@ -32,10 +32,25 @@ class MusicForm(forms.ModelForm):
 		  'artist_name': forms.Textarea(attrs={'rows':1, 'cols':1}),
         }
 
+class MusicUpdateForm(forms.ModelForm):
+	class Meta:
+		model = Music
+		fields = ['title', 'artist_name', 'track', 'artwork']
+		widgets = {
+          'title': forms.Textarea(attrs={'rows':1, 'cols':1}),
+		  'artist_name': forms.Textarea(attrs={'rows':1, 'cols':1}),
+        }
+
 
 
 class VideoForm(forms.ModelForm):
 	class Meta:
 		model = Video
-		fields = ['video']
-		
+		fields = ['video', 'caption']
+		widgets = {
+          'caption': forms.Textarea(attrs={'rows':1, 'cols':1}),
+        }
+
+
+	
+

@@ -4,7 +4,7 @@ from django.urls import reverse
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
-from .forms import NewCommentForm, NewPostForm, MusicForm, VideoForm
+from .forms import NewCommentForm, NewPostForm, MusicForm, VideoForm, MusicUpdateForm
 from django.views.generic import ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .models import Post, Comments, Like, Music, Video
@@ -177,6 +177,44 @@ def music_upload(request, slug):
 
 
 @login_required
+def edit_tracks(request, slug):
+    p = request.user.profile
+    you = p.user
+    music = Music.objects.all().filter(artist=you).order_by('-date_posted')
+    context={
+        'u': you,
+        'music': music,
+        }
+    return render(request, 'feed/edit_tracks.html', context)
+
+@login_required
+def edit_song(request, pk, slug):
+    track = Music.objects.get(pk=pk)
+    if request.method == 'POST':
+            m_form = MusicUpdateForm(request.POST, request.FILES, instance=track)
+            if m_form.is_valid():
+                    m_form.save()
+                    messages.info(request, f'Track updated!')
+                    return redirect('my_profile', slug=slug)
+            
+    else:
+            m_form = MusicUpdateForm(instance=track)
+    context ={
+            'm_form': m_form,
+    }
+    return render(request, 'feed/music_update.html', context)
+
+
+@login_required
+def track_delete(request, pk):
+    track = get_object_or_404(Music, pk=pk)
+    if request.user.id == track.artist_id:
+        Music.objects.get(pk=pk).delete()
+        messages.error(request, f'Track deleted')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+@login_required
 def video_upload(request, slug):
     if request.method == 'POST':
         form = VideoForm(request.POST, request.FILES)
@@ -189,6 +227,27 @@ def video_upload(request, slug):
     else:
         form = VideoForm()
     return render(request, 'feed/video_upload.html', {'form':form})
+
+
+@login_required
+def edit_videos(request, slug):
+    p = request.user.profile
+    you = p.user
+    video = Video.objects.all().filter(videoUser_id=you)
+    context={
+        'u': you,
+        'video': video,
+        }
+    return render(request, 'feed/edit_videos.html', context)
+
+
+@login_required
+def video_delete(request, pk):
+    video = get_object_or_404(Video, pk=pk)
+    if request.user.id == video.videoUser_id:
+        Video.objects.get(pk=pk).delete()
+        messages.error(request, f'Video Deleted')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))    
 
 
 

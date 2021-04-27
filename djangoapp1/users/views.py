@@ -102,7 +102,7 @@ def cancel_friend_request(request, username):
         to_user=user).first()
     frequest.delete()
     messages.error(request, f'Friend request cancelled')
-    return redirect('users_list')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -118,25 +118,26 @@ def accept_friend_request(request, username):
         request_rev.delete() 
     frequest.delete()
     messages.success(request, f'You are now friends with {user2}')
-    return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
-def delete_friend_request(request, id):
-    from_user = get_object_or_404(User, id=id)
+def delete_friend_request(request, username):
+    from_user = get_object_or_404(User, username=username)
     frequest = FriendRequest.objects.filter(from_user=from_user, to_user=request.user).first()
     frequest.delete()
-    return HttpResponseRedirect('/users/{}'.format(request.user.profile.slug))
+    messages.error(request, f'Friend request cancelled')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 
-def delete_friend(request, id):
+def delete_friend(request, username):
     user_profile = request.user.profile
-    friend_profile = get_object_or_404(Profile, id=id) 
+    friend_profile = get_object_or_404(Profile, username=username) 
     user_profile.friends.remove(friend_profile)
     friend_profile.friends.remove(user_profile)
     messages.error(request, f'You are no longer friends with {friend_profile}')
-    return redirect('my_profile')
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
 @login_required
@@ -212,7 +213,7 @@ def my_profile(request, slug):
         user_posts = Post.objects.filter(user_name=you)
         friends = p.friends.all()
         artwork = Music.objects.all().filter(artist=you).order_by('-date_posted')
-        videos = Video.objects.all().filter(videoUser_id=you)
+        videos = Video.objects.all().filter(videoUser_id=you).order_by('-date_posted')
         
  
         # is this user our friend 

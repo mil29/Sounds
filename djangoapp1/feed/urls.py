@@ -23,5 +23,10 @@ urlpatterns=[
 	path('user_posts/<str:username>/', UserPostListView.as_view(), name='user-posts'),
 	path('comments/<int:pk>/delete/', views.comment_delete, name='comment-delete'),
 	path('music/new/<slug:slug>/', views.music_upload, name='music-upload'),
+	path('edit-tracks/<slug:slug>/', views.edit_tracks, name='edit_tracks'),
+	path('edit/<int:pk>/song/<slug:slug>/', views.edit_song, name='edit-song'),
+	path('track/<int:pk>/delete/', views.track_delete, name='track-delete'),
 	path('video/new/<slug:slug>/', views.video_upload, name='video-upload'),
+	path('edit-videos/<slug:slug>/', views.edit_videos, name='edit_videos'),
+	path('video/<int:pk>/delete/', views.video_delete, name='video-delete'),
 ]
