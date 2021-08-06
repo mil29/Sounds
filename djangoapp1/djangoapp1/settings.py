@@ -154,3 +154,15 @@ MESSAGE_TAGS = {
     messages.ERROR: 'alert-danger',
 }
 
+
+
+#S3 BUCKETS CONFIG
+
+AWS_ACCESS_KEY_ID = 'AKIA6N4N7KHXFOOT5FM6'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'sounds-connect-app'
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
