@@ -153,6 +153,10 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     text-align: center;
 }
 
+.footer-copyright {
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 767px) {
     .navbar-nav {
         width: 100%;
@@ -218,17 +222,18 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     text-decoration: none; // text decorations are clipped in WebKit browsers
     &:hover {
         background-position: 0 100%;
-  }
+    }
 }
 
-}
 
 .form-inline {
     justify-content: center;
 }
 .card-profile-image {
     margin-top: 15px;
+    text-align: center;
 }
+
 
 
 
@@ -544,15 +549,24 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     }
 }
 
+@media screen and (max-width: 484px) {
+    #app-cover {
+        width: 170px;
+    }
+}
+
 #player
 {
     position: relative;
     height: 115px;
     z-index: 1;
     width: 100%;
-    top: 125px;
-    
-    
+    top: 125px; 
+}
+@media screen and (max-width: 484px) {
+    #player {
+        height: 90px;
+    }
 }
 
 #player-track
@@ -567,6 +581,11 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     transition: 0.9s ease top;
     z-index: 1;
     height: 100px;
+}
+@media screen and (max-width: 484px) {
+    #player-track {
+        visibility: hidden;
+    }
 }
 
 #player-track.active
@@ -698,6 +717,22 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     overflow: hidden;
 }
 
+@media screen and (max-width: 484px) {
+    #album-art
+    {
+    position: absolute;
+    top: -40px;
+    width: 50px;
+    height:50px;
+    margin-left: 10px;
+    transform: rotateZ(0);
+    transition: 1s ease all;
+    box-shadow: 0 0 0 5px rgb(196, 196, 196);
+    border-radius: 50%;
+    overflow: hidden;
+    }
+}
+
 #album-art.active
 {
     top: -60px;
@@ -820,6 +855,14 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         position: relative;
     }
 }
+@media screen and (max-width: 484px) {
+        #player-controls {
+        width: 90%;
+        height: 100%;
+        margin: auto;
+        left: -15px
+    }
+}
 
 .music-buttons {
     padding: 35px;
@@ -899,6 +942,11 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     background-color: #ac0707;
     position: absolute;
 }
+@media screen and (max-width: 410px) {
+    .track-upload-button {
+        width: 70px;
+    } 
+}
 
 .edit-tracks-button {
     width: 100px;
@@ -916,6 +964,13 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     background-color: #ac0707;
     position: absolute;
 }
+@media screen and (max-width: 410px) {
+    .edit-tracks-button {
+        width: 90px;
+    } 
+}
+
+
 .track-delete-button {
     position: relative;
     top: -35px;
@@ -1095,6 +1150,11 @@ right: 30%;
     background-color: #ac0707;
     position: absolute;
 }
+@media screen and (max-width: 410px) {
+    .video-upload-button {
+        width: 70px;
+    } 
+}
 
 .edit-videos-button {
     width: 100px;
@@ -1112,6 +1172,12 @@ right: 30%;
     background-color: #ac0707;
     position: absolute;
 }
+@media screen and (max-width: 410px) {
+    .edit-videos-button {
+        width: 90px;
+    } 
+}
+
 .video-delete-button {
     position: relative;
     top: -35px;
@@ -1122,6 +1188,12 @@ right: 30%;
     height: fit-content;
 }
 
+@media screen and (max-width: 410px) {
+    .music-video-titles {
+        width: fit-content;
+        margin-left: 5px;
+    } 
+}
 /*  /////////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
 

@@ -78,7 +78,7 @@
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 m-auto order-xl-2 mb-5 mb-xl-0">
         <div class="card card-music">
-          <h3>MUSIC</h3>
+          <h3 class="music-video-titles">MUSIC</h3>
           <a class="btn btn-secondary track-upload-button" href="{% url 'music-upload' user.profile.slug %}">Upload</a>
 
           
@@ -153,7 +153,7 @@
       <div class="col-xl-12 col-lg-12 col-md-12 m-auto mb-5 mb-xl-5">
         <div class="card card-videos shadow">
 
-          <h3>VIDEOS</h3>
+          <h3 class="music-video-titles">VIDEOS</h3>
           <a class="btn btn-secondary video-upload-button" href="{% url 'video-upload' user.profile.slug %}">Upload</a>
 
          {% if videos|length >= 1 %}
