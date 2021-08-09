@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['https://sounds-city.herokuapp.com', '127:0.0.1']
 
@@ -165,7 +165,7 @@ MESSAGE_TAGS = {
 
 
 
-USE_S3 = False
+USE_S3 = True
 #S3 BUCKETS CONFIG
 
 if USE_S3:
