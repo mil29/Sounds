@@ -24,38 +24,45 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     user-select: text;
 } /** only allows text to be selected on site **/
 
-.container1 {
-    width: 100%;
-    height: auto;
-    padding: 0px;
-    position: relative;
-}
-.large_navbar {
-    padding: 10px;
-    
-}
-.menu_nav {
-    justify-content: center;
 
-}
 
 .navbar-brand {
     margin: 0px;
-    padding: -10px;
-    left: -25px;
+    left: 15px;
+    top: 10px;
+    position: absolute;
     font-family: 'Saira', sans-serif;
     font-weight: 100;
     font-size: 30px;
 }
+@media screen and (max-width: 767px) {
+    .navbar-brand {
+        margin: 0px;
+        padding: -10px;
+        left: 15px;
+        font-family: 'Saira', sans-serif;
+        font-weight: 100;
+        font-size: 30px;
+    }
+}
+@media screen and (max-width: 300px) {
+    .navbar-brand {
+        margin: 0px;
+        padding: -10px;
+        left: 15px;
+        font-family: 'Saira', sans-serif;
+        font-weight: 100;
+        font-size: 20px;
+    }
+}
+
 .navbar-brand:hover {
     margin: 0px;
-    padding: -10px;
-    left: -25px;
+    left: 15px;
     display: inline-block;
     font-size: 30px;
     font-weight: 100;
     color: rgb(65, 188, 225);
-    overflow: hidden;
     background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -63,22 +70,19 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     background-size: 200% 100%;
     background-position: 100%;
     transition: background-position 875ms ease;
-    text-decoration: none; // text decorations are clipped in WebKit browsers
-    &:hover {
-        background-position: 0 100%;
-  }
+    text-decoration: none; 
 }
 
 .navbar-nav {
     width: 100%;
-    height: auto;
+    height: 170px;
     padding: 10px;
 }
 
 .nav-item-logout {
     position: absolute;
     top: 34px;
-    right: 0;
+    right: 0px;
     font-family: 'Saira', sans-serif;
     font-weight: 200;
     font-size: 20px;
@@ -89,7 +93,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 }
 .nav-item-login {
     position: relative;
-    top: 35px;
+    top: 85px;
     right: 0px;
     font-family: 'Saira', sans-serif;
     font-weight: 200;
@@ -100,7 +104,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 }
 .nav-item-register {
     position: relative;
-    top: 35px;
+    top: 85px;
     right: -15px;
     font-family: 'Saira', sans-serif;
     font-weight: 200;
@@ -160,9 +164,9 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 @media screen and (max-width: 767px) {
     .navbar-nav {
         width: 100%;
-        height: auto;
-        padding: 0;
-        margin-bottom: 60px;
+        height: 350px;
+        padding: 10px;
+        margin-bottom: 30px;
     }
     .nav-item-login {
         position: relative;
@@ -204,14 +208,13 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     width: 100%;
     text-align: center;
     position: relative;
-    top: 35px;
+    top: 85px;
     margin-bottom: 20px;
 }
 .nav-item:hover{
     font-size: 20px;
     font-weight: 400;
     color: rgb(65, 188, 225);
-    overflow: hidden;
     background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
     background-clip: text;
     -webkit-background-clip: text;
@@ -219,10 +222,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     background-size: 200% 100%;
     background-position: 100%;
     transition: background-position 875ms ease;
-    text-decoration: none; // text decorations are clipped in WebKit browsers
-    &:hover {
-        background-position: 0 100%;
-    }
+    text-decoration: none;
 }
 
 
@@ -236,36 +236,21 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 
 
 
-
 @media screen and (min-width: 768px){
     .menu {display: none;}
 }
 
 @media screen and (max-width: 767px) {
-    .searchbar{
-        position: absolute!important;
-        top: 300px !important;
-        right: 180px !important;
-        transition: all 1s;
-        width: 50px;
-        height: 50px;
-        background: white;
-        box-sizing: border-box;
-        border-radius: 15px;
-        border: 4px solid white;
-        padding: 20px;  
-    }
-
     .nav-item-logout {
-        position: absolute;
-        top: 303px;
-        right: -10px;
         font-family: 'Saira', sans-serif;
-        font-weight: 200;
+        font-weight: 100;
         font-size: 20px;
         color: rgb(223, 250, 250);
-        padding: 5px;
-        width: 95px;
+        padding: 0px;
+        width: 100%;
+        position: relative;
+        top: 50px;
+        margin-bottom: 20px;
     }
     .nav-item {
         font-family: 'Saira', sans-serif;
@@ -282,7 +267,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         font-size: 20px;
         font-weight: 400;
         color: rgb(65, 188, 225);
-        overflow: hidden;
+        /* overflow: hidden; */
         background: linear-gradient(to right, midnightblue, rgb(14, 117, 160) 50%, rgb(24, 198, 186) 50%);
         background-clip: text;
         -webkit-background-clip: text;
@@ -290,10 +275,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         background-size: 200% 100%;
         background-position: 100%;
         transition: background-position 875ms ease;
-        text-decoration: none; // text decorations are clipped in WebKit browsers
-        &:hover {
-            background-position: 0 100%;
-        }
+        text-decoration: none; 
     }
     .menu {
         background-color: transparent;
@@ -345,14 +327,6 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 
 /** Search button for Posts and User search  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! **/
 
-.container2 {
-    width: 100%;
-    top: 10px;
-    left: 10%;
-    position: absolute;
-    margin: 0px;
-}
-
 
 #search_btn {
     border: none;
@@ -361,16 +335,60 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 
 .searchbar{
     position: absolute;
-    top: 32px;
-    right: 25%;
+    top: 42px;
+    right: 15%;
     transition: all 1s;
     width: 50px;
     height: 50px;
     background: white;
-    box-sizing: border-box;
     border-radius: 15px;
     border: 4px solid white;
     padding: 20px;  
+}
+
+@media screen and (max-width: 767px) {
+    .searchbar{
+        position: absolute;
+        top: 310px;
+        right: 20px;
+        transition: all 1s;
+        width: 50px;
+        height: 50px;
+        background: white;
+        border-radius: 15px;
+        border: 4px solid white;
+        padding: 20px;
+    }
+}
+@media screen and (max-width: 500px) {
+    .searchbar{
+        position: absolute;
+        top: 310px;
+        transition: all 1s;
+        width: 50px;
+        height: 50px;
+        background: white;
+        box-sizing: border-box;
+        border-radius: 15px;
+        border: 4px solid white;
+        padding: 20px;  
+        margin-right: 0px;
+    }
+}
+@media screen and (max-width: 350px) {
+    .searchbar{
+        position: absolute;
+        top: 310px;
+        transition: all 1s;
+        width: 50px;
+        height: 50px;
+        background: white;
+        box-sizing: border-box;
+        border-radius: 15px;
+        border: 4px solid white;
+        padding: 20px;  
+        margin-right: -30px;
+    }
 }
 
 .postquery{
@@ -407,6 +425,18 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
 .searchbar:hover{
     width: 400px;
     cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+    .searchbar:hover {
+        width: 90%;
+        position: absolute;
+    }
+}
+@media screen and (max-width: 500px) {
+    .searchbar:hover {
+        width: 80%;
+        position: absolute;
+    }
 }
 
 .searchbar:hover .postquery{
