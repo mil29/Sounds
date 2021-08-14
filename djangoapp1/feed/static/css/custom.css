@@ -1025,6 +1025,14 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     }
 }
 
+
+/* ////////////// progress bar for music upload //////////*/
+.not-visible {
+    display: none;
+}
+
+
+
 /* /////////////////////////////////////////////// Video section styling //////////////////////////////////////*/
 
 .card-videos h3 {

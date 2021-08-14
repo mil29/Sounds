@@ -22,7 +22,7 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center"><b>Upload Music</b></h5>
-            <form class="form-signin" method = "POST" onsubmit='disableButton()' enctype="multipart/form-data">
+            <form class="form-signin" id="upload-form" method = "POST" onsubmit='disableButton()' enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group"><br>
                 {{ form|crispy }}
@@ -31,6 +31,11 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
                 <button class="btn btn-info btn-primary btn-block text-uppercase post_button" id="musicFormUpload" type="submit">Upload</button><br>
             </div>
         </form>
+
+        <div id="progress-box" class="not-visible">Progress</div>
+        <div id="cancel-box" class="not-visible">
+          <button id="cancel-btn" class="btn btn-danger">Cancel</button>
+        </div>
 
         <a class="btn btn-secondary btn-block text-uppercase update_profile" href="{% url 'my_profile' user.profile.slug %}">Go Back</a>
 

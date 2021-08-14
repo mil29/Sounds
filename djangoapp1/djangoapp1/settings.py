@@ -137,7 +137,6 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
-
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -166,7 +165,7 @@ MESSAGE_TAGS = {
 
 
 
-USE_S3 = False
+USE_S3 = True
 #S3 BUCKETS CONFIG
 
 if USE_S3:
