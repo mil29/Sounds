@@ -1,17 +1,42 @@
-  $(function () {
+$(function () {
+// http://127.0.0.1:8000/music/music_all/?format=json
+// https://soundpro-city.herokuapp.com/music/music_all/?format=json
+
+
+
+    // function to load track data from Django REST API 
+    // function getTrackData(){
+    //     $.getJSON("https://soundpro-city.herokuapp.com/music/music_all/?format=json", function(data) {
+    //       $.each( data, function(index, val) {
+    //         trackNames.push(val.title)
+    //         trackUrl.push(val.track)
+    //         albums.push(val.artist_name)
+    //         // console.log(index, val);
+    //       });
+    //       console.log(trackNames, trackUrl, albums)
+    //     });
+    // };
+    // getTrackData();
+
 
     async function getUserTracks() {
-      await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
-        .then(res => res.json())
-        .then(data => {
-          for (item of data)
-            trackNames.push(item['title']),
-              trackUrl.push(item['track']),
-              albums.push(item['artist_name'])
-          // console.log(trackNames, trackUrl, albums)
-        });
+      try {
+        await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
+          .then(res => res.json())
+          .then(data => {
+            for (item of data)
+              trackNames.push(item['title']),
+                trackUrl.push(item['track']),
+                albums.push(item['artist_name'])
+            console.log(trackNames, trackUrl, albums)
+          })
+      } catch(error) {
+        console.error(error)
+      }
     }
     getUserTracks();
+
+
 
     function createAlbumId() {
       setTimeout(function () {
@@ -25,7 +50,7 @@
       }, 100)
     }
     createAlbumId();
-
+    
 
     var playerTrack = $("#player-track"), bgArtwork = $('#bg-artwork'), bgArtworkUrl,
       albumName = $('#album-name'), trackName = $('#track-name'), albumArt = $('#album-art'),
@@ -34,14 +59,16 @@
       tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes,
       ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null,
       tFlag = false,
-
-      // all arrays are fetched from above fetch functions
+      
+      // all arrays are fetched from above getJSON getTrackData function
       trackNames = [],
       trackUrl = [],
       albums = [],
       albumArtworks = [],
+
       playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
 
+      
 
 
     function playPause() {
@@ -51,6 +78,8 @@
           albumArt.addClass('active');
           checkBuffering();
           i.attr('class', 'fas fa-pause');
+          audio.load();
+          window.focus();
           audio.play();
           document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
@@ -209,6 +238,8 @@
         bTime = bTime.getTime();
 
         if (flag != 0) {
+          audio.load();
+          window.focus();
           audio.play();
           playerTrack.addClass('active');
           albumArt.addClass('active');
@@ -236,36 +267,36 @@
 
     function initPlayer() {
       setTimeout(function () {
+      
+          if (trackUrl.length == 0) {
+            $('#player-controls').click(function () {
+              alert('You haven\'t uploaded any tracks, please upload now!');
+            });
+          }
+          else {
+            audio = new Audio();
+  
+            selectTrack(0);
+  
+            audio.loop = false;
+  
+            playPauseButton.on('click', playPause);
+  
+            sArea.mousemove(function (event) { showHover(event); });
+  
+            sArea.mouseout(hideHover);
+  
+            sArea.on('click', playFromClickedPos);
+  
+            $(audio).on('timeupdate', updateCurrTime);
+  
+            playPreviousTrackButton.on('click', function () { selectTrack(-1); });
+            playNextTrackButton.on('click', function () { selectTrack(1); });
+          };
 
-        if (trackUrl.length == 0) {
-          $('#player-controls').click(function () {
-            alert('You haven\'t uploaded any tracks, please upload now!');
-          });
-        }
-        else {
-          audio = new Audio();
-
-          selectTrack(0);
-
-          audio.loop = false;
-
-          playPauseButton.on('click', playPause);
-
-          sArea.mousemove(function (event) { showHover(event); });
-
-          sArea.mouseout(hideHover);
-
-          sArea.on('click', playFromClickedPos);
-
-          $(audio).on('timeupdate', updateCurrTime);
-
-          playPreviousTrackButton.on('click', function () { selectTrack(-1); });
-          playNextTrackButton.on('click', function () { selectTrack(1); });
-        };
-      }, 1000)
-
+      }, 500)
     }
-
-
     initPlayer();
+
+
   });

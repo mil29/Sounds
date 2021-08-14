@@ -30,9 +30,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['https://sounds-city.herokuapp.com', '127:0.0.1']
+ALLOWED_HOSTS = ['https://soundpro-city.herokuapp.com', '127:0.0.1']
 
 
 # Application definition
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -165,7 +166,7 @@ MESSAGE_TAGS = {
 
 
 
-USE_S3 = True
+USE_S3 = False
 #S3 BUCKETS CONFIG
 
 if USE_S3:
@@ -188,12 +189,15 @@ if USE_S3:
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'djangoapp1.storage_backends.PublicMediaStorage'
 else:
-    STATIC_URL = '/static/'
+    STATIC_URL = '/staticfiles/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    MEDIA_URL = '/media/'
+    MEDIA_URL = '/mediafiles/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
 
+# For AWS S3 bucket to collect updated collectstatic request the 2nd option with 'staticfiles=false' needs to be on instead of the 1t option
 django_on_heroku.settings(locals())
+# django_on_heroku.settings(locals(), staticfiles=False)
 

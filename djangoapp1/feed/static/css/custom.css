@@ -1015,6 +1015,15 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     font-family: 'Saira', sans-serif;
 }
 
+.track-edit-delete-buttons {
+    float: left;
+    margin-top: 10px;
+}
+@media screen and (max-width: 300px) {
+    .edit-and-delete-buttons {
+        padding: 0;
+    }
+}
 
 /* /////////////////////////////////////////////// Video section styling //////////////////////////////////////*/
 

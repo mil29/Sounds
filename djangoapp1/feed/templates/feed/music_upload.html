@@ -22,13 +22,13 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center"><b>Upload Music</b></h5>
-            <form class="form-signin" method = "POST" enctype="multipart/form-data">
+            <form class="form-signin" method = "POST" onsubmit='disableButton()' enctype="multipart/form-data">
             {% csrf_token %}
             <fieldset class="form-group"><br>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-info btn-primary btn-block text-uppercase post_button" type="submit">Upload</button><br>
+                <button class="btn btn-info btn-primary btn-block text-uppercase post_button" id="musicFormUpload" type="submit">Upload</button><br>
             </div>
         </form>
 
@@ -41,4 +41,16 @@ integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fW
 </div>
 
 {% endblock content %}
-{% block jsfiles %}{% endblock jsfiles %}
+
+{% block jsfiles %}
+
+<script>
+    function disableButton() {
+        var btn = document.getElementById('musicFormUpload');
+        btn.disabled = true;
+        btn.innerText = 'Uploading...'
+    }
+</script>
+
+
+{% endblock jsfiles %}

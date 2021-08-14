@@ -6,6 +6,7 @@ from users.models import Profile
 from embed_video.fields import EmbedVideoField
 
 
+
 class Post(models.Model):
 	description = models.TextField(max_length=255)
 	pic = models.ImageField(upload_to='path/to/img', blank=True)
@@ -42,7 +43,7 @@ class Music(models.Model):
 	def __str__(self):
 		return self.title
 
-
+	
 
 class Video(models.Model):
 	video = EmbedVideoField()
