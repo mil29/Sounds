@@ -21,7 +21,7 @@ $(function () {
 
     async function getUserTracks() {
       try {
-        await fetch("http://127.0.0.1:8000/music/music_all/?format=json")
+        await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
           .then(res => res.json())
           .then(data => {
             for (item of data)
