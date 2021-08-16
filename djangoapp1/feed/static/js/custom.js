@@ -29,6 +29,7 @@ function progressBar() {
         },
         xhr: function(){
             const xhr = new window.XMLHttpRequest();
+            xhr.open('POST', 'https://soundpro-city.herokuapp.com');
             xhr.upload.addEventListener('progress', e=>{
                 // console.log(e);
                 if (e.lengthComputable) {
@@ -47,6 +48,7 @@ function progressBar() {
                 cancelBox.classList.add('not-visible')
                 window.location.reload();
             })
+            xhr.send(data)
             return xhr
         },
         success: function(response){

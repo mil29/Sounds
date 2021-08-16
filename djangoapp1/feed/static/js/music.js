@@ -1,4 +1,5 @@
 $(function () {
+
 // http://127.0.0.1:8000/music/music_all/?format=json
 // https://soundpro-city.herokuapp.com/music/music_all/?format=json
 
@@ -19,22 +20,25 @@ $(function () {
     // getTrackData();
 
 
-    async function getUserTracks() {
-      try {
-        await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
-          .then(res => res.json())
-          .then(data => {
-            for (item of data)
-              trackNames.push(item['title']),
-                trackUrl.push(item['track']),
-                albums.push(item['artist_name'])
-            console.log(trackNames, trackUrl, albums)
-          })
-      } catch(error) {
-        console.error(error)
-      }
+  async function getUserTracks() {
+    try {
+      await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
+        .then(res => res.json())
+        .then(data => {
+          for (item of data)
+            trackNames.push(item['title']),
+              trackUrl.push(item['track']),
+              albums.push(item['artist_name'])
+          console.log(trackNames, trackUrl, albums)
+        })
+    } catch(error) {
+      console.error(error)
     }
-    getUserTracks();
+  }
+  getUserTracks();
+
+
+
 
 
 
@@ -78,8 +82,6 @@ $(function () {
           albumArt.addClass('active');
           checkBuffering();
           i.attr('class', 'fas fa-pause');
-          audio.load();
-          window.focus();
           audio.play();
           document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
@@ -238,8 +240,6 @@ $(function () {
         bTime = bTime.getTime();
 
         if (flag != 0) {
-          audio.load();
-          window.focus();
           audio.play();
           playerTrack.addClass('active');
           albumArt.addClass('active');
