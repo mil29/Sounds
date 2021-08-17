@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['https://soundpro-city.herokuapp.com', '127:0.0.1']
 
@@ -199,4 +199,3 @@ else:
 # For AWS S3 bucket to collect updated collectstatic request the 2nd option with 'staticfiles=false' needs to be on instead of the 1t option
 # django_on_heroku.settings(locals())
 django_on_heroku.settings(locals(), staticfiles=False)
-

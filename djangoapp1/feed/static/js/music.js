@@ -39,9 +39,6 @@ $(function () {
 
 
 
-
-
-
     function createAlbumId() {
       setTimeout(function () {
         let number = 0;
@@ -76,13 +73,12 @@ $(function () {
 
 
     function playPause() {
-      setTimeout(function () {
         if (audio.paused) {
           playerTrack.addClass('active');
           albumArt.addClass('active');
           checkBuffering();
           i.attr('class', 'fas fa-pause');
-          audio.play();
+          onButtonClick();
           document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
         else {
@@ -94,7 +90,6 @@ $(function () {
           audio.pause();
           document.querySelector('.card-music').style.backgroundColor = "rgb(52, 68, 80)";
         }
-      }, 100);
     }
 
     function showHover(event) {
@@ -240,7 +235,7 @@ $(function () {
         bTime = bTime.getTime();
 
         if (flag != 0) {
-          audio.play();
+          onButtonClick();
           playerTrack.addClass('active');
           albumArt.addClass('active');
 
@@ -265,6 +260,27 @@ $(function () {
       }
     }
 
+    function onButtonClick() {
+      audio.load();
+      fetchAudioAndPlay();
+    }
+
+
+    function fetchAudioAndPlay() {
+      fetch(trackUrl[currIndex])
+      .then(response => response.blob())
+      .then(blob => {
+        audio.srcObject = blob;
+        return audio.play();
+      })
+      .then(_ => {
+        console.log('audio has started!');
+      })
+      .catch(e => {
+        console.log(e);
+      })
+    }
+
     function initPlayer() {
       setTimeout(function () {
       
@@ -277,7 +293,8 @@ $(function () {
             audio = new Audio();
   
             selectTrack(0);
-  
+
+            
             audio.loop = false;
   
             playPauseButton.on('click', playPause);

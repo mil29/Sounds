@@ -6,6 +6,7 @@ const progressBox = document.getElementById('progress-box')
 const cancelBox = document.getElementById('cancel-box')
 const cancelBtn = document.getElementById('cancel-btn')
 const csrf = document.getElementsByName('csrfmiddlewaretoken')
+const progbar = document.getElementById('musicFormUpload')
 
 
 function progressBar() {
@@ -28,12 +29,11 @@ function progressBar() {
 
         },
         xhr: function(){
-            const xhr = new window.XMLHttpRequest();
-            xhr.open('POST', 'https://soundpro-city.herokuapp.com');
+            const xhr = new XMLHttpRequest();
             xhr.upload.addEventListener('progress', e=>{
                 // console.log(e);
                 if (e.lengthComputable) {
-                    const percent = e.loaded / e.total * 100
+                    const percent = (e.loaded / e.total) * 100;
                     // console.log(percent);
                     progressBox.innerHTML = `<h5 style="text-align:center;">${percent.toFixed(1)}%</h5>
                                             <div class="progress" style="height: 30px;">
@@ -48,11 +48,11 @@ function progressBar() {
                 cancelBox.classList.add('not-visible')
                 window.location.reload();
             })
-            xhr.send(data)
-            return xhr
+            return xhr;
         },
         success: function(response){
             // console.log(response);
+            uploadForm.reset()
             cancelBox.classList.add('not-visible')
         },
         error: function(error){
@@ -64,7 +64,6 @@ function progressBar() {
     })
 
 }
-
 
 
 

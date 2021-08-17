@@ -32,7 +32,7 @@ function progressBar() {
             xhr.upload.addEventListener('progress', e=>{
                 // console.log(e);
                 if (e.lengthComputable) {
-                    const percent = e.loaded / e.total * 100
+                    const percent = (e.loaded / e.total) * 100;
                     // console.log(percent);
                     progressBox.innerHTML = `<h5 style="text-align:center;">${percent.toFixed(1)}%</h5>
                                             <div class="progress" style="height: 30px;">
@@ -51,6 +51,7 @@ function progressBar() {
         },
         success: function(response){
             // console.log(response);
+            uploadForm.reset()
             cancelBox.classList.add('not-visible')
         },
         error: function(error){
