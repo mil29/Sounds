@@ -24,10 +24,10 @@ https://soundpro-city.herokuapp.com/
 ## Technologies used
 
 <b>Frontend</b>: HTML5, CSS (Bootstrap4, Custom CSS, Custom JS), AJAX, JQuery <br>
-Backend: Django, REST API <br>
-Storage: AWS <br>
-Databases: SQLite3, PostgreSQL <br>
-Deployment: Heroku <br>
-Languages used: Python, Javascript, JQuery, HTML5, CSS <br>
+<b>Backend</b>: Django, REST API <br>
+<b>Storage</b>: AWS <br>
+<b>Databases</b>: SQLite3, PostgreSQL <br>
+<b>Deployment</b>: Heroku <br>
+<b>Languages used</b>: Python, Javascript, JQuery, HTML5, CSS <br>
 
   
