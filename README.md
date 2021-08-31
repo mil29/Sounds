@@ -7,8 +7,8 @@ Features:
 1.  Login/Authentication for user.
 2.  Users can create profile page with personal information and profile picture.
 3.  User profile page contains profile picture, bio, music player and video player.
-4.  Users can add mp3's to player and album artwork , which is then displayed on player.
-5.  Users can add a youtube embed link for video content, and scroll through videos on profile.
+4.  Users can add mp3's to player and album artwork.
+5.  Users can add a youtube embed link for video content, and scroll through videos in profile.
 6.  Ability to post picture with text to main blog page.
 7.  Other users can comment, like or disklike a post.
 8.  Users can send friend requests and accept requests.
