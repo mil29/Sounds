@@ -1,0 +1,33 @@
+# Soundpro-City
+
+Social media application built with Django Framework.
+
+Features:
+
+1.  Login/Authentication for user.
+2.  Users can create profile page with personal information and profile picture.
+3.  User profile page contains profile picture, bio, music player and video player.
+4.  Users can add mp3's to player and album artwork , which is then displayed on player.
+5.  Users can add a youtube embed link for video content, and scroll through videos on profile.
+6.  Ability to post picture with text to main blog page.
+7.  Other users can comment, like or disklike a post.
+8.  Users can send friend requests and accept requests.
+9.  Ability to search through all posts or users.
+10. Users are able to edit and delete their content and profile information.
+
+
+## Demo
+
+https://soundpro-city.herokuapp.com/
+
+  
+## Technologies used
+
+Frontend: HTML5, CSS (Bootstrap4, Custom CSS, Custom JS), AJAX, JQuery
+Backend: Django, REST API
+Storage: AWS
+Databases: SQLite3, PostgreSQL
+Deployment: Heroku
+Languages used: Python, Javascript, JQuery, HTML5, CSS
+
+  
