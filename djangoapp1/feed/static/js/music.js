@@ -4,38 +4,20 @@ $(function () {
 // https://soundpro-city.herokuapp.com/music/music_all/?format=json
 
 
+  //   // function to load track data from Django REST API 
+  // function getTrackData(){
+  //     $.getJSON("https://soundpro-city.herokuapp.com/music/music_all/?format=json", function(data) {
+  //       $.each( data, function(index, val) {
+  //         trackNames.push(val.title)
+  //         trackUrl.push(val.track)
+  //         albums.push(val.artist_name)
+  //         // console.log(index, val);
+  //       });
+  //       console.log(trackNames, trackUrl, albums)
+  //     });
+  // };
+  // getTrackData();
 
-    // function to load track data from Django REST API 
-    // function getTrackData(){
-    //     $.getJSON("https://soundpro-city.herokuapp.com/music/music_all/?format=json", function(data) {
-    //       $.each( data, function(index, val) {
-    //         trackNames.push(val.title)
-    //         trackUrl.push(val.track)
-    //         albums.push(val.artist_name)
-    //         // console.log(index, val);
-    //       });
-    //       console.log(trackNames, trackUrl, albums)
-    //     });
-    // };
-    // getTrackData();
-
-
-  async function getUserTracks() {
-    try {
-      await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
-        .then(res => res.json())
-        .then(data => {
-          for (item of data)
-            trackNames.push(item['title']),
-              trackUrl.push(item['track']),
-              albums.push(item['artist_name'])
-          console.log(trackNames, trackUrl, albums)
-        })
-    } catch(error) {
-      console.error(error)
-    }
-  }
-  getUserTracks();
 
 
 
@@ -60,25 +42,42 @@ $(function () {
       tProgress = $('#current-time'), tTime = $('#track-length'), seekT, seekLoc, seekBarPos, cM, ctMinutes,
       ctSeconds, curMinutes, curSeconds, durMinutes, durSeconds, playProgress, bTime, nTime = 0, buffInterval = null,
       tFlag = false,
+      playPreviousTrackButton = $('#play-previous'), 
+      playNextTrackButton = $('#play-next'), 
+      currIndex = -1;
       
+
       // all arrays are fetched from above getJSON getTrackData function
-      trackNames = [],
-      trackUrl = [],
-      albums = [],
-      albumArtworks = [],
-
-      playPreviousTrackButton = $('#play-previous'), playNextTrackButton = $('#play-next'), currIndex = -1;
-
-      
+      var trackNames = [];
+      var trackUrl = [];
+      var albums = [];
+      var albumArtworks = [];
+      async function getUserTracks() {
+          try {
+            await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json")
+              .then(res => res.json())
+              .then(data => {
+                for (item of data)
+                  trackNames.push(item['title']),
+                    trackUrl.push(item['track']),
+                    albums.push(item['artist_name']),
+                console.log(trackNames, trackUrl, albums)
+              })
+          } catch(error) {
+            console.error(error)
+          }
+      }
+      getUserTracks();
 
 
     function playPause() {
-        if (audio.paused) {
+      setTimeout(function() {
+        if(audio.paused) {
           playerTrack.addClass('active');
           albumArt.addClass('active');
           checkBuffering();
           i.attr('class', 'fas fa-pause');
-          onButtonClick();
+          audio.play();
           document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
         else {
@@ -90,6 +89,7 @@ $(function () {
           audio.pause();
           document.querySelector('.card-music').style.backgroundColor = "rgb(52, 68, 80)";
         }
+      }, 300)
     }
 
     function showHover(event) {
@@ -235,7 +235,7 @@ $(function () {
         bTime = bTime.getTime();
 
         if (flag != 0) {
-          onButtonClick();
+          audio.play();
           playerTrack.addClass('active');
           albumArt.addClass('active');
 
@@ -260,42 +260,21 @@ $(function () {
       }
     }
 
-    function onButtonClick() {
-      audio.load();
-      fetchAudioAndPlay();
-    }
 
+ 
 
-    function fetchAudioAndPlay() {
-      fetch(trackUrl[currIndex])
-      .then(response => response.blob())
-      .then(blob => {
-        audio.srcObject = blob;
-        return audio.play();
-      })
-      .then(_ => {
-        console.log('audio has started!');
-      })
-      .catch(e => {
-        console.log(e);
-      })
-    }
 
     function initPlayer() {
       setTimeout(function () {
       
-          if (trackUrl.length == 0) {
-            $('#player-controls').click(function () {
-              alert('You haven\'t uploaded any tracks, please upload now!');
-            });
-          }
-          else {
             audio = new Audio();
+
   
             selectTrack(0);
 
-            
+
             audio.loop = false;
+
   
             playPauseButton.on('click', playPause);
   
@@ -309,11 +288,11 @@ $(function () {
   
             playPreviousTrackButton.on('click', function () { selectTrack(-1); });
             playNextTrackButton.on('click', function () { selectTrack(1); });
-          };
+     
 
       }, 500)
     }
     initPlayer();
 
-
   });
+
