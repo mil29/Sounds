@@ -56,6 +56,17 @@ INSTALLED_APPS = [
     'corsheaders'
 ]
 
+# Django rest framework
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication'
+    ]
+}
+
+CORS_ORIGIN_WHITELIST = [
+    'https://soundpro-city.herokuapp.com',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",

@@ -184,6 +184,7 @@ def profile_view(request, slug):
 
 @login_required
 def edit_profile(request):
+    p = request.user.profile.slug
     if request.method == 'POST':
             u_form = UserUpdateForm(request.POST, instance=request.user)
             p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
@@ -191,7 +192,7 @@ def edit_profile(request):
                     u_form.save()
                     p_form.save()
                     messages.info(request, f'Your account has been updated!')
-                    return redirect('my_profile')
+                    return redirect('my_profile', slug=p)
             
     else:
             u_form = UserUpdateForm(instance=request.user)

@@ -52,29 +52,22 @@ $(function () {
       var trackUrl = [];
       var albums = [];
       var albumArtworks = [];
-    async function getUserTracks() {
-        try {
-          await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json") 
-            .then(res => res.json())
-            .then(data => {
-              for (item of data)
-                trackNames.push(item['title']),
-                trackUrl.push(item['track']),
-                albums.push(item['artist_name']),
-                console.log(trackNames, trackUrl, albums)
-            })
-        } catch(error) {
-          console.error(error)
-        }
-    }
-    getUserTracks();
-
-    async function playAudio() {
-      try {
-        await audio.play();
-      } catch(err) {
+      async function getUserTracks() {
+          try {
+            await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json") 
+              .then(res => res.json())
+              .then(data => {
+                for (item of data)
+                  trackNames.push(item['title']),
+                  trackUrl.push(item['track']),
+                  albums.push(item['artist_name']),
+                  console.log(trackNames, trackUrl, albums)
+              })
+          } catch(error) {
+            console.error(error)
+          }
       }
-    }
+      getUserTracks();
 
 
     function playPause() {
@@ -84,7 +77,7 @@ $(function () {
           albumArt.addClass('active');
           checkBuffering();
           i.attr('class', 'fas fa-pause');
-          playAudio();
+          audio.play();
           document.querySelector('.card-music').style.backgroundColor = "rgb(18, 17, 17)";
         }
         else {
@@ -243,7 +236,7 @@ $(function () {
         bTime = bTime.getTime();
 
         if (flag != 0) {
-          playAudio();
+          audio.play();
           playerTrack.addClass('active');
           albumArt.addClass('active');
 
@@ -283,6 +276,19 @@ $(function () {
           else {
       
             audio = new Audio();
+
+            function playSound(url){
+              var audio = document.createElement('audio');
+              audio.style.display = "none";
+              audio.src = url;
+              audio.autoplay = true;
+              audio.onended = function(){
+                audio.remove() //Remove when played.
+              };
+              document.body.appendChild(audio);
+            }
+            playSound();
+
 
   
             selectTrack(0);
