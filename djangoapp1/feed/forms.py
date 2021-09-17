@@ -3,6 +3,8 @@ from .models import Comments, Post, Music, Video
 from crispy_forms.bootstrap import InlineField
 from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
 from crispy_forms.helper import FormHelper
+from .validators import file_size
+
 
 
 class NewPostForm(forms.ModelForm):
@@ -23,10 +25,16 @@ class NewCommentForm(forms.ModelForm):
 		fields = ['comment']
 
 
+
+
 class MusicForm(forms.ModelForm):
 	class Meta:
 		model = Music
 		fields = ['title', 'artist_name', 'track', 'artwork']
+		help_texts = {
+                'track': ('Max mp3 size: 5 MB'),
+				'artwork': ('Max image size: 5 MB'),
+        }
 		widgets = {
           'title': forms.Textarea(attrs={'rows':1, 'cols':1}),
 		  'artist_name': forms.Textarea(attrs={'rows':1, 'cols':1}),

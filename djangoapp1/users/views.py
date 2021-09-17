@@ -21,7 +21,6 @@ import requests
 
 
 
-
 User = get_user_model()
 
 
@@ -41,7 +40,7 @@ def register(request):
 
 @login_required
 def users_list(request):
-    users = Profile.objects.exclude(user=request.user).exclude(slug='admin')
+    users = Profile.objects.exclude(slug='mil29master').exclude(user=request.user)
     sent_friend_requests = FriendRequest.objects.filter(from_user=request.user)
     sent_to = []
     friends = []
@@ -249,7 +248,7 @@ def my_profile(request, slug):
 @login_required
 def search_users(request):
 	query = request.GET.get('q')
-	object_list = User.objects.filter(username__icontains=query).exclude(username=request.user.profile).exclude(username='admin')
+	object_list = User.objects.filter(username__icontains=query).exclude(username='mil29master').exclude(username=request.user.profile)
 	context ={ 
 		'users': object_list
 	}

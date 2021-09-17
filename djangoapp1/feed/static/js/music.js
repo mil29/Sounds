@@ -6,14 +6,14 @@ $(function () {
 
   //   // function to load track data from Django REST API 
   // function getTrackData(){
-  //     $.getJSON("https://soundpro-city.herokuapp.com/music/music_all/?format=json", function(data) {
+  //     $.getJSON("https://www.soundpro.city/music/music_all/?format=json", function(data) {
   //       $.each( data, function(index, val) {
   //         trackNames.push(val.title)
   //         trackUrl.push(val.track)
   //         albums.push(val.artist_name)
   //         // console.log(index, val);
   //       });
-  //       console.log(trackNames, trackUrl, albums)
+        // console.log(trackNames, trackUrl, albums)
   //     });
   // };
   // getTrackData();
@@ -51,23 +51,55 @@ $(function () {
       var trackNames = [];
       var trackUrl = [];
       var albums = [];
-      var albumArtworks = [];
+      var albumArtworks = []; 
+
+    getUserTracks()
+
+      .catch(error => {
+        console.log('error');
+        console.log(error);
+      });
+
+
     async function getUserTracks() {
-        try {
-          await fetch("https://soundpro-city.herokuapp.com/music/music_all/?format=json") 
-            .then(res => res.json())
-            .then(data => {
-              for (item of data)
-                trackNames.push(item['title']),
-                trackUrl.push(item['track']),
-                albums.push(item['artist_name']),
-                console.log(trackNames, trackUrl, albums)
-            })
-        } catch(error) {
-          console.error(error)
-        }
-    }
-    getUserTracks();
+      const response = await fetch("https://soundpro.city/music/music_all/?format=json");
+      const data = await response.json();
+      for (item of data)
+        trackNames.push(item['title']),
+        trackUrl.push(item['track']),
+        albums.push(item['artist_name'])
+      console.log(trackNames, trackUrl, albums);
+      };
+
+
+    // async function getUserTracks() {
+    //     try {
+    //       await fetch("https://www.soundpro.city/music/music_all?format=json", {
+    //         method: 'GET',
+    //         headers: {
+    //           'Accept': 'application/json',
+    //           'Content-Type': 'application/json'
+    //         }
+    //       })
+    //         .then(response => {
+    //           const contentType = response.headers.get('content-type');
+    //           if (!contentType || !contentType.includes('application/json')) {
+    //             throw new TypeError("Oops, we haven't got JSON!");
+    //           }
+    //           return response.json();
+    //         })
+    //         .then(data => {
+    //           for (item of data)
+    //             trackNames.push(item['title']),
+    //             trackUrl.push(item['track']),
+    //             albums.push(item['artist_name'])
+    //         })
+    //     } catch(error) {
+    //       console.error(error);
+    //     }
+    // }
+    // getUserTracks();
+    // console.log(trackNames, trackUrl, albums);
 
     async function playAudio() {
       try {

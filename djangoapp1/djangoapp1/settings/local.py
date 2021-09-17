@@ -16,7 +16,7 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
-import django_on_heroku
+import django_heroku
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,8 +32,10 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://soundpro-city.herokuapp.com', '127:0.0.1']
+ALLOWED_HOSTS = ['*', 'https://soundpro-city.herokuapp.com', '127:0.0.1', '18.169.114.2', 'www.soundpro.city', 'soundpro.city']
 
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Application definition
 
@@ -63,15 +65,13 @@ REST_FRAMEWORK = {
     ]
 }
 
-CORS_ORIGIN_WHITELIST = [
-    'https://soundpro-city.herokuapp.com',
-]
+
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -99,7 +99,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangoapp1.wsgi.application'
 
-CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 # Database
@@ -212,7 +212,8 @@ else:
 
 
 # For AWS S3 bucket to collect updated collectstatic request the 2nd option with 'staticfiles=false' needs to be on instead of the 1st option
-# django_on_heroku.settings(locals())
-django_on_heroku.settings(locals(), staticfiles=False)
+# django_heroku.settings(locals())
+django_heroku.settings(locals(), staticfiles=False)
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+

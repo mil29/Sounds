@@ -118,6 +118,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     margin: 10px;
     height: fit-content; 
     background: none;
+    height: -moz-max-content;
 }
 .auth_buttons_signup_login {
     position: relative;
@@ -195,6 +196,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         margin: 10px;
         height: fit-content; 
         background: none;
+        height: -moz-max-content;
     }
 
 }
@@ -480,6 +482,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
    position: relative;
    top: 20px;
 }
+
 .no_friends_text {
     position: relative;
     top: 200px;
@@ -566,7 +569,7 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         margin: -4px auto;
     }
 }
-@media screen and (max-width: 485px) {
+@media screen and (max-width: 480px) {
     #app-cover {
         position: relative;
         top: 10px;
@@ -578,7 +581,28 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     }
 }
 
-@media screen and (max-width: 484px) {
+@media screen and (max-width: 479px) {
+    #app-cover {
+        width: 340px;
+    }
+}
+
+@media screen and (max-width: 415px) {
+    #app-cover {
+        width: 290px;
+    }
+}
+@media screen and (max-width: 360px) {
+    #app-cover {
+        width: 240px;
+    }
+}
+@media screen and (max-width: 315px) {
+    #app-cover {
+        width: 200px;
+    }
+}
+@media screen and (max-width: 269px) {
     #app-cover {
         width: 170px;
     }
@@ -592,11 +616,12 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     width: 100%;
     top: 125px; 
 }
-@media screen and (max-width: 484px) {
+@media screen and (max-width: 260px) {
     #player {
         height: 90px;
     }
 }
+
 
 #player-track
 {
@@ -611,12 +636,53 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     z-index: 1;
     height: 100px;
 }
-@media screen and (max-width: 484px) {
+
+@media screen and (max-width: 316px) {
     #player-track {
         visibility: hidden;
     }
 }
 
+@media screen and (max-width: 480px) {
+    .track-text {
+        justify-content: center;
+        margin-left: -45px;
+        width: 170px;
+    }
+}
+@media screen and (max-width: 479px) {
+    .track-text {
+        justify-content: center;
+        margin-left: -40px;
+        width: 150px;
+    }
+}
+@media screen and (max-width: 415px) {
+    .track-text {
+        justify-content: center;
+        margin-left: -55px;
+        width: 120px;
+    }
+}
+@media screen and (max-width: 370px) {
+    .track-text {
+        justify-content: center;
+        margin-left: -80px;
+        width: 150px;
+    }
+}
+@media screen and (max-width: 360px) {
+    .track-text {
+        justify-content: center;
+        margin-left: -90px;
+        width: 110px;
+    }
+}
+@media screen and (max-width: 316px) {
+    #track-time {
+        visibility: hidden;
+    }
+}
 #player-track.active
 {
     top: -100px;
@@ -628,6 +694,8 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     color: #343435;
     font-size: 17px;
     font-weight: bold;
+    height: 20px;
+    overflow: hidden;
 }
 
 #track-name
@@ -635,12 +703,35 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     color: #404041;
     font-size: 13px;
     margin: 2px 0 13px 0;
+    height: 15px;
+    overflow: hidden;
+}
+@media screen and (max-width: 767px) {
+    #album-name
+    {
+        font-size: 14px; 
+    }
+    #track-name
+    {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #album-name
+    {
+        font-size: 14px; 
+    }
+    #track-name
+    {
+        font-size: 13px;
+    }
 }
 
 #track-time
 {
-    height: 12px;
-    margin-bottom: 3px;
+    height: 15px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 
@@ -745,8 +836,54 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     border-radius: 50%;
     overflow: hidden;
 }
+@media screen and (max-width: 480px) {
+    #album-art
+    {
+    position: absolute;
+    top: -40px;
+    width: 100px;
+    height:100px;
+    margin-left: 20px;
+    transform: rotateZ(0);
+    transition: 1s ease all;
+    box-shadow: 0 0 0 5px rgb(196, 196, 196);
+    border-radius: 50%;
+    overflow: hidden;
+    }
+}
+@media screen and (max-width: 410px) {
+    #album-art
+    {
+    position: absolute;
+    top: -40px;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    transform: rotateZ(0);
+    transition: 1s ease all;
+    box-shadow: 0 0 0 5px rgb(196, 196, 196);
+    border-radius: 50%;
+    overflow: hidden;
+    }
+}
+@media screen and (max-width: 370px) {
+    #album-art
+    {
+    position: absolute;
+    top: -40px;
+    width: 70px;
+    height: 70px;
+    margin-left: 20px;
+    transform: rotateZ(0);
+    transition: 1s ease all;
+    box-shadow: 0 0 0 5px rgb(196, 196, 196);
+    border-radius: 50%;
+    overflow: hidden;
+    }
+}
 
-@media screen and (max-width: 484px) {
+
+@media screen and (max-width: 320px) {
     #album-art
     {
     position: absolute;
@@ -875,24 +1012,47 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
         position: relative;
     }
 }
-@media screen and (max-width: 485px) {
+@media screen and (max-width: 410px) {
         #player-controls {
         width: 170px;
         height: 100%;
         margin: auto;
-        left: 20%;
+        left: 15%;
         position: relative;
     }
 }
-@media screen and (max-width: 484px) {
+@media screen and (max-width: 409px) {
         #player-controls {
-        width: 90%;
+        width: 170px;
         height: 100%;
         margin: auto;
-        left: -15px
+        left: 15%;
     }
 }
-
+@media screen and (max-width: 371px) {
+        #player-controls {
+        width: 170px;
+        height: 100%;
+        margin: auto;
+        left: 10%;
+    }
+}
+@media screen and (max-width: 361px) {
+        #player-controls {
+        width: 150px;
+        height: 100%;
+        margin: auto;
+        left: 5%;
+    }
+}
+@media screen and (max-width: 310px) {
+        #player-controls {
+        width: 140px;
+        height: 100%;
+        margin: auto;
+        left: 0;
+    }
+}
 .music-buttons {
     padding: 35px;
     color: #20516f;
@@ -1252,6 +1412,7 @@ right: 30%;
     float: right;
     margin: 10px;
     padding-right: 10px;
+    margin-top: 30px;
 }
 .comment_delete {
     color: #880a0a;

@@ -4,6 +4,7 @@ from django.urls import reverse
 from django.utils import timezone
 from users.models import Profile
 from embed_video.fields import EmbedVideoField
+from .validators import file_size
 
 
 
@@ -33,15 +34,16 @@ class Like(models.Model):
 
 
 class Music(models.Model):
-	track = models.FileField(upload_to='path/to/audio')
+	track = models.FileField(upload_to='path/to/audio', validators=[file_size])
 	title = models.TextField(max_length=50)
-	artwork = models.ImageField(upload_to='path/to/img')
+	artwork = models.ImageField(upload_to='path/to/img', validators=[file_size])
 	artist_name = models.TextField(max_length=50)
 	artist = models.ForeignKey(User, on_delete=models.CASCADE)
 	date_posted = models.DateTimeField(default=timezone.now)
 
 	def __str__(self):
 		return self.title
+
 
 	
 
