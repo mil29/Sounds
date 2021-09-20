@@ -217,6 +217,7 @@ django_heroku.settings(locals(), staticfiles=False)
 
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# test 123423543
+# test 123hello
+
 
 
