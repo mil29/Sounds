@@ -1,5 +1,5 @@
 version: 0.0
 os: linux
 files:
-  - source: /
+  - source: /Sounds/djangoapp1
     destination: /home/ubuntu/
