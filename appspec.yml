@@ -3,4 +3,8 @@ os: linux
 files:
   - source: /Sounds/djangoapp1/
     destination: /home/ubuntu/Sounds/djangoapp1
-
+hooks:
+  AfterInstall:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root
