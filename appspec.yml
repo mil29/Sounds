@@ -1,7 +1,6 @@
 version: 0.0
 os: linux
 files:
-  - source: /Sounds/djangoapp1
-    destination: /home/ubuntu/Sounds
+  - source: /Sounds/djangoapp1/
+    destination: /home/ubuntu/Sounds/
 
-    
