@@ -38,7 +38,7 @@
       
       <div class="brand-name">
         <a href="{% url 'home' %}" class="navbar-brand ml-4 mr-4" href="#"
-          ><b>SoundPro-City!</b></a>
+          ><b>SoundPro-City</b></a>
       </div>
         
         <button
@@ -65,7 +65,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
           
-            <a class="nav-item" href="{% url 'home' %}">HOME</a>
+            <a class="nav-item" href="{% url 'home' %}">HOMES</a>
             <a class="nav-item" href="{% url 'users_list' %}">ADD NEW FRIENDS</a>
             {% if user.is_authenticated %}
             <a class="nav-item" href="{% url 'friend_list' %}">FRIENDS</a>
