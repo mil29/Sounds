@@ -1,0 +1,46 @@
+server { 
+listen 443 ssl;
+server_name soundpro.city;
+
+
+ssl_certificate /etc/letsencrypt/live/soundpro.city/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/soundpro.city/privkey.pem; # managed by Certbot
+include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+
+location = /favicon.ico { access_log off; log_not_found off; }
+location /static/ {
+root /home/ubuntu/Sounds/djangoapp1;
+}
+
+location /media/ {
+root /home/ubuntu/Sounds/djangoapp1;    
+}
+
+location / {
+include proxy_params;
+proxy_pass http://unix:/run/gunicorn.sock;
+}
+
+}
+
+server { # redirect http/https www.example.com to https://example.com
+listen 80;
+listen 443 ssl;
+server_name www.soundpro.city;
+ssl_certificate /etc/letsencrypt/live/soundpro.city/fullchain.pem; # managed by Certbot
+ssl_certificate_key /etc/letsencrypt/live/soundpro.city/privkey.pem; # managed by Certbot
+include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+return 301 https://soundpro.city$request_uri;
+
+}
+
+
+server { # redirect http://example.com to https://example.com
+listen 80;
+server_name soundpro.city;
+return 301 https://soundpro.city$request_uri;
+}
+
