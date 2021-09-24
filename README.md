@@ -27,7 +27,7 @@ https://soundpro-city.herokuapp.com/
 <b>Backend</b>: Django, Django Rest API <br>
 <b>Storage</b>: AWS <br>
 <b>Databases</b>: SQLite3, PostgreSQL <br>
-<b>Deployment</b>: Heroku <br>
+<b>Deployment</b>: AWS (EC2, S3 BUCKET, CODEDEPLOY, CODEPIPELINE), NGINX, GUNICORN <br>
 <b>Languages used</b>: Python, Javascript, JQuery, HTML5, CSS <br>
 
   
