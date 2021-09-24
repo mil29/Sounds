@@ -1124,7 +1124,8 @@ p,a,h1,h2,h3,h4,h5,h6,li,td,article{
     margin: 5px;
     position: absolute;
     font-family: 'Saira', sans-serif;
-    background-color: #058a8a;
+    background-color: #b10ea3;
+    /* background-color: #058a8a; */
     border: none;
 }
 .track-upload-button:hover {
