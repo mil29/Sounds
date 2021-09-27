@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /home/ubuntu/djangoapp1/djangoapp1/settings
 touch .env
 echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
 echo AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }} >> .env
