@@ -4,6 +4,7 @@ soundpro-city.pem
 # Mac
 .DS_Store
 djangoapp1/.DS_Store
+.vscode
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
