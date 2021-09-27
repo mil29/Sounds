@@ -4,10 +4,11 @@ files:
   - source: /
     destination: /home/ubuntu/
 hooks:
-  AfterInstall:
+  BeforeInstall:
     - location: scripts/setup_env.sh
       timeout: 6000
       runas: ubuntu
+  AfterInstall:
     - location: scripts/install_python_dependencies.sh
       timeout: 6000
       runas: ubuntu
@@ -17,4 +18,6 @@ hooks:
     - location: scripts/start_server.sh
       timeout: 6000
       runas: ubuntu
-
+    - location: scripts/setup_env.sh
+      timeout: 6000
+      runas: ubuntu
