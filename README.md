@@ -18,7 +18,7 @@ Features:
 
 ## Demo
 
-https://soundpro-city.herokuapp.com/
+www.soundpro.city
 
   
 ## Technologies used
