@@ -29,7 +29,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*', 'https://soundpro-city.herokuapp.com', '127:0.0.1', '18.169.114.2', 'www.soundpro.city', 'soundpro.city']
 
