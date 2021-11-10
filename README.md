@@ -20,6 +20,10 @@ Features:
 
 www.soundpro.city
 
+test account login:
+username : test123
+password : password3311
+
   
 ## Technologies used
 
