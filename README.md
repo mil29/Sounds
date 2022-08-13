@@ -18,7 +18,7 @@ Features:
 
 ## Demo
 
-<a href='http://www.18.169.114.2'>soundpro-city</a>
+<a href='http://18.169.114.2'>soundpro-city</a>
 
 test account login: <br> <br>
 username : test123 <br>
