@@ -1,4 +1,4 @@
-# Soundpro-City
+# Soundpro-City (Python/Django Application)
 
 Social media application built with Django Framework.
 
